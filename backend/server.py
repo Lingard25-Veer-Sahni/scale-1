@@ -380,9 +380,12 @@ class PaymentTransaction(BaseModel):
 
 # ===================== Auth helpers =====================
 def _resolve_public_origin(request: Request) -> str:
-    """Return a public, user-facing base URL (no trailing slash) for use in
-    outbound emails. The internal pod `request.base_url` is not publicly
-    resolvable, so we prefer PUBLIC_BASE_URL env, then Origin / Referer headers."""
+    """Return the public FRONTEND base URL (no trailing slash) for links that
+    must open the React app in a browser (payment page, scholarship form,
+    Cashfree return_url, etc). We prefer the explicit PUBLIC_BASE_URL env var
+    (set in deployment to the frontend's real domain) over Origin/Referer
+    headers, since those are only present on browser-originated requests and
+    this is also called from server-to-server flows."""
     env_url = (os.environ.get("PUBLIC_BASE_URL") or "").strip()
     if env_url:
         return env_url.rstrip("/")
@@ -395,6 +398,19 @@ def _resolve_public_origin(request: Request) -> str:
         parts = urlsplit(referer)
         if parts.scheme and parts.netloc:
             return f"{parts.scheme}://{parts.netloc}"
+    return str(request.base_url).rstrip("/")
+
+
+def _resolve_backend_origin(request: Request) -> str:
+    """Return the public BACKEND base URL (no trailing slash) for links that
+    must hit this API directly rather than the frontend app — currently only
+    the Cashfree webhook notify_url. Prefers an explicit BACKEND_PUBLIC_URL
+    env var; falls back to request.base_url, which on a normal reverse-proxy
+    deployment (Render, etc.) already reflects the real public hostname via
+    the forwarded Host header."""
+    env_url = (os.environ.get("BACKEND_PUBLIC_URL") or "").strip()
+    if env_url:
+        return env_url.rstrip("/")
     return str(request.base_url).rstrip("/")
 
 
@@ -1738,8 +1754,9 @@ async def create_payment_order(body: CreateOrderRequest, request: Request):
     # Cashfree requires a merchant-generated order id ≤ 50 chars.
     order_id = f"scale_{body.registration_id[:20]}_{uuid.uuid4().hex[:8]}"
     origin = _resolve_public_origin(request)
+    backend_origin = _resolve_backend_origin(request)
     return_url = f"{origin}/payment-success?session_id={order_id}&reg={body.registration_id}"
-    notify_url = f"{origin}/api/webhook/cashfree"
+    notify_url = f"{backend_origin}/api/webhook/cashfree"
 
     payload = {
         "order_id": order_id,
