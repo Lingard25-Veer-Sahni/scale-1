@@ -1,0 +1,12 @@
+backend/.env
+frontend/.env
+backend/.preview_data.json
+backend/.preview_data.json.tmp
+backend/.venv/
+backend/storage/
+__pycache__/
+*.pyc
+node_modules/
+frontend/build/
+mongo/
+uploads/
