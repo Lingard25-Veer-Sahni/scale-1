@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
   const [sessions, setSessions] = useState([]);
   const [pages, setPages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
   const [editMode, setEditMode] = useState(false);
 
   const applyTheme = useCallback((t) => {
@@ -32,29 +33,54 @@ export const AppProvider = ({ children }) => {
         contentApi.get(), themeApi.get(), eventsApi.list(), sessionsApi.list(), pagesApi.list(),
       ]);
       setContent(c); setTheme(t); applyTheme(t); setEvents(e); setSessions(s); setPages(p);
-    } catch (err) { console.error("Load failed", err); }
+      setLoadError(null);
+      return true;
+    } catch (err) {
+      console.error("Load failed", err);
+      // Distinguish a cold-start/slow-backend timeout from a real failure so the UI
+      // can tell the user what's actually happening instead of hanging silently.
+      const isTimeout = err.code === "ECONNABORTED" || /timeout/i.test(err.message || "");
+      setLoadError(isTimeout ? "timeout" : "error");
+      return false;
+    }
   }, [applyTheme]);
 
   useEffect(() => {
+    let cancelled = false;
+    let retryTimer = null;
+
+    const attempt = async (retryDelayMs) => {
+      const ok = await loadAll();
+      if (!ok && !cancelled) {
+        // Keep retrying with a short, capped backoff — covers Render free-tier cold
+        // starts (first request after idle can take 30-50s) without leaving the
+        // splash screen stuck forever on a single failed attempt.
+        retryTimer = setTimeout(() => attempt(Math.min(retryDelayMs * 1.5, 15000)), retryDelayMs);
+      }
+    };
+
     const init = async () => {
       try {
         const token = localStorage.getItem("scale_token");
         if (token) {
           try { const u = await authApi.me(); setUser(u); } catch { localStorage.removeItem("scale_token"); }
         }
-        await loadAll();
-      } finally { setLoading(false); }
+        await attempt(3000);
+      } finally { if (!cancelled) setLoading(false); }
     };
     init();
 
     // Refresh content + theme + events periodically so admin changes propagate to all open sessions
-    const interval = setInterval(() => {
-      loadAll();
-    }, 60 * 1000);
+    const interval = setInterval(() => { loadAll(); }, 60 * 1000);
     // Refresh when the tab regains focus
     const onFocus = () => loadAll();
     window.addEventListener("focus", onFocus);
-    return () => { clearInterval(interval); window.removeEventListener("focus", onFocus); };
+    return () => {
+      cancelled = true;
+      if (retryTimer) clearTimeout(retryTimer);
+      clearInterval(interval);
+      window.removeEventListener("focus", onFocus);
+    };
   }, [loadAll]);
 
   const login = async (email, password) => {
@@ -85,7 +111,7 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        user, content, theme, events, sessions, pages, loading,
+        user, content, theme, events, sessions, pages, loading, loadError, retryLoad: loadAll,
         login, signup, logout,
         refreshContent, refreshTheme, refreshEvents, refreshSessions, refreshPages,
         applyTheme, isAdmin, editMode, setEditMode, editing,

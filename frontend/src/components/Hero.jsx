@@ -61,7 +61,7 @@ export default function Hero() {
             >
               {content?.hero_cta_primary || "Explore Events"} <ArrowRight size={16} />
             </button>
-            {(teamPageVisible || isAdmin) && (
+            {false && (teamPageVisible || isAdmin) && (
               <button
                 className="btn-outline-light"
                 onClick={() => navigate("/our-team")}

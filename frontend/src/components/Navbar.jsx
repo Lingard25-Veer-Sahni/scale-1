@@ -13,7 +13,6 @@ const NAV_ITEMS = [
 
 const NAV_ROUTES = [
   { label: "Community", to: "/community", visibleKey: "community_page_visible" },
-  { label: "Our Team", to: "/our-team", visibleKey: "team_page_visible" },
 ];
 
 export default function Navbar() {
