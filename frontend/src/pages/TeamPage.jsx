@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { teamApi, uploadsApi } from "../lib/api";
 import Editable from "../components/Editable";
+import SafeImage from "../components/SafeImage";
 import { Dialog, DialogContent, DialogTitle } from "../components/ui/dialog";
 import { Plus, Trash2, Upload } from "lucide-react";
 import { toast } from "sonner";
@@ -113,11 +114,7 @@ export default function TeamPage() {
                     </button>
                   )}
                   <div className="aspect-square bg-black/5 overflow-hidden">
-                    {m.image_url ? (
-                      <img src={m.image_url} alt={m.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-black/30 text-xs">No image</div>
-                    )}
+                    <SafeImage src={m.image_url} alt={m.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="p-4">
                     <h3 className="font-serif font-black text-lg" data-testid={`team-name-${m.id}`}>{m.name || "Untitled"}</h3>
@@ -153,11 +150,7 @@ function TeamDetail({ member, editing, onPatch, onUploadImage, onDelete }) {
   return (
     <div>
       <div className="aspect-square bg-black/5 overflow-hidden relative max-w-xs mx-auto mt-6">
-        {member.image_url ? (
-          <img src={member.image_url} alt={member.name} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-black/30 text-xs">No image</div>
-        )}
+        <SafeImage src={member.image_url} alt={member.name} className="w-full h-full object-cover" />
         {editing && (
           <label className="absolute bottom-2 right-2 btn-outline-dark text-xs bg-white cursor-pointer" data-testid="team-image-upload">
             <Upload size={12} /> Replace

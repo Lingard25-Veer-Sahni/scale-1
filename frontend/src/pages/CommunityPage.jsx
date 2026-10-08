@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { communityApi, uploadsApi } from "../lib/api";
 import Editable from "../components/Editable";
+import SafeImage from "../components/SafeImage";
 import { Dialog, DialogContent, DialogTitle } from "../components/ui/dialog";
 import { Slider } from "../components/ui/slider";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../components/ui/select";
@@ -128,11 +129,7 @@ export default function CommunityPage() {
                     </button>
                   )}
                   <div className="aspect-[4/3] bg-black/5 overflow-hidden">
-                    {g.image_url ? (
-                      <img src={g.image_url} alt={g.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-black/30 text-xs">No image</div>
-                    )}
+                    <SafeImage src={g.image_url} alt={g.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="p-4">
                     <div className="inline-block text-[10px] tracking-[0.2em] uppercase font-bold text-[var(--scale-crimson)] mb-1">
@@ -175,11 +172,7 @@ function CommunityDetail({ group, editing, onPatch, onUploadImage, onAddGalleryI
   return (
     <div>
       <div className="aspect-[16/9] bg-black/5 overflow-hidden relative">
-        {group.image_url ? (
-          <img src={group.image_url} alt={group.name} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-black/30 text-xs">No image</div>
-        )}
+        <SafeImage src={group.image_url} alt={group.name} className="w-full h-full object-cover" />
         {editing && (
           <label className="absolute bottom-3 right-3 btn-outline-dark text-xs bg-white cursor-pointer" data-testid="community-image-upload">
             <Upload size={12} /> Replace image
@@ -308,7 +301,7 @@ function CommunityDetail({ group, editing, onPatch, onUploadImage, onAddGalleryI
           <div className="grid grid-cols-3 gap-2">
             {(group.gallery || []).map((img) => (
               <div key={img.id} className="relative aspect-square bg-black/5 overflow-hidden">
-                <img src={img.url} alt={img.caption || group.name} className="w-full h-full object-cover" />
+                <SafeImage src={img.url} alt={img.caption || group.name} className="w-full h-full object-cover" />
                 {editing && (
                   <button
                     onClick={() => onRemoveGalleryImage(img.id)}
