@@ -511,47 +511,66 @@ async def startup():
         doc["id"] = "main"
         await db.theme.insert_one(doc)
 
-    count = await db.events.count_documents({})
-    if count == 0:
-        e1 = EventItem(
-            title="Mock Stock Market & Investment Challenge",
-            description="Test your investing instincts. Analyse real markets, build a portfolio, and defend your financial decisions to a panel of judges.",
-            about="The Mock Stock Market & Investment Challenge is SCALE's flagship live competition. Teams of 1–3 students receive a virtual portfolio of ₹10,00,000 and trade real-time market data over a 4-week window. Performance is evaluated not just on returns, but also on the rigour of investment thesis, risk management, and sector calls. The top 12 teams pitch their strategies live to a panel of analysts and CFAs in the national finals. Open to all students from grades 9–12 across India.",
-            status="live",
-            cta_label="Event Details",
-            date="May 2025",
-            location="Online + Mumbai Finals",
-            price_inr=500.0,
-            order=1,
-        )
-        e2 = EventItem(
-            title="Situational Business Challenge",
-            description="Teams placed in high-pressure real-world business scenarios. Think fast, strategise sharp, present with conviction.",
-            about="The Situational Business Challenge drops teams into real-world Indian business scenarios — pricing crisis, distribution failure, brand controversy — with 90 minutes to build a recovery strategy and present it to a jury of MBAs and operators. Tests strategic thinking, time management, and on-the-spot communication.",
-            status="coming_soon",
-            cta_label="Event Details",
-            date="Coming Soon",
-            location="TBA",
-            price_inr=500.0,
-            order=2,
-        )
-        await db.events.insert_many([e1.model_dump(), e2.model_dump()])
+    # Seed flags live in a dedicated app_meta doc, NOT a "count == 0" check.
+    # Reason: count==0 re-fires the seed on every container restart once an
+    # admin deletes every row in a collection (confirmed bug — Render
+    # free-tier containers restart often: redeploys, cold-starts after idle
+    # spindown), silently resurrecting "deleted" events/sessions/team
+    # members. A one-time flag means a genuinely-emptied collection stays
+    # empty. The count==0 checks below are kept ONLY as a belt-and-braces
+    # guard against double-inserting defaults on the first deploy after this
+    # change, when the flag doc doesn't exist yet but the tables already
+    # have real (possibly admin-edited) data in them.
+    seed_flags = await db.app_meta.find_one({"id": "seed_flags"}, {"_id": 0}) or {}
+    new_flags = {}
 
-    scount = await db.sessions_list.count_documents({})
-    if scount == 0:
-        s1 = SessionItem(topic="Reading Financial Statements Like a CFA", speaker="Industry Analyst — TBA", date="TBA", order=1)
-        s2 = SessionItem(topic="How Founders Actually Build Brands", speaker="Founder Speaker — TBA", date="TBA", order=2)
-        await db.sessions_list.insert_many([s1.model_dump(), s2.model_dump()])
+    if not seed_flags.get("events_seeded"):
+        if await db.events.count_documents({}) == 0:
+            e1 = EventItem(
+                title="Mock Stock Market & Investment Challenge",
+                description="Test your investing instincts. Analyse real markets, build a portfolio, and defend your financial decisions to a panel of judges.",
+                about="The Mock Stock Market & Investment Challenge is SCALE's flagship live competition. Teams of 1–3 students receive a virtual portfolio of ₹10,00,000 and trade real-time market data over a 4-week window. Performance is evaluated not just on returns, but also on the rigour of investment thesis, risk management, and sector calls. The top 12 teams pitch their strategies live to a panel of analysts and CFAs in the national finals. Open to all students from grades 9–12 across India.",
+                status="live",
+                cta_label="Event Details",
+                date="May 2025",
+                location="Online + Mumbai Finals",
+                price_inr=500.0,
+                order=1,
+            )
+            e2 = EventItem(
+                title="Situational Business Challenge",
+                description="Teams placed in high-pressure real-world business scenarios. Think fast, strategise sharp, present with conviction.",
+                about="The Situational Business Challenge drops teams into real-world Indian business scenarios — pricing crisis, distribution failure, brand controversy — with 90 minutes to build a recovery strategy and present it to a jury of MBAs and operators. Tests strategic thinking, time management, and on-the-spot communication.",
+                status="coming_soon",
+                cta_label="Event Details",
+                date="Coming Soon",
+                location="TBA",
+                price_inr=500.0,
+                order=2,
+            )
+            await db.events.insert_many([e1.model_dump(), e2.model_dump()])
+        new_flags["events_seeded"] = True
 
-    tcount = await db.team_members.count_documents({})
-    if tcount == 0:
-        team_seed = [
-            TeamMember(name="Veer Singh Sahni", designation="Founder", order=1),
-            TeamMember(name="Abhir Mehani", designation="Team Member", order=2),
-            TeamMember(name="Ardas Mahajan", designation="Team Member", order=3),
-            TeamMember(name="Daksh Vohra", designation="Team Member", order=4),
-        ]
-        await db.team_members.insert_many([m.model_dump() for m in team_seed])
+    if not seed_flags.get("sessions_seeded"):
+        if await db.sessions_list.count_documents({}) == 0:
+            s1 = SessionItem(topic="Reading Financial Statements Like a CFA", speaker="Industry Analyst — TBA", date="TBA", order=1)
+            s2 = SessionItem(topic="How Founders Actually Build Brands", speaker="Founder Speaker — TBA", date="TBA", order=2)
+            await db.sessions_list.insert_many([s1.model_dump(), s2.model_dump()])
+        new_flags["sessions_seeded"] = True
+
+    if not seed_flags.get("team_seeded"):
+        if await db.team_members.count_documents({}) == 0:
+            team_seed = [
+                TeamMember(name="Veer Singh Sahni", designation="Founder", order=1),
+                TeamMember(name="Abhir Mehani", designation="Team Member", order=2),
+                TeamMember(name="Ardas Mahajan", designation="Team Member", order=3),
+                TeamMember(name="Daksh Vohra", designation="Team Member", order=4),
+            ]
+            await db.team_members.insert_many([m.model_dump() for m in team_seed])
+        new_flags["team_seeded"] = True
+
+    if new_flags:
+        await db.app_meta.update_one({"id": "seed_flags"}, {"$set": new_flags}, upsert=True)
 
 
 @app.on_event("shutdown")

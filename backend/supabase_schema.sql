@@ -25,6 +25,7 @@ create table if not exists public.registrations         (id text primary key, do
 create table if not exists public.file_refs             (id text primary key, doc jsonb not null default '{}'::jsonb);
 create table if not exists public.event_submissions     (id text primary key, doc jsonb not null default '{}'::jsonb);
 create table if not exists public.payment_transactions  (id text primary key, doc jsonb not null default '{}'::jsonb);
+create table if not exists public.app_meta              (id text primary key, doc jsonb not null default '{}'::jsonb);
 
 do $$
 declare
@@ -33,7 +34,7 @@ begin
   for t in select unnest(array[
     'users','content','theme','events','sessions_list','team_members',
     'pages','community','submissions','registrations','file_refs',
-    'event_submissions','payment_transactions'
+    'event_submissions','payment_transactions','app_meta'
   ])
   loop
     execute format('alter table public.%I enable row level security;', t);
