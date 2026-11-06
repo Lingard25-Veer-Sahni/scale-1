@@ -139,11 +139,16 @@ def upload_file(s: requests.Session, event_id: str, filename: str, label: str) -
     }
 
 
+SUBMISSION_LINKS = [
+    {"label": "Round 1 Submission Form", "url": "https://forms.gle/CMMUTpydygEjhCJGA"},
+]
+
+
 def attach_materials(s: requests.Session, event_id: str) -> None:
     documents = [upload_file(s, event_id, fname, label) for fname, label in FILES_TO_ATTACH]
     r = s.put(
         f"{BASE}/events/{event_id}/materials",
-        json={"notes": MATERIALS_NOTES, "links": [], "documents": documents},
+        json={"notes": MATERIALS_NOTES, "links": SUBMISSION_LINKS, "documents": documents},
     )
     r.raise_for_status()
     print("Materials attached.")
