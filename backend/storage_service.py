@@ -30,15 +30,39 @@ import httpx
 logger = logging.getLogger(__name__)
 
 APP_NAME = "scale-india"
-BUCKET = os.environ.get("SUPABASE_STORAGE_BUCKET", "uploads")
-
-_SUPABASE_URL = (os.environ.get("SUPABASE_URL") or "").rstrip("/")
-_SUPABASE_KEY = os.environ.get("SUPABASE_SECRET_KEY") or os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or ""
-_STORAGE_URL = f"{_SUPABASE_URL}/storage/v1"
-_HEADERS = {"apikey": _SUPABASE_KEY, "Authorization": f"Bearer {_SUPABASE_KEY}"}
 
 _client = httpx.Client(timeout=30.0)
 _bucket_ready = False
+
+# NOTE: these used to be computed once at module-import time. That broke
+# whenever this module was imported before server.py's load_dotenv() call
+# ran (e.g. `from storage_service import ...` appears above `load_dotenv(...)`
+# in server.py) — os.environ was still empty at that point, so _SUPABASE_URL/
+# _SUPABASE_KEY got permanently cached as "" for the lifetime of the process,
+# even though the real values were loaded a few lines later. Resolving them
+# lazily, on every init_storage() call until the bucket is confirmed ready,
+# fixes that regardless of import order.
+
+
+def _bucket():
+    return os.environ.get("SUPABASE_STORAGE_BUCKET", "uploads")
+
+
+def _supabase_url():
+    return (os.environ.get("SUPABASE_URL") or "").rstrip("/")
+
+
+def _supabase_key():
+    return os.environ.get("SUPABASE_SECRET_KEY") or os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or ""
+
+
+def _storage_url():
+    return f"{_supabase_url()}/storage/v1"
+
+
+def _headers():
+    key = _supabase_key()
+    return {"apikey": key, "Authorization": f"Bearer {key}"}
 
 
 def init_storage() -> str:
@@ -46,8 +70,13 @@ def init_storage() -> str:
     once per process via _bucket_ready, re-verified lazily if that flag was
     never set e.g. due to a transient failure on a previous attempt)."""
     global _bucket_ready
+    BUCKET = _bucket()
     if _bucket_ready:
         return BUCKET
+    _SUPABASE_URL = _supabase_url()
+    _SUPABASE_KEY = _supabase_key()
+    _STORAGE_URL = _storage_url()
+    _HEADERS = _headers()
     if not _SUPABASE_URL or not _SUPABASE_KEY:
         raise RuntimeError("SUPABASE_URL/SUPABASE_SECRET_KEY not configured — cannot init storage")
 
@@ -77,11 +106,11 @@ def init_storage() -> str:
 
 
 def put_object(path: str, data: bytes, content_type: str) -> dict:
-    init_storage()
+    bucket = init_storage()
     resp = _client.post(
-        f"{_STORAGE_URL}/object/{BUCKET}/{path}",
+        f"{_storage_url()}/object/{bucket}/{path}",
         headers={
-            **_HEADERS,
+            **_headers(),
             "Content-Type": content_type or "application/octet-stream",
             "x-upsert": "true",
         },
@@ -93,8 +122,8 @@ def put_object(path: str, data: bytes, content_type: str) -> dict:
 
 
 def get_object(path: str) -> tuple[bytes, str]:
-    init_storage()
-    resp = _client.get(f"{_STORAGE_URL}/object/{BUCKET}/{path}", headers=_HEADERS)
+    bucket = init_storage()
+    resp = _client.get(f"{_storage_url()}/object/{bucket}/{path}", headers=_headers())
     if resp.status_code == 404:
         raise FileNotFoundError(path)
     if resp.status_code >= 400:

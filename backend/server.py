@@ -19,6 +19,7 @@ from datetime import datetime, timezone, timedelta
 
 from email_service import send_email, notify_admin
 from storage_service import init_storage, put_object, get_object, build_upload_path
+from certificate_service import generate_course1_certificate
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / ".env")
@@ -101,6 +102,12 @@ class EventItem(BaseModel):
     extra_fields: List[ExtraField] = []
     registration_open: bool = True
     registration_closed_message: str = "Registration is currently closed for this event. Check back soon."
+    # Free/no-registration events (e.g. the case competition): hides the
+    # scholarship CTA + the Register Now/payment form on the public page,
+    # and lets materials.documents be fetched/downloaded with no
+    # registration/payment gate at all.
+    public_materials: bool = False
+    hide_registration: bool = False
 
 
 class EventUpdate(BaseModel):
@@ -126,6 +133,8 @@ class EventUpdate(BaseModel):
     extra_fields: Optional[List[ExtraField]] = None
     registration_open: Optional[bool] = None
     registration_closed_message: Optional[str] = None
+    public_materials: Optional[bool] = None
+    hide_registration: Optional[bool] = None
 
 
 def _serialize_event(doc: dict) -> dict:
@@ -255,10 +264,16 @@ class SiteContent(BaseModel):
     team_headline: str = "The people building SCALE."
     team_about: str = "A small, committed team of students driving SCALE's mission forward."
 
+    # SCALE Courses page chrome — admin-editable
+    courses_eyebrow: str = "SCALE Courses"
+    courses_headline: str = "Free, high-quality courses for every student."
+    courses_about: str = "SCALE offers high-quality, intellectually serious courses for free to all students — no fees, no catches. Sign up with your name and email, work through each lesson's video, materials, and quiz, and earn a certificate once you've passed every quiz in the course."
+
     # Page visibility toggles — admin can hide these fixed CMS pages from the
     # nav and from direct navigation without deleting their content.
     community_page_visible: bool = True
     team_page_visible: bool = False
+    courses_page_visible: bool = True
 
 
 class FormSubmissionRecord(BaseModel):
@@ -365,6 +380,80 @@ class TeamMemberUpdate(BaseModel):
     order: Optional[int] = None
 
 
+class QuizOption(BaseModel):
+    text: str
+
+
+class QuizQuestion(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    question: str
+    options: List[str] = []
+    correct_index: int = 0
+    explanation: Optional[str] = None
+
+
+class Lesson(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    course_id: str
+    order: int = 1
+    title: str
+    youtube_url: Optional[str] = None
+    summary_pdf_id: Optional[str] = None
+    ppt_pdf_id: Optional[str] = None
+    quiz: List[QuizQuestion] = []
+    passing_pct: int = 60
+    created_at: str = Field(default_factory=now_iso)
+
+
+class LessonUpdate(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    order: Optional[int] = None
+    title: Optional[str] = None
+    youtube_url: Optional[str] = None
+    summary_pdf_id: Optional[str] = None
+    ppt_pdf_id: Optional[str] = None
+    quiz: Optional[List[QuizQuestion]] = None
+    passing_pct: Optional[int] = None
+
+
+class Course(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    slug: str
+    title: str
+    subtitle: Optional[str] = None
+    description: Optional[str] = None
+    published: bool = True
+    order: int = 1
+    created_at: str = Field(default_factory=now_iso)
+
+
+class CourseUpdate(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    slug: Optional[str] = None
+    title: Optional[str] = None
+    subtitle: Optional[str] = None
+    description: Optional[str] = None
+    published: Optional[bool] = None
+    order: Optional[int] = None
+
+
+class Learner(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: str
+    created_at: str = Field(default_factory=now_iso)
+
+
+class LearnerSignup(BaseModel):
+    name: str
+    email: EmailStr
+
+
+class QuizSubmitIn(BaseModel):
+    learner_id: str = ""  # unused; learner identity comes from the bearer token
+    answers: List[int] = []  # answers[i] = selected option index for quiz[i]
+
+
 class PaymentTransaction(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     session_id: str
@@ -451,6 +540,26 @@ async def require_admin(user: dict = Depends(get_current_user)) -> dict:
     if user.get("role") != "admin":
         raise HTTPException(status_code=403, detail="Admin only")
     return user
+
+
+async def get_current_learner(creds: HTTPAuthorizationCredentials = Depends(security)) -> dict:
+    """Separate, lightweight learner-auth path (role 'learner') for the
+    Courses/LMS feature — deliberately kept apart from admin/user auth
+    (get_current_user looks up db.users; this looks up db.learners) so a
+    learner's email+name signup never collides with an admin session even
+    if both tokens happen to be present in the browser at once."""
+    if not creds:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    try:
+        payload = jwt.decode(creds.credentials, JWT_SECRET, algorithms=[JWT_ALG])
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    if payload.get("role") != "learner":
+        raise HTTPException(status_code=401, detail="Not a learner token")
+    learner = await db.learners.find_one({"id": payload["sub"]}, {"_id": 0})
+    if not learner:
+        raise HTTPException(status_code=401, detail="Learner not found")
+    return learner
 
 
 # ===================== Seed + init =====================
@@ -568,6 +677,13 @@ async def startup():
             ]
             await db.team_members.insert_many([m.model_dump() for m in team_seed])
         new_flags["team_seeded"] = True
+
+    # Note: Course 1 ("Personal Finance & Money Decisions") and its lessons
+    # are NOT auto-seeded here like events/sessions/team above. Unlike those,
+    # each lesson needs real uploaded PDF file_refs (summary/ppt) created via
+    # the storage layer first — that's a one-time data-population step done
+    # via backend/scripts/seed_course1.py (run once against the real DB),
+    # not something safe to recreate blindly on every cold start.
 
     if new_flags:
         await db.app_meta.update_one({"id": "seed_flags"}, {"$set": new_flags}, upsert=True)
@@ -1316,6 +1432,288 @@ async def admin_file_meta(file_id: str, _admin: dict = Depends(require_admin)):
     return row
 
 
+# ===================== Courses / LMS (SCALE Courses) =====================
+# Coursera-style free courses. Learner identity is a lightweight separate
+# signup (name + email -> learner JWT), not the admin/user auth above.
+# Course materials (summary/ppt PDFs) reuse the FileRef/storage pattern with
+# kind="course_material" and a dedicated public-ish serve endpoint (no auth
+# required to read them, same posture as the YouTube video itself).
+
+def _serialize_course(doc: dict) -> dict:
+    doc = dict(doc)
+    doc.pop("_id", None)
+    return doc
+
+
+def _public_lesson(doc: dict) -> dict:
+    """Strip correct_index/explanation from quiz questions before sending to
+    a non-learner-authenticated or in-progress client — the public course
+    detail view shows lesson content but must not leak quiz answers."""
+    doc = dict(doc)
+    doc.pop("_id", None)
+    quiz = doc.get("quiz") or []
+    doc["quiz"] = [{"id": q.get("id"), "question": q.get("question"), "options": q.get("options", [])} for q in quiz]
+    return doc
+
+
+@api_router.get("/courses")
+async def list_courses():
+    items = await db.courses.find({"published": True}, {"_id": 0}).sort("order", 1).to_list(200)
+    return [_serialize_course(c) for c in items]
+
+
+@api_router.get("/admin/courses")
+async def admin_list_courses(_admin: dict = Depends(require_admin)):
+    items = await db.courses.find({}, {"_id": 0}).sort("order", 1).to_list(200)
+    return [_serialize_course(c) for c in items]
+
+
+@api_router.post("/admin/courses")
+async def create_course(body: Course, _admin: dict = Depends(require_admin)):
+    await db.courses.insert_one(body.model_dump())
+    return body.model_dump()
+
+
+@api_router.put("/admin/courses/{course_id}")
+async def update_course(course_id: str, body: CourseUpdate, _admin: dict = Depends(require_admin)):
+    existing = await db.courses.find_one({"id": course_id})
+    if not existing:
+        raise HTTPException(status_code=404, detail="Course not found")
+    updates = {k: v for k, v in body.model_dump(exclude_unset=True).items() if v is not None}
+    if updates:
+        await db.courses.update_one({"id": course_id}, {"$set": updates})
+    updated = await db.courses.find_one({"id": course_id}, {"_id": 0})
+    return _serialize_course(updated)
+
+
+@api_router.delete("/admin/courses/{course_id}")
+async def delete_course(course_id: str, _admin: dict = Depends(require_admin)):
+    await db.courses.delete_one({"id": course_id})
+    lessons = await db.lessons.find({"course_id": course_id}, {"_id": 0}).to_list(1000)
+    for l in lessons:
+        await db.lessons.delete_one({"id": l["id"]})
+    return {"ok": True}
+
+
+@api_router.get("/courses/{slug}")
+async def get_course(slug: str):
+    course = await db.courses.find_one({"slug": slug, "published": True}, {"_id": 0})
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    lessons = await db.lessons.find({"course_id": course["id"]}, {"_id": 0}).sort("order", 1).to_list(500)
+    course = _serialize_course(course)
+    course["lessons"] = [_public_lesson(l) for l in lessons]
+    return course
+
+
+@api_router.get("/admin/courses/{course_id}/lessons")
+async def admin_list_lessons(course_id: str, _admin: dict = Depends(require_admin)):
+    lessons = await db.lessons.find({"course_id": course_id}, {"_id": 0}).sort("order", 1).to_list(500)
+    return lessons
+
+
+@api_router.post("/admin/courses/{course_id}/lessons")
+async def create_lesson(course_id: str, body: Lesson, _admin: dict = Depends(require_admin)):
+    course = await db.courses.find_one({"id": course_id})
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    body.course_id = course_id
+    await db.lessons.insert_one(body.model_dump())
+    return body.model_dump()
+
+
+@api_router.put("/admin/lessons/{lesson_id}")
+async def update_lesson(lesson_id: str, body: LessonUpdate, _admin: dict = Depends(require_admin)):
+    existing = await db.lessons.find_one({"id": lesson_id})
+    if not existing:
+        raise HTTPException(status_code=404, detail="Lesson not found")
+    updates = body.model_dump(exclude_unset=True)
+    if "quiz" in updates and updates["quiz"] is not None:
+        updates["quiz"] = [q if isinstance(q, dict) else q.model_dump() for q in updates["quiz"]]
+    updates = {k: v for k, v in updates.items() if v is not None}
+    if updates:
+        await db.lessons.update_one({"id": lesson_id}, {"$set": updates})
+    updated = await db.lessons.find_one({"id": lesson_id}, {"_id": 0})
+    return updated
+
+
+@api_router.delete("/admin/lessons/{lesson_id}")
+async def delete_lesson(lesson_id: str, _admin: dict = Depends(require_admin)):
+    await db.lessons.delete_one({"id": lesson_id})
+    return {"ok": True}
+
+
+@api_router.post("/admin/course-materials/upload")
+async def upload_course_material(file: UploadFile = File(...), _admin: dict = Depends(require_admin)):
+    """Admin-only upload for lesson summary/PPT/quiz PDFs. Served back
+    unauthenticated via GET /course-materials/{file_id}, same posture as the
+    public_image pattern, since these are meant to be viewable by any
+    learner once published."""
+    original = file.filename or "file"
+    ext = original.rsplit(".", 1)[-1].lower() if "." in original else ""
+    if ext not in ALLOWED_MATERIAL_EXT:
+        raise HTTPException(status_code=400, detail=f"Unsupported file type .{ext}. Allowed: {', '.join(sorted(ALLOWED_MATERIAL_EXT))}")
+
+    data = await file.read()
+    if len(data) > MAX_UPLOAD_SIZE:
+        raise HTTPException(status_code=400, detail="File larger than 10 MB")
+    if len(data) == 0:
+        raise HTTPException(status_code=400, detail="Empty file")
+
+    content_type = file.content_type or MIME_BY_EXT.get(ext, "application/octet-stream")
+    path = build_upload_path("course-materials", ext)
+    try:
+        result = put_object(path, data, content_type)
+    except Exception as e:
+        logger.error(f"Course material upload failed: {e}")
+        raise HTTPException(status_code=503, detail="File storage unavailable. Please try again.")
+
+    ref = FileRef(
+        storage_path=result["path"],
+        original_filename=original,
+        content_type=content_type,
+        size=int(result.get("size") or len(data)),
+        kind="course_material",
+    )
+    await db.file_refs.insert_one(ref.model_dump())
+    return {"id": ref.id, "original_filename": original, "size": ref.size}
+
+
+@api_router.get("/course-materials/{file_id}")
+async def get_course_material(file_id: str):
+    row = await db.file_refs.find_one({"id": file_id, "is_deleted": False, "kind": "course_material"}, {"_id": 0})
+    if not row:
+        raise HTTPException(status_code=404, detail="File not found")
+    try:
+        data, ctype = get_object(row["storage_path"])
+    except Exception as e:
+        logger.error(f"Course material fetch failed: {e}")
+        raise HTTPException(status_code=503, detail="Storage unavailable")
+    headers = {"Content-Disposition": f'inline; filename="{row["original_filename"]}"'}
+    return Response(content=data, media_type=row.get("content_type") or ctype, headers=headers)
+
+
+@api_router.post("/learners/signup")
+async def learner_signup(body: LearnerSignup):
+    """Upsert-by-email: re-signing up with the same email just logs the
+    returning learner back in rather than creating a duplicate, so their
+    existing progress/enrollments stay attached to the same learner id."""
+    email = body.email.strip().lower()
+    existing = await db.learners.find_one({"email": email})
+    if existing:
+        if body.name.strip() and body.name.strip() != existing.get("name"):
+            await db.learners.update_one({"id": existing["id"]}, {"$set": {"name": body.name.strip()}})
+            existing["name"] = body.name.strip()
+        learner = existing
+    else:
+        learner = Learner(name=body.name.strip(), email=email).model_dump()
+        await db.learners.insert_one(learner)
+    token = create_token(learner["id"], "learner")
+    return {"token": token, "learner": {"id": learner["id"], "name": learner["name"], "email": learner["email"]}}
+
+
+@api_router.get("/learners/me")
+async def learner_me(learner: dict = Depends(get_current_learner)):
+    return {"id": learner["id"], "name": learner["name"], "email": learner["email"]}
+
+
+async def _get_or_create_enrollment(learner_id: str, course_id: str) -> dict:
+    eid = f"{learner_id}_{course_id}"
+    enr = await db.enrollments.find_one({"id": eid})
+    if not enr:
+        enr = {"id": eid, "learner_id": learner_id, "course_id": course_id, "progress": {}, "completed_at": None}
+        await db.enrollments.insert_one(enr)
+    return enr
+
+
+@api_router.get("/courses/{slug}/progress")
+async def get_course_progress(slug: str, learner: dict = Depends(get_current_learner)):
+    course = await db.courses.find_one({"slug": slug})
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    enr = await _get_or_create_enrollment(learner["id"], course["id"])
+    return {"progress": enr.get("progress", {}), "completed_at": enr.get("completed_at")}
+
+
+@api_router.post("/lessons/{lesson_id}/quiz/submit")
+async def submit_quiz(lesson_id: str, body: QuizSubmitIn, learner: dict = Depends(get_current_learner)):
+    lesson = await db.lessons.find_one({"id": lesson_id})
+    if not lesson:
+        raise HTTPException(status_code=404, detail="Lesson not found")
+    quiz = lesson.get("quiz") or []
+    if not quiz:
+        raise HTTPException(status_code=400, detail="This lesson has no quiz")
+
+    answers = body.answers or []
+    correct_flags = []
+    for i, q in enumerate(quiz):
+        chosen = answers[i] if i < len(answers) else None
+        correct_flags.append(chosen == q.get("correct_index"))
+    num_correct = sum(1 for c in correct_flags if c)
+    score_pct = round(100 * num_correct / len(quiz))
+    passing_pct = lesson.get("passing_pct", 60)
+    passed = score_pct >= passing_pct
+
+    course_id = lesson["course_id"]
+    enr = await _get_or_create_enrollment(learner["id"], course_id)
+    progress = dict(enr.get("progress", {}))
+    prior = progress.get(lesson_id, {})
+    best = max(score_pct, prior.get("best_score_pct", 0))
+    progress[lesson_id] = {
+        "best_score_pct": best,
+        "passed": bool(prior.get("passed") or passed),
+        "attempts": prior.get("attempts", 0) + 1,
+        "last_attempt_at": now_iso(),
+    }
+    update_fields = {"progress": progress}
+
+    # Certificate eligibility: every lesson in the course must be passed
+    # (not just an average) — check this on every submit so completed_at is
+    # stamped the moment the LAST required lesson first passes, using the
+    # actual completion date (not later re-download date).
+    if not enr.get("completed_at"):
+        all_lessons = await db.lessons.find({"course_id": course_id}, {"_id": 0}).to_list(500)
+        all_passed = len(all_lessons) > 0 and all(
+            progress.get(l["id"], {}).get("passed") for l in all_lessons
+        )
+        if all_passed:
+            update_fields["completed_at"] = now_iso()
+
+    await db.enrollments.update_one({"id": enr["id"]}, {"$set": update_fields})
+
+    correct_indices = [q.get("correct_index") for q in quiz]
+    explanations = [q.get("explanation") for q in quiz]
+    return {
+        "score_pct": score_pct,
+        "passed": passed,
+        "passing_pct": passing_pct,
+        "num_correct": num_correct,
+        "num_questions": len(quiz),
+        "correct_indices": correct_indices,
+        "explanations": explanations,
+        "correct_flags": correct_flags,
+    }
+
+
+@api_router.get("/courses/{slug}/certificate")
+async def get_certificate(slug: str, learner: dict = Depends(get_current_learner)):
+    course = await db.courses.find_one({"slug": slug})
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    enr = await db.enrollments.find_one({"id": f"{learner['id']}_{course['id']}"})
+    if not enr or not enr.get("completed_at"):
+        raise HTTPException(status_code=403, detail="Certificate not yet unlocked — pass every lesson's quiz (60%+) first.")
+
+    if slug != "personal-finance-money-decisions":
+        raise HTTPException(status_code=501, detail="Certificate template not configured for this course yet.")
+
+    completed_dt = datetime.fromisoformat(enr["completed_at"].replace("Z", "+00:00"))
+    date_str = completed_dt.strftime("%d %B %Y")
+    pdf_bytes = generate_course1_certificate(learner["name"], date_str)
+    headers = {"Content-Disposition": f'attachment; filename="SCALE-Certificate-{learner["name"].replace(" ", "-")}.pdf"'}
+    return Response(content=pdf_bytes, media_type="application/pdf", headers=headers)
+
+
 @api_router.get("/submissions")
 async def list_submissions(_admin: dict = Depends(require_admin)):
     items = await db.submissions.find({}, {"_id": 0}).sort("created_at", -1).to_list(2000)
@@ -1390,12 +1788,14 @@ def _is_admin_request(authorization: str | None) -> bool:
 
 @api_router.get("/events/{event_id}/materials")
 async def get_event_materials(event_id: str, reg_id: str | None = None, request: Request = None):
-    """Gated read: admin OR paid registrant for this event can fetch materials."""
-    if not _is_admin_request(request.headers.get("authorization") if request else None):
-        await _require_paid_registration(event_id, reg_id or "")
+    """Gated read: admin OR paid registrant for this event can fetch materials.
+    Exception: events flagged public_materials=True (free, no-registration
+    events like the case competition) skip the gate entirely."""
     event = await db.events.find_one({"id": event_id}, {"_id": 0})
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
+    if not event.get("public_materials") and not _is_admin_request(request.headers.get("authorization") if request else None):
+        await _require_paid_registration(event_id, reg_id or "")
     materials = event.get("materials") or {}
     # Normalise defaults so frontend can render without null-checks.
     return {
@@ -1491,7 +1891,7 @@ async def download_event_file(
     document_ids = {d.get("file_id") for d in (materials.get("documents") or [])}
     if file_id not in document_ids:
         raise HTTPException(status_code=404, detail="File not attached to this event")
-    if not _is_admin_request(request.headers.get("authorization") if request else None):
+    if not event.get("public_materials") and not _is_admin_request(request.headers.get("authorization") if request else None):
         await _require_paid_registration(event_id, reg_id or "")
     row = await db.file_refs.find_one({"id": file_id, "is_deleted": False}, {"_id": 0})
     if not row:

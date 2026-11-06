@@ -130,6 +130,52 @@ export const eventMaterialsApi = {
   },
 };
 
+// --- Courses / LMS (SCALE Courses) ---
+// Learner identity is a separate, lightweight signup (name+email -> JWT),
+// deliberately kept apart from the admin/user "scale_token" above so a
+// learner session never collides with an admin session in the same browser.
+// A dedicated axios instance + interceptor keeps that token out of every
+// other request, and lets a learner call stay anonymous (no Authorization
+// header at all) if no learner token is present yet — those public reads
+// just hit `api` directly instead.
+export const learnerApi = axios.create({ baseURL: API, timeout: 20000 });
+learnerApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem("scale_learner_token");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+export const coursesApi = {
+  list: () => api.get("/courses").then((r) => r.data),
+  get: (slug) => api.get(`/courses/${slug}`).then((r) => r.data),
+  progress: (slug) => learnerApi.get(`/courses/${slug}/progress`).then((r) => r.data),
+  certificateUrl: (slug) => `${BASE_URL}/api/courses/${slug}/certificate`,
+  // Admin CRUD
+  adminList: () => api.get("/admin/courses").then((r) => r.data),
+  adminCreate: (payload) => api.post("/admin/courses", payload).then((r) => r.data),
+  adminUpdate: (id, payload) => api.put(`/admin/courses/${id}`, payload).then((r) => r.data),
+  adminRemove: (id) => api.delete(`/admin/courses/${id}`).then((r) => r.data),
+  adminListLessons: (courseId) => api.get(`/admin/courses/${courseId}/lessons`).then((r) => r.data),
+  adminCreateLesson: (courseId, payload) => api.post(`/admin/courses/${courseId}/lessons`, payload).then((r) => r.data),
+  adminUpdateLesson: (lessonId, payload) => api.put(`/admin/lessons/${lessonId}`, payload).then((r) => r.data),
+  adminRemoveLesson: (lessonId) => api.delete(`/admin/lessons/${lessonId}`).then((r) => r.data),
+  adminUploadMaterial: (file) => {
+    const fd = new FormData();
+    fd.append("file", file);
+    return api.post("/admin/course-materials/upload", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then((r) => r.data);
+  },
+  materialUrl: (fileId) => `${BASE_URL}/api/course-materials/${fileId}`,
+};
+
+export const learnersApi = {
+  signup: (name, email) => api.post("/learners/signup", { name, email }).then((r) => r.data),
+  me: () => learnerApi.get("/learners/me").then((r) => r.data),
+  submitQuiz: (lessonId, answers) =>
+    learnerApi.post(`/lessons/${lessonId}/quiz/submit`, { answers }).then((r) => r.data),
+};
+
 export const eventSubmissionsApi = {
   upload: (eventId, regId, file) => {
     const form = new FormData();

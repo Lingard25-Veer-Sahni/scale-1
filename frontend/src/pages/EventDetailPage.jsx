@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { eventsApi, registrationsApi } from "../lib/api";
+import { eventsApi, registrationsApi, eventMaterialsApi } from "../lib/api";
 import { useApp } from "../context/AppContext";
 import { toast } from "sonner";
 import Editable from "../components/Editable";
@@ -8,7 +8,7 @@ import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { Label } from "../components/ui/label";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../components/ui/select";
-import { ArrowLeft, Calendar, MapPin, IndianRupee, Plus, Trash2, Users, User, Upload } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, IndianRupee, Plus, Trash2, Users, User, Upload, FileText } from "lucide-react";
 import { uploadsApi } from "../lib/api";
 
 const emptyIndividual = {
@@ -22,6 +22,7 @@ export default function EventDetailPage() {
   const navigate = useNavigate();
   const { editing, refreshEvents, content } = useApp();
   const [event, setEvent] = useState(null);
+  const [materials, setMaterials] = useState(null);
 
   const [individual, setIndividual] = useState(emptyIndividual);
   const [teamName, setTeamName] = useState("");
@@ -39,6 +40,12 @@ export default function EventDetailPage() {
       // Ensure members array length matches min team size
       const tmin = Math.max(2, e.team_size_min || 2);
       setMembers((curr) => (curr.length < tmin ? [...curr, ...Array(tmin - curr.length).fill().map(() => ({ ...emptyMember }))] : curr));
+      if (e.public_materials) {
+        try {
+          const m = await eventMaterialsApi.get(e.id);
+          setMaterials(m);
+        } catch { /* materials optional — ignore failures */ }
+      }
     } catch { toast.error("Event not found."); navigate("/"); }
   };
   useEffect(() => { load(); /* eslint-disable-next-line */ }, [id]);
@@ -143,25 +150,30 @@ export default function EventDetailPage() {
             <span className="flex items-center gap-2"><MapPin size={14} className="text-[var(--scale-goldlight)]" />
               <Editable value={event.location || "TBA"} onSave={(v) => saveField("location", v)} placeholder="Location" />
             </span>
-            <span className="flex items-center gap-2"><IndianRupee size={14} className="text-[var(--scale-goldlight)]" />
-              {editing ? (
-                <input
-                  type="number"
-                  defaultValue={event.price_inr || 500}
-                  onBlur={(e) => saveField("price_inr", parseFloat(e.target.value || "0"))}
-                  className="bg-transparent border-b border-white/40 text-white w-24"
-                />
-              ) : (
-                <span>{event.price_inr || 500} registration fee</span>
-              )}
-            </span>
+            {!event.hide_registration && (
+              <span className="flex items-center gap-2"><IndianRupee size={14} className="text-[var(--scale-goldlight)]" />
+                {editing ? (
+                  <input
+                    type="number"
+                    defaultValue={event.price_inr || 500}
+                    onBlur={(e) => saveField("price_inr", parseFloat(e.target.value || "0"))}
+                    className="bg-transparent border-b border-white/40 text-white w-24"
+                  />
+                ) : (
+                  <span>{event.price_inr || 500} registration fee</span>
+                )}
+              </span>
+            )}
+            {event.hide_registration && (
+              <span className="flex items-center gap-2 text-[var(--scale-goldlight)] font-semibold">Free to enter</span>
+            )}
           </div>
         </div>
       </section>
 
       <section className="py-12 md:py-20">
         <div className="max-container grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-7">
+          <div className={event.hide_registration ? "lg:col-span-12" : "lg:col-span-7"}>
             <Editable as="div" field="event_detail_about_label" value={content?.event_detail_about_label || "About this event"} className="eyebrow block" />
             <Editable
               as="div"
@@ -185,22 +197,48 @@ export default function EventDetailPage() {
               />
             </div>
 
-            <div className="mt-10 bg-[var(--scale-cream)] border-l-4 border-[var(--scale-gold)] p-5">
-              <Editable as="div" field="event_detail_scholarship_label" value={content?.event_detail_scholarship_label || "Need financial support?"} className="font-serif font-bold mb-1 block" />
-              <Editable
-                as="p"
-                field="event_detail_scholarship_body"
-                value={content?.event_detail_scholarship_body}
-                multiline
-                className="text-sm text-black/75 mb-3 block"
-              />
-              <Link to={`/events/${event.id}/scholarship`} className="btn-outline-dark text-sm" data-testid="event-scholarship-link">
-                Apply for Scholarship
-              </Link>
-            </div>
+            {!event.hide_registration && (
+              <div className="mt-10 bg-[var(--scale-cream)] border-l-4 border-[var(--scale-gold)] p-5">
+                <Editable as="div" field="event_detail_scholarship_label" value={content?.event_detail_scholarship_label || "Need financial support?"} className="font-serif font-bold mb-1 block" />
+                <Editable
+                  as="p"
+                  field="event_detail_scholarship_body"
+                  value={content?.event_detail_scholarship_body}
+                  multiline
+                  className="text-sm text-black/75 mb-3 block"
+                />
+                <Link to={`/events/${event.id}/scholarship`} className="btn-outline-dark text-sm" data-testid="event-scholarship-link">
+                  Apply for Scholarship
+                </Link>
+              </div>
+            )}
+
+            {event.public_materials && materials && (materials.documents || []).length > 0 && (
+              <div className="mt-10" data-testid="event-public-materials">
+                <div className="eyebrow block mb-3">Materials</div>
+                {materials.notes && (
+                  <p className="text-sm text-black/70 whitespace-pre-line mb-4">{materials.notes}</p>
+                )}
+                <div className="flex flex-wrap gap-3">
+                  {materials.documents.map((doc) => (
+                    <a
+                      key={doc.file_id}
+                      href={`${process.env.REACT_APP_BACKEND_URL}/api/events/${event.id}/files/${doc.file_id}/download`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn-outline-dark text-xs"
+                      data-testid={`event-material-${doc.file_id}`}
+                    >
+                      <FileText size={14} /> {doc.label || doc.filename}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Registration form — dynamic per mode */}
+          {!event.hide_registration && (
           <div className="lg:col-span-5">
             <div className="bg-white border border-black/10 p-6 md:p-8 sticky top-28" data-testid="event-registration-form">
               {event.registration_open === false ? (
@@ -347,6 +385,7 @@ export default function EventDetailPage() {
               )}
             </div>
           </div>
+          )}
         </div>
       </section>
     </div>

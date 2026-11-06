@@ -15,6 +15,8 @@ import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import CustomPage from "./pages/CustomPage";
 import CommunityPage from "./pages/CommunityPage";
 import TeamPage from "./pages/TeamPage";
+import CoursesPage from "./pages/CoursesPage";
+import CourseLearnPage from "./pages/CourseLearnPage";
 import { Toaster } from "sonner";
 
 function Layout({ children }) {
@@ -48,6 +50,8 @@ function App() {
               <Route path="/payment-success" element={<PaymentSuccessPage />} />
               <Route path="/community" element={<CommunityPage />} />
               <Route path="/our-team" element={<TeamPage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/courses/:slug" element={<CourseLearnPage />} />
               <Route path="/p/:slug" element={<CustomPage />} />
             </Routes>
           </Layout>
