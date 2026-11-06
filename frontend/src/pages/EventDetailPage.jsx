@@ -8,7 +8,7 @@ import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { Label } from "../components/ui/label";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../components/ui/select";
-import { ArrowLeft, Calendar, MapPin, IndianRupee, Plus, Trash2, Users, User, Upload, FileText } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, IndianRupee, Plus, Trash2, Users, User, Upload, FileText, ExternalLink } from "lucide-react";
 import { uploadsApi } from "../lib/api";
 
 const emptyIndividual = {
@@ -210,6 +210,23 @@ export default function EventDetailPage() {
                 <Link to={`/events/${event.id}/scholarship`} className="btn-outline-dark text-sm" data-testid="event-scholarship-link">
                   Apply for Scholarship
                 </Link>
+              </div>
+            )}
+
+            {event.public_materials && materials && (materials.links || []).length > 0 && (
+              <div className="mt-10 bg-[var(--scale-cream)] border-l-4 border-[var(--scale-gold)] p-5" data-testid="event-public-links">
+                {materials.links.map((lk) => (
+                  <a
+                    key={lk.id}
+                    href={lk.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-gold justify-center w-full"
+                    data-testid={`event-link-${lk.id}`}
+                  >
+                    {lk.label} <ExternalLink size={14} />
+                  </a>
+                ))}
               </div>
             )}
 
