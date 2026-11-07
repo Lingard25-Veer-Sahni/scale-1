@@ -85,12 +85,28 @@ class _Cursor:
     async def to_list(self, limit: int = 1000) -> List[Dict[str, Any]]:
         params = _filter_to_params(self._filt)
         params.append(("select", "doc"))
-        if self._sort_field:
-            order = "asc" if self._sort_dir >= 0 else "desc"
-            params.append(("order", f"doc->>{self._sort_field}.{order}"))
+        # Sorting happens client-side below rather than via PostgREST's
+        # `order` param: `doc->>field` extracts the value as text, so
+        # PostgREST would sort numeric "order" fields lexicographically
+        # (1, 10, 11, 2, ...) instead of numerically. Fetching unsorted and
+        # sorting here lets us compare numbers as numbers.
         params.append(("limit", str(limit)))
         rows = await self._collection._request("GET", params=params)
-        return [r["doc"] for r in rows]
+        docs = [r["doc"] for r in rows]
+        if self._sort_field:
+            def _key(doc: Dict[str, Any]):
+                value = doc.get(self._sort_field)
+                if isinstance(value, (int, float)) and not isinstance(value, bool):
+                    return (0, value, "")
+                if isinstance(value, str):
+                    try:
+                        return (0, float(value), "")
+                    except ValueError:
+                        return (1, 0, value)
+                return (2, 0, "")
+
+            docs.sort(key=_key, reverse=self._sort_dir < 0)
+        return docs
 
 
 class PGCollection:
