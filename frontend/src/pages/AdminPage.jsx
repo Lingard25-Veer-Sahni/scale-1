@@ -156,6 +156,18 @@ export default function AdminPage() {
                   </label>
                 </F>
 
+                <F label="Courses page visibility" full>
+                  <label className="flex items-center gap-2 text-sm font-semibold">
+                    <input
+                      type="checkbox"
+                      checked={content.courses_page_visible !== false}
+                      onChange={(e) => setC("courses_page_visible", e.target.checked)}
+                      data-testid="content-courses-page-visible"
+                    />
+                    Show "Courses" page (nav link + direct access)
+                  </label>
+                </F>
+
                 <F label="Contact email"><Input value={content.contact_email || ""} onChange={(e) => setC("contact_email", e.target.value)} /></F>
                 <F label="Contact Instagram"><Input value={content.contact_instagram || ""} onChange={(e) => setC("contact_instagram", e.target.value)} /></F>
                 <F label="Contact LinkedIn"><Input value={content.contact_linkedin || ""} onChange={(e) => setC("contact_linkedin", e.target.value)} /></F>

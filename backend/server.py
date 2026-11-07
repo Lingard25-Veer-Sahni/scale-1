@@ -731,9 +731,10 @@ async def me(user: dict = Depends(get_current_user)):
 @api_router.get("/content")
 async def get_content():
     doc = await db.content.find_one({"id": "main"}, {"_id": 0})
-    if not doc:
-        doc = SiteContent().model_dump()
-    return doc
+    # Run through the model so fields added after this doc was first saved
+    # (e.g. new page-visibility toggles) backfill their declared defaults
+    # instead of silently coming back as None.
+    return SiteContent(**(doc or {})).model_dump()
 
 
 @api_router.put("/content")
@@ -741,7 +742,7 @@ async def update_content(body: dict, _admin: dict = Depends(require_admin)):
     body["id"] = "main"
     await db.content.update_one({"id": "main"}, {"$set": body}, upsert=True)
     doc = await db.content.find_one({"id": "main"}, {"_id": 0})
-    return doc
+    return SiteContent(**(doc or {})).model_dump()
 
 
 # ===================== Theme =====================
