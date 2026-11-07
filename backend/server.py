@@ -108,6 +108,8 @@ class EventItem(BaseModel):
     # registration/payment gate at all.
     public_materials: bool = False
     hide_registration: bool = False
+    prize_pool: str = ""  # optional prize breakdown, shown as a highlighted block
+    disclaimer: str = ""  # optional legal/educational-use note, shown in very small print
 
 
 class EventUpdate(BaseModel):
@@ -135,6 +137,8 @@ class EventUpdate(BaseModel):
     registration_closed_message: Optional[str] = None
     public_materials: Optional[bool] = None
     hide_registration: Optional[bool] = None
+    prize_pool: Optional[str] = None
+    disclaimer: Optional[str] = None
 
 
 def _serialize_event(doc: dict) -> dict:

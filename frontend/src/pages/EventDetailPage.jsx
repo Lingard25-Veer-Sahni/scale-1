@@ -197,6 +197,21 @@ export default function EventDetailPage() {
               />
             </div>
 
+            {(event.prize_pool || editing) && (
+              <div className="mt-10 bg-[var(--scale-cream)] border-l-4 border-[var(--scale-gold)] p-5" data-testid="event-prize-pool">
+                <div className="eyebrow-gold block mb-1">Prize Pool</div>
+                <Editable
+                  as="p"
+                  value={event.prize_pool}
+                  multiline
+                  className="text-sm text-black/80 whitespace-pre-line block"
+                  onSave={(v) => saveField("prize_pool", v)}
+                  testId="event-detail-prize-pool"
+                  placeholder="Add prize pool details here."
+                />
+              </div>
+            )}
+
             {!event.hide_registration && (
               <div className="mt-10 bg-[var(--scale-cream)] border-l-4 border-[var(--scale-gold)] p-5">
                 <Editable as="div" field="event_detail_scholarship_label" value={content?.event_detail_scholarship_label || "Need financial support?"} className="font-serif font-bold mb-1 block" />
@@ -250,6 +265,20 @@ export default function EventDetailPage() {
                     </a>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {(event.disclaimer || editing) && (
+              <div className="mt-10" data-testid="event-disclaimer">
+                <Editable
+                  as="p"
+                  value={event.disclaimer}
+                  multiline
+                  className="text-[9px] leading-relaxed text-black/40 whitespace-pre-line block"
+                  onSave={(v) => saveField("disclaimer", v)}
+                  testId="event-detail-disclaimer"
+                  placeholder="Add a small-print legal disclaimer here."
+                />
               </div>
             )}
           </div>

@@ -55,6 +55,18 @@ ELIGIBILITY_TEXT = (
     "the top 10 scorers advance to a live final pitch."
 )
 
+PRIZE_POOL_TEXT = (
+    "Total prize pool: 15,000 rupees.\n"
+    "1st place: 10,000 rupees.\n"
+    "2nd place: 5,000 rupees."
+)
+
+DISCLAIMER_TEXT = (
+    "All data, materials, and case content used in this competition are for educational "
+    "purposes only. SCALE is not affiliated with, endorsed by, or targeting any company "
+    "referenced in this competition."
+)
+
 MATERIALS_NOTES = (
     'Start with "Rules & Format", it has the full rubric and the case-specific judging checklist for Lenskart. '
     '"Lenskart case" is the case you must solve. The IndiGo sample case + sample solution are a reference only, '
@@ -105,6 +117,8 @@ def upsert_event(s: requests.Session) -> dict:
         # registration/payment gate at all.
         "public_materials": True,
         "hide_registration": True,
+        "prize_pool": PRIZE_POOL_TEXT,
+        "disclaimer": DISCLAIMER_TEXT,
     }
     if existing:
         r = s.put(f"{BASE}/events/{existing['id']}", json=payload)
