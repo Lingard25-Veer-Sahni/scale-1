@@ -1,0 +1,74 @@
+# Render configuration, kept in the repo so the live routing rules are
+# reviewable and recoverable instead of existing only as clicks in a dashboard.
+#
+# READ THIS FIRST
+# ---------------
+# Render only applies this file to services that were created FROM a Blueprint.
+# The current frontend service was created by hand in the dashboard, so this
+# file is documentation until either (a) the same rules are entered in the
+# dashboard by hand, or (b) the service is re-created from this Blueprint.
+# DEPLOY.md lists the exact dashboard steps. Nothing here changes the live site
+# on its own.
+#
+# WHY THE ROUTES LOOK LIKE THIS
+# -----------------------------
+# The site currently has one catch-all rewrite, `/*` -> `/index.html`. That
+# rule is what fixed "Not Found" on page reload, but it also means EVERY
+# possible URL answers 200 with the app shell: a typo, a deleted event, a
+# retired course, even /sitemap.xml before it existed. Search engines read that
+# as "this page exists", so junk URLs get crawled and indexed and real removals
+# never register.
+#
+# After the prerender step there is a real file on disk for every public page
+# (build/index.html, build/courses/index.html, build/courses/<slug>/index.html,
+# build/events/<id>/index.html, ...), so deep links and reloads are served
+# directly by those files - no catch-all needed. Only the routes that cannot be
+# enumerated at build time need a rewrite, and those are user-specific flow
+# pages that should never be indexed, so they point at a noindex shell.
+#
+# Anything matching neither a file nor a rule falls through to build/404.html
+# with a genuine HTTP 404.
+
+services:
+  - type: web
+    runtime: static
+    name: scale-frontend
+    rootDir: frontend
+    buildCommand: yarn install --frozen-lockfile && yarn build
+    staticPublishPath: ./build
+    pullRequestPreviewsEnabled: false
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        value: https://scale-india-backend.onrender.com
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      # Hashed CRA bundles are immutable; the HTML must never be cached hard or
+      # a deploy would not reach returning visitors.
+      - path: /static/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /*.html
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      # Signed-in / payment flow routes. The id segment is unknowable at build
+      # time, so these are rewritten to an app shell carrying
+      # <meta name="robots" content="noindex">. The React app still boots and
+      # renders the correct route from the URL, exactly as before.
+      - type: rewrite
+        source: /events/:id/scholarship
+        destination: /app-noindex.html
+      - type: rewrite
+        source: /events/:id/registered
+        destination: /app-noindex.html
+      - type: rewrite
+        source: /payment/:registrationId
+        destination: /app-noindex.html
+      # Admin-authored CMS pages can be created between deploys, so they cannot
+      # be enumerated reliably either. Same treatment: the route keeps working,
+      # it just is not indexed until it gets prerendered on the next deploy.
+      - type: rewrite
+        source: /p/*
+        destination: /app-noindex.html

@@ -11,6 +11,9 @@
 # production
 /build
 
+# cached pristine CRA shell used by scripts/prerender.js
+/.prerender-shell.html
+
 # misc
 .DS_Store
 .env.local

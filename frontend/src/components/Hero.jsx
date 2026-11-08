@@ -86,7 +86,10 @@ export default function Hero() {
             <div className="absolute -inset-3 border-2 border-[var(--scale-gold)]/40 rotate-1" />
             <img
               src={LOGO_URL}
-              alt="SCALE logo"
+              alt="SCALE logo: Society of Commerce, Analytics, Leadership and Entrepreneurship"
+              width="1254"
+              height="1254"
+              fetchPriority="high"
               className="relative w-full max-w-md lg:max-w-lg shadow-2xl rounded-sm"
               data-testid="hero-logo-image"
             />
