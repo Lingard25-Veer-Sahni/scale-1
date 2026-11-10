@@ -7,7 +7,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "./ui/select";
-import { Mail, Instagram, Linkedin } from "lucide-react";
+import { Mail, Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function ContactSection() {
   const { content } = useApp();
@@ -46,6 +46,16 @@ export default function ContactSection() {
             <a href={`https://instagram.com/${(content?.contact_instagram || "").replace("@", "")}`} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-[var(--scale-goldlight)] transition">
               <Instagram size={18} className="text-[var(--scale-goldlight)]" />
               <Editable field="contact_instagram" value={content?.contact_instagram} />
+            </a>
+            <a
+              href={`https://www.youtube.com/@${(content?.contact_youtube || "").replace("@", "")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 hover:text-[var(--scale-goldlight)] transition"
+              data-testid="contact-youtube-link"
+            >
+              <Youtube size={18} className="text-[var(--scale-goldlight)]" />
+              <Editable field="contact_youtube" value={content?.contact_youtube} />
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-[var(--scale-goldlight)] transition">
               <Linkedin size={18} className="text-[var(--scale-goldlight)]" />

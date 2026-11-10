@@ -373,13 +373,29 @@ function navHtml(content) {
 }
 
 function footerHtml(content) {
+  const instagram = (content.contact_instagram || "").replace("@", "");
+  const youtube = (content.contact_youtube || "").replace("@", "");
+  // No tagline line here: Footer.jsx does not render one either, so the
+  // prerendered first paint matches what the app shows once it boots.
   return `<footer>
 <p>SCALE ${esc(ORG.legalName ? `(${ORG.legalName})` : "")}</p>
-${content.footer_tagline ? `<p>${esc(content.footer_tagline)}</p>` : ""}
 <p>Contact: <a href="mailto:${esc(content.contact_email || ORG.email)}">${esc(
     content.contact_email || ORG.email
   )}</a></p>
-${content.contact_instagram ? `<p>Instagram: ${esc(content.contact_instagram)}</p>` : ""}
+${
+  instagram
+    ? `<p>Instagram: <a href="https://instagram.com/${esc(instagram)}">${esc(
+        content.contact_instagram
+      )}</a></p>`
+    : ""
+}
+${
+  youtube
+    ? `<p>YouTube: <a href="https://www.youtube.com/@${esc(youtube)}">${esc(
+        content.contact_youtube
+      )}</a></p>`
+    : ""
+}
 </footer>`;
 }
 
@@ -889,7 +905,8 @@ ${sitemap
 > SCALE (Society of Commerce, Analytics, Leadership and Entrepreneurship) is a student organisation in India. It runs business case competitions, expert sessions and free online courses in business, finance and leadership for school students.
 
 Contact: ${content.contact_email || ORG.email}
-Instagram: ${content.contact_instagram || "@scale.national"}
+Instagram: https://www.instagram.com/${(content.contact_instagram || "@scale.national").replace("@", "")}
+YouTube: https://www.youtube.com/@${(content.contact_youtube || "@Scale-national").replace("@", "")}
 
 ## Competitions and events
 
