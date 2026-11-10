@@ -170,8 +170,10 @@ export default function AdminPage() {
 
                 <F label="Contact email"><Input value={content.contact_email || ""} onChange={(e) => setC("contact_email", e.target.value)} /></F>
                 <F label="Contact Instagram"><Input value={content.contact_instagram || ""} onChange={(e) => setC("contact_instagram", e.target.value)} /></F>
+                <F label="Contact YouTube"><Input value={content.contact_youtube || ""} onChange={(e) => setC("contact_youtube", e.target.value)} placeholder="@Scale-national" /></F>
                 <F label="Contact LinkedIn"><Input value={content.contact_linkedin || ""} onChange={(e) => setC("contact_linkedin", e.target.value)} /></F>
-                <F label="Footer tagline" full><Input value={content.footer_tagline || ""} onChange={(e) => setC("footer_tagline", e.target.value)} /></F>
+                {/* No "Footer tagline" field: the footer does not render one
+                    any more, so editing it here would have no visible effect. */}
               </div>
 
               <PillarsEditor content={content} setContent={setContent} />

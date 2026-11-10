@@ -237,7 +237,10 @@ class SiteContent(BaseModel):
     contact_email: str = "scalesupportteam2@gmail.com"
     contact_instagram: str = "@scale.national"
     contact_linkedin: str = "SCALE India"
-    footer_tagline: str = "SCALE is not a club. It is a credential."
+    contact_youtube: str = "@Scale-national"
+    # Retired: the footer no longer shows a tagline. The field is kept so that
+    # content rows saved earlier still validate; nothing reads it any more.
+    footer_tagline: str = ""
 
     # Eyebrow labels + section headlines — all admin-editable
     pillars_eyebrow: str = "The SCALE Experience"

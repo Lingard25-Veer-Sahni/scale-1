@@ -33,7 +33,12 @@ const ORG = {
   url: SITE,
   logo: LOGO_URL,
   email: "scalesupportteam2@gmail.com",
-  sameAs: ["https://www.instagram.com/scale.national/"],
+  // Official profiles. Search engines use these to tie the site and the
+  // social accounts together as one organisation.
+  sameAs: [
+    "https://www.instagram.com/scale.national/",
+    "https://www.youtube.com/@Scale-national",
+  ],
   // Factual, non-comparative. Used for the Organization JSON-LD description.
   description:
     "SCALE (Society of Commerce, Analytics, Leadership and Entrepreneurship) is a student organisation in India that runs business case competitions, expert sessions and free online courses for school students.",
