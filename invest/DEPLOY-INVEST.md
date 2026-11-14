@@ -1,98 +1,103 @@
-# Putting the investment simulator on its own subdomain
+# The investment simulator at scale-national.com/invest
 
-Target URL: **https://invest.scale-national.com**
+Target URL: **https://www.scale-national.com/invest**
 
-This is a separate site from scale-national.com. Nothing on the main site links
-to it, and the main site is not touched by any of the steps below. If you stop
-halfway through, the main site is unaffected.
+It is a path on the main site, the same way `/community` is, not a separate
+site and not a separate Render service.
 
-## What is in this folder
+## How it ships
+
+The whole simulator lives at `frontend/public/invest/`. Create React App copies
+everything in `frontend/public/` into `build/` untouched, so a normal deploy of
+the existing `scale-frontend` service puts real files at:
+
+```
+build/invest/index.html
+build/invest/assets/app.js, styles.css, logo.png
+build/invest/data/*.json
+```
+
+There is **nothing to create in the Render dashboard**. No second service, no
+DNS record, no build command. It goes out with the next deploy of the main site.
+
+> If you already created a `scale-invest` static site in Render, delete it. It
+> is not used by this approach and its builds will keep failing.
+
+## The one blocker: the `/*` catch-all
+
+The frontend service currently has a single rewrite rule, `/*` -> `/index.html`.
+On Render a rewrite rule **beats a real file on disk**. So while that rule is
+there, `/invest` returns the React app's HTML instead of the simulator, and the
+simulator never loads.
+
+Verified on the live site on 14 November 2026: `/courses` and a made-up path
+both returned the home page's HTML even though `build/courses/index.html` exists.
+
+**Step 2 of `DEPLOY.md` is what removes that rule.** It has to be done before
+`/invest` will work. That step also replaces the catch-all with four narrow
+rewrites so that reloading an event or payment page keeps working.
+
+Once it is done, no extra rule is needed for `/invest` - Render serves the real
+files directly.
+
+## What is in this folder now
 
 | Path | What it is |
 | --- | --- |
-| `site/` | The whole website. Plain HTML, CSS and JavaScript. No build step. **This is the folder Render publishes.** |
-| `site/data/*.json` | Offline fallback copies of the startup data. The live site normally ignores these and reads fresh data from the worker. |
-| `data-worker.js` | Source of the backend that feeds the site. **Not deployed by these steps** and not served to visitors. Kept only so the backend can be self-hosted later. |
+| `data-worker.js` | Source of the backend that feeds the site. **Not deployed and not served to visitors.** |
 | `INTEGRATION-NOTES.md` | The original handoff notes from whoever built it. |
+| `AUDIT.md` | How the tracker decides a company is an Indian unlisted startup, and when it removes one. |
+| `APP-README.md` | The app's own README, as handed over. Out of date - see the note at the bottom of this file. |
+| `DEPLOY-INVEST.md` | This file. |
 
-The site gets its live data from a Cloudflare Worker that already runs at
+Everything here is outside `frontend/public/` on purpose. Anything inside
+`frontend/public/` is copied straight onto the public web, so internal notes and
+the worker source are kept here instead.
+
+The site itself is at `frontend/public/invest/`, which holds only `index.html`,
+`assets/` and `data/`.
+
+The live data comes from a Cloudflare Worker that already runs at
 `scale-startup-data.y84ikt.workers.dev`. You do not need to deploy or configure
-anything for that. Verified working on 14 November 2026: it answered in about
-one second with data refreshed the same morning, tracking 33 startups.
+anything for it. Verified working on 14 November 2026: it answered in about one
+second with data refreshed the same morning, tracking 33 startups. The JSON
+files in `frontend/public/invest/data/` are offline fallbacks used only if the
+worker does not answer within three seconds.
 
-## Step 1. Create the Render service
+## Checking it after a deploy
 
-1. In the Render dashboard click **New +** then **Static Site**.
-2. Pick the same repository the main site uses.
-3. Fill in:
-   - **Name:** `scale-invest`
-   - **Branch:** whichever branch you deploy from
-   - **Root Directory:** `invest/site`
-   - **Build Command:** leave it **empty**
-   - **Publish Directory:** `.` (a single dot)
-4. Click **Create Static Site** and wait for the first deploy to finish.
+1. Open `https://www.scale-national.com/invest`. You should get the dark
+   "SCALE India Investment" page with a signup box over it.
+2. Reload the page. It should still be there, not "Not Found".
+3. Confirm the main site is untouched: the home page, logging in, event pages,
+   payments and the courses all behave as before.
+4. Confirm nothing links to it: there is no `/invest` entry in the navbar, the
+   footer or the sitemap.
 
-It will give you a URL like `scale-invest.onrender.com`. Open it and check the
-page loads before going on.
-
-> Leave the Build Command empty. There is nothing to compile, and a build
-> command would fail and block the deploy.
-
-## Step 2. Point the subdomain at it
-
-In **Render**, open the `scale-invest` service, go to **Settings → Custom
-Domains**, and add `invest.scale-national.com`. Render will show you a CNAME
-value, something like `scale-invest.onrender.com`.
-
-Then in **GoDaddy**, open the DNS records for `scale-national.com` and add:
-
-| Field | Value |
-| --- | --- |
-| Type | `CNAME` |
-| Name | `invest` |
-| Value | the hostname Render showed you |
-| TTL | leave the default |
-
-Save. DNS usually takes a few minutes, occasionally up to an hour. Render shows
-a green tick on the custom domain once it has worked, and issues the HTTPS
-certificate automatically.
-
-Only add the `invest` record. Do not change the existing records for `@` or
-`www`, which are what keep the main site working.
-
-## Step 3. Check it
-
-Open `https://invest.scale-national.com`. You should get the dark
-"SCALE India Investment" page with a signup box over it.
-
-Then confirm it stayed separate from the main site:
-
-- `https://www.scale-national.com` still loads normally
-- Logging in, event pages and the courses still work
-- There is no link to the simulator anywhere in the main site's menus
+If step 1 shows the normal SCALE home page instead, the catch-all rewrite is
+still in place - do `DEPLOY.md` Step 2.
 
 ## Keeping it out of Google
 
-Two things do this, and neither depends on the other:
+Three things do this, and none depends on the others:
 
-- `site/index.html` carries `<meta name="robots" content="noindex,nofollow">`
-- `render.yaml` sets an `X-Robots-Tag: noindex, nofollow` header on everything,
-  which also covers the JSON files that have no HTML to put a tag in
+- Nothing on scale-national.com links to `/invest`, so crawlers have no path to
+  it in the first place.
+- `frontend/public/invest/index.html` carries
+  `<meta name="robots" content="noindex,nofollow">`.
+- `render.yaml` sets `X-Robots-Tag: noindex, nofollow` on `/invest/*`, which
+  also covers the JSON files, since they have no HTML head to put a tag in.
+  (`render.yaml` only takes effect if the service is re-created from the
+  Blueprint - see the note at the top of that file. The meta tag works either
+  way.)
 
 Note that *unlisted* is not the same as *private*. Anyone who has the URL can
 open it and sign up. These settings keep it out of search results; they are not
-a lock. If it needs to be genuinely restricted, that needs a password on the
-site itself, which it does not currently have.
+a lock. Genuinely restricting it would need a password on the site itself,
+which it does not currently have.
 
-To make it findable later, delete the meta tag and the `X-Robots-Tag` header.
-
-## If you would rather have scale-national.com/invest instead
-
-That is a path on the main site rather than a subdomain, and it is a different
-and riskier job: it needs a rewrite rule ordered ahead of the main site's own
-routing, plus a `/invest` to `/invest/` redirect, because the app loads its
-files using relative paths. Getting the order wrong can break existing pages.
-The subdomain above avoids all of that. Ask before switching approaches.
+To make it findable later, delete the meta tag, delete the `X-Robots-Tag`
+header, and add it to the sitemap.
 
 ## Things worth knowing about the app itself
 
@@ -100,11 +105,11 @@ The subdomain above avoids all of that. Ask before switching approaches.
 - It has its own signup with usernames and passwords, handled entirely by the
   Cloudflare Worker, which is **not** the main site's login system. A SCALE
   admin account will not work here, and an account here has no access to the
-  main site.
+  main site. Being on the same domain does not join the two together.
 - Email addresses are collected and stored but never verified and never
   emailed.
 - Anyone removed by the admin can sign up again under a different username.
   The handoff notes flag this as a known limitation.
-- `site/README.md` is out of date: it says the app has no accounts and no
+- `APP-README.md` is out of date: it says the app has no accounts and no
   backend, which was true of an earlier version. `INTEGRATION-NOTES.md` is the
   accurate one.

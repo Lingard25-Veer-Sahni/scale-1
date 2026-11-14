@@ -5,7 +5,7 @@
 const SHELL_HTML = `
 <header class="topbar">
   <div class="brand">
-    <img class="logo-img" src="assets/logo.png" alt="SCALE logo" width="36" height="36">
+    <img class="logo-img" src="/invest/assets/logo.png" alt="SCALE logo" width="36" height="36">
     <div>
       <div class="brand-name">SCALE India Investment</div>
       <div class="brand-sub">Unlisted Startup Exchange &middot; learning simulator</div>
@@ -1080,7 +1080,7 @@ async function load() {
       clearTimeout(t);
       if (r.ok) { liveHits++; return await r.json(); }
     } catch {}
-    try { const r = await fetch("data/" + name + "?v=" + Date.now()); return await r.json(); }
+    try { const r = await fetch("/invest/data/" + name + "?v=" + Date.now()); return await r.json(); }
     catch { return fb; }
   };
   const [su, pr, ne, gr, me] = await Promise.all([

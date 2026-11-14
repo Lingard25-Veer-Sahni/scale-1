@@ -52,6 +52,18 @@ services:
       - path: /*.html
         name: Cache-Control
         value: public, max-age=0, must-revalidate
+      # /invest is reachable only by typing the URL: nothing on the site links
+      # to it. index.html carries a noindex meta tag; this header repeats it
+      # for the JSON files under /invest, which have no HTML head to put a tag
+      # in.
+      - path: /invest/*
+        name: X-Robots-Tag
+        value: noindex, nofollow
+      # The simulator's data is refreshed by its worker four times a day, so a
+      # long cache would pin stale numbers on screen.
+      - path: /invest/data/*
+        name: Cache-Control
+        value: public, max-age=300
     routes:
       # Signed-in / payment flow routes. The id segment is unknowable at build
       # time, so these are rewritten to an app shell carrying
@@ -72,44 +84,21 @@ services:
       - type: rewrite
         source: /p/*
         destination: /app-noindex.html
-
-  # Unlisted-startup simulator, served on its OWN subdomain
-  # (invest.scale-national.com) rather than as a path on the main site.
-  #
-  # Deliberately a separate service, not a rewrite on scale-frontend:
-  #  * nothing on the main site links here, and a separate origin keeps it that
-  #    way by construction - there is no path on scale-national.com to find;
-  #  * a path-based rule would have to be ordered ahead of the main site's
-  #    routing, which is the one part of the config that can break login,
-  #    registration and event URLs if it is got wrong;
-  #  * the two deploy independently, so a bad push here cannot take the main
-  #    site down.
-  #
-  # No build step: the folder is plain HTML/CSS/JS and is served as-is.
-  # Its data comes from an external Cloudflare Worker at runtime; the JSON under
-  # invest/site/data/ is only the offline fallback snapshot.
-  - type: web
-    runtime: static
-    name: scale-invest
-    rootDir: invest/site
-    buildCommand: ""
-    staticPublishPath: .
-    pullRequestPreviewsEnabled: false
-    headers:
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-      # Belt-and-braces alongside the <meta name="robots"> tag in index.html:
-      # the header also covers the JSON and markdown files, which have no HTML
-      # head to put a meta tag in.
-      - path: /*
-        name: X-Robots-Tag
-        value: noindex, nofollow
-      - path: /*.html
-        name: Cache-Control
-        value: public, max-age=0, must-revalidate
-      # The data files are refreshed by the worker four times a day, so a long
-      # cache here would serve stale numbers even when the worker has new ones.
-      - path: /data/*
-        name: Cache-Control
-        value: public, max-age=300
+      # /invest - the unlisted-startup simulator. It lives in
+      # frontend/public/invest/, so CRA copies it verbatim into build/invest/
+      # and it ships with the main site; no second service and no build step.
+      #
+      # It needs NO rewrite of its own once the `/*` catch-all is gone: there
+      # are real files at build/invest/index.html, /invest/assets/* and
+      # /invest/data/*, and Render serves real files directly. This single
+      # redirect only normalises the missing trailing slash.
+      #
+      # The catch-all IS the blocker, though. While `/*` -> /index.html is
+      # still present in the dashboard it wins over real files, so /invest
+      # returns the React shell and the simulator never loads. Verified on the
+      # live site 14 Nov: /courses and a nonsense path both return the home
+      # page's HTML despite build/courses/index.html existing. DEPLOY.md
+      # Step 2 is therefore a prerequisite for /invest, not just for SEO.
+      - type: redirect
+        source: /invest
+        destination: /invest/
