@@ -1,0 +1,204 @@
+{
+  "updated": "2026-11-14",
+  "note": "Positive issuer-level evidence that each tracked company is unlisted, with dated sources. Re-verified each updater run against exchange masters; this file is the affirmative case.",
+  "evidence": {
+    "flipkart": {
+      "name": "Flipkart",
+      "claim": "IPO deferred to 2028 or later - still private",
+      "source": "https://economictimes.indiatimes.com/tech/startups",
+      "evidence_date": "Nov 2026"
+    },
+    "phonepe": {
+      "name": "PhonePe",
+      "claim": "Traded as unlisted/pre-IPO shares; IPO paused Mar 2026",
+      "source": "https://www.planify.in/research-report/phonepe/",
+      "evidence_date": "Nov 2026"
+    },
+    "zerodha": {
+      "name": "Zerodha",
+      "claim": "Traded as unlisted shares; no IPO ever filed",
+      "source": "https://www.planify.in/research-report/zerodha/",
+      "evidence_date": "Nov 2026"
+    },
+    "razorpay": {
+      "name": "Razorpay",
+      "claim": "Traded as unlisted shares; SEBI IPO nod Nov 2026, listing targeted Q1 2027",
+      "source": "https://www.planify.in/research-report/razorpay/",
+      "evidence_date": "Nov 2026"
+    },
+    "zepto": {
+      "name": "Zepto",
+      "claim": "Confidential DRHP reported, IPO shelved per ET - still private",
+      "source": "https://economictimes.indiatimes.com/tech/startups",
+      "evidence_date": "Nov 2026"
+    },
+    "cred": {
+      "name": "CRED",
+      "claim": "Traded as unlisted/pre-IPO shares",
+      "source": "https://www.planify.in/research-report/cred/",
+      "evidence_date": "Nov 2026"
+    },
+    "dream11": {
+      "name": "Dream11",
+      "claim": "Dream Sports tracked on unlisted-markets platform",
+      "source": "https://www.prosperainsights.in/unlisted-markets/dream11-dream-sports",
+      "evidence_date": "Nov 2026"
+    },
+    "oyo": {
+      "name": "OYO",
+      "claim": "Parent Prism (ex-Oravel Stays) filed UDRHP Jun 2026 - pre-IPO",
+      "source": "https://www.livemint.com/market/ipo/oyo-ipo-parent-prism-files-updated-drhp-for-6-650-crore-public-issue-11782793572171.html",
+      "evidence_date": "Jun 2026"
+    },
+    "acko": {
+      "name": "Acko",
+      "claim": "Pre-IPO: appointed independent directors ahead of IPO, DRHP targeted",
+      "source": "https://www.moneycontrol.com/news/business/startup/acko-waited-two-years-for-growth-visibility-appointed-independent-directors-well-before-ipo-founder-varun-dua-14040140.html",
+      "evidence_date": "Sep 2026"
+    },
+    "boat": {
+      "name": "boAt",
+      "claim": "Issuer Imagine Marketing refiled DRHP Oct 2025 - pre-IPO",
+      "source": "https://www.goldmansachs.com/worldwide/india/ipo/imagine-marketing-limited/download",
+      "evidence_date": "Oct 2025"
+    },
+    "ofbusiness": {
+      "name": "OfBusiness",
+      "claim": "Traded as unlisted shares; DRHP filed ~Nov 2026",
+      "source": "https://www.planify.in/research-report/ofbusiness/",
+      "evidence_date": "Nov 2026"
+    },
+    "zoho": {
+      "name": "Zoho",
+      "claim": "CEO: IPO unlikely soon, focus on R&D",
+      "source": "https://www.business-standard.com/companies/news/zoho-ipo-delay-arattai-success-bharat-projects-125092900810_1.html",
+      "evidence_date": "Sep 2025"
+    },
+    "udaan": {
+      "name": "Udaan",
+      "claim": "Targets IPO by early 2028 - still private",
+      "source": "https://www.business-standard.com/companies/news/b2b-ecom-platform-udaan-targets-ipo-by-early-2028-as-turnaround-takes-hold-126101100549_1.html",
+      "evidence_date": "Oct 2026"
+    },
+    "sharechat": {
+      "name": "ShareChat",
+      "claim": "Traded as unlisted/pre-IPO shares",
+      "source": "https://www.planify.in/research-report/sharechat/",
+      "evidence_date": "Nov 2026"
+    },
+    "rapido": {
+      "name": "Rapido",
+      "claim": "Co-founder: not chasing IPO timeline",
+      "source": "https://www.newindianexpress.com/business/2026/Jun/15/well-capitalised-not-chasing-ipo-timeline-rapido-co-founder-aravind-sanka",
+      "evidence_date": "Jun 2026"
+    },
+    "bharatpe": {
+      "name": "BharatPe",
+      "claim": "Traded as unlisted/pre-IPO shares",
+      "source": "https://www.planify.in/research-report/bharatpe/",
+      "evidence_date": "Nov 2026"
+    },
+    "cars24": {
+      "name": "CARS24",
+      "claim": "Traded as unlisted shares; inc42 IPO tracker: yet to file",
+      "source": "https://www.planify.in/research-report/cars24/",
+      "evidence_date": "Nov 2026"
+    },
+    "cardekho": {
+      "name": "CarDekho",
+      "claim": "inc42 IPO tracker: yet to file",
+      "source": "https://inc42.com/features/indian-startup-ipo-tracker/",
+      "evidence_date": "Nov 2026"
+    },
+    "unacademy": {
+      "name": "Unacademy",
+      "claim": "Tracked as private company on secondary-market platforms",
+      "source": "https://quantlogix.ai/private-company/unacademy",
+      "evidence_date": "Nov 2026"
+    },
+    "upgrad": {
+      "name": "upGrad",
+      "claim": "Traded as unlisted/pre-IPO shares",
+      "source": "https://www.planify.in/research-report/upgrad/",
+      "evidence_date": "Nov 2026"
+    },
+    "eruditus": {
+      "name": "Eruditus",
+      "claim": "Tracked on private secondary-market platforms",
+      "source": "https://notice.co/c/eruditus",
+      "evidence_date": "Nov 2026"
+    },
+    "cultfit": {
+      "name": "Cult.fit",
+      "claim": "inc42 IPO tracker: yet to file",
+      "source": "https://inc42.com/features/indian-startup-ipo-tracker/",
+      "evidence_date": "Nov 2026"
+    },
+    "porter": {
+      "name": "Porter",
+      "claim": "Traded as unlisted/pre-IPO shares",
+      "source": "https://www.planify.in/research-report/porter/",
+      "evidence_date": "Nov 2026"
+    },
+    "xpressbees": {
+      "name": "Xpressbees",
+      "claim": "Traded as unlisted/pre-IPO shares",
+      "source": "https://www.planify.in/research-report/xpressbees/",
+      "evidence_date": "Nov 2026"
+    },
+    "elasticrun": {
+      "name": "ElasticRun",
+      "claim": "Issuer NTex Transportation tracked on Moneycontrol unlisted-shares (ISIN-tagged)",
+      "source": "https://www.moneycontrol.com/markets/unlisted-shares/elasticrun-ntex-transportation-services-share-price-INE0AGE01019/",
+      "evidence_date": "Nov 2026"
+    },
+    "atomberg": {
+      "name": "Atomberg",
+      "claim": "DRHP filed with SEBI (Atomberg Technologies Ltd, CIN U72900MH2012PLC229...) - pre-IPO",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787809930622.pdf",
+      "evidence_date": "Aug 2026"
+    },
+    "healthifyme": {
+      "name": "HealthifyMe",
+      "claim": "Traded as unlisted/pre-IPO shares",
+      "source": "https://www.planify.in/research-report/healthifyme/",
+      "evidence_date": "Nov 2026"
+    },
+    "kukufm": {
+      "name": "Kuku FM",
+      "claim": "Parent Kuku Technologies got SEBI nod for IPO, listing eyed 2027 - pre-IPO",
+      "source": "https://indianstartupnews.com/news/kuku-fm-parent-gets-sebi-nod-for-rs-3500-crore-ipo-eyes-stock-market-listing-in-2027-12548372",
+      "evidence_date": "Sep 2026"
+    },
+    "jar": {
+      "name": "Jar",
+      "claim": "Raised fresh private funding Sep 2026 - still private",
+      "source": "https://entrackr.com/exclusive/exclusive-jar-raises-small-fresh-funding-from-unitary-fund-12547515",
+      "evidence_date": "Sep 2026"
+    },
+    "darwinbox": {
+      "name": "Darwinbox",
+      "claim": "Weighing buyout interest amid IPO plans - still private",
+      "source": "https://www.hindustantimes.com/business/microsoft-rivals-eye-buyout-of-hr-firm-darwinbox-101787047269601.html",
+      "evidence_date": "Aug 2026"
+    },
+    "jupiter": {
+      "name": "Jupiter",
+      "claim": "Traded as unlisted/pre-IPO shares",
+      "source": "https://www.planify.in/research-report/jupiter/",
+      "evidence_date": "Nov 2026"
+    },
+    "zeta": {
+      "name": "Zeta",
+      "claim": "Private: raised $50 Mn from Optum at a $2 Bn valuation (Feb 2025), no IPO filed; Indian parent entity verified as Better World Technologies Pvt Ltd (FY24 financials covered by YourStory)",
+      "source": "https://techcrunch.com/2025/02/10/zeta-valued-at-2b-in-new-funding/",
+      "evidence_date": "Nov 2026"
+    },
+    "moengage": {
+      "name": "MoEngage",
+      "claim": "Private: $280 Mn Series F (Dec 2025) at ~$900 Mn; reverse-merged into MoEngage India Private Limited (NCLT order 12 Jan 2026); no formal IPO process started, listing expected 2027-28",
+      "source": "https://inc42.com/buzz/ipo-bound-moengage-gets-nclt-nod-for-reverse-merger/",
+      "evidence_date": "Nov 2026"
+    }
+  }
+}

@@ -1,0 +1,675 @@
+{
+  "updated": "2026-11-14",
+  "note": "Curated dataset of Indian UNLISTED startups. Eligibility: founded in India, headquartered/primarily operated in India, not listed on any exchange anywhere, not a subsidiary of a listed company. Valuations are last publicly reported figures and may be stale. Prices are simulated for learning.",
+  "startups": [
+    {
+      "id": "flipkart",
+      "name": "Flipkart",
+      "sector": "E-commerce",
+      "hq": "Bengaluru",
+      "founded": 2007,
+      "valuation_usd": 36000000000,
+      "funding_usd": 15000000000,
+      "investors": [
+        "Walmart",
+        "Tiger Global",
+        "Accel"
+      ],
+      "blurb": "India's largest homegrown e-commerce marketplace; IPO deferred to at least 2028.",
+      "base_price": 512.0,
+      "aliases": [
+        "Flipkart Internet"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "phonepe",
+      "name": "PhonePe",
+      "sector": "Fintech",
+      "hq": "Bengaluru",
+      "founded": 2015,
+      "valuation_usd": 12000000000,
+      "funding_usd": 1900000000,
+      "investors": [
+        "Walmart",
+        "General Atlantic",
+        "Tiger Global"
+      ],
+      "blurb": "UPI payments leader; SEBI approval received Jan 2026 but IPO launch paused.",
+      "base_price": 171.0,
+      "aliases": [
+        "PhonePe Private Limited",
+        "PhonePe India"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "zerodha",
+      "name": "Zerodha",
+      "sector": "Fintech",
+      "hq": "Bengaluru",
+      "founded": 2010,
+      "valuation_usd": 10500000000,
+      "funding_usd": 0,
+      "investors": [
+        "Bootstrapped"
+      ],
+      "blurb": "India's largest discount broker; profitable and bootstrapped with no IPO plans.",
+      "base_price": 150.0,
+      "aliases": [
+        "Zerodha Broking"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "razorpay",
+      "name": "Razorpay",
+      "sector": "Fintech",
+      "hq": "Bengaluru",
+      "founded": 2014,
+      "valuation_usd": 5000000000,
+      "funding_usd": 740000000,
+      "investors": [
+        "Peak XV",
+        "Lightspeed",
+        "Tiger Global",
+        "GIC"
+      ],
+      "blurb": "Payments and banking infra for businesses; SEBI nod Nov 2026, eyeing a 2027 listing.",
+      "base_price": 71.0,
+      "aliases": [
+        "Razorpay Software"
+      ],
+      "ipo_watch": true
+    },
+    {
+      "id": "zepto",
+      "name": "Zepto",
+      "sector": "Quick commerce",
+      "hq": "Mumbai",
+      "founded": 2021,
+      "valuation_usd": 4500000000,
+      "funding_usd": 3600000000,
+      "investors": [
+        "StepStone",
+        "Lightspeed",
+        "Y Combinator"
+      ],
+      "blurb": "10-minute grocery delivery; IPO on hold, raised a pre-IPO round instead.",
+      "base_price": 64.0,
+      "aliases": [
+        "Kiranakart",
+        "KiranaKart Technologies"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "cred",
+      "name": "CRED",
+      "sector": "Fintech",
+      "hq": "Bengaluru",
+      "founded": 2018,
+      "valuation_usd": 6400000000,
+      "funding_usd": 1000000000,
+      "investors": [
+        "Peak XV",
+        "Ribbit Capital",
+        "Tiger Global"
+      ],
+      "blurb": "Members-only credit card bill payments and commerce club.",
+      "base_price": 91.0,
+      "aliases": [
+        "Dreamplug Technologies"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "dream11",
+      "name": "Dream11",
+      "sector": "Gaming",
+      "hq": "Mumbai",
+      "founded": 2008,
+      "valuation_usd": 8000000000,
+      "funding_usd": 1620000000,
+      "investors": [
+        "Tiger Global",
+        "Steadview",
+        "TPG"
+      ],
+      "blurb": "Fantasy sports giant navigating India's real-money gaming reset.",
+      "base_price": 114.0,
+      "aliases": [
+        "Sporta Technologies"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "oyo",
+      "name": "OYO",
+      "sector": "Hospitality",
+      "hq": "Gurugram",
+      "founded": 2012,
+      "valuation_usd": 2400000000,
+      "funding_usd": 3200000000,
+      "investors": [
+        "SoftBank",
+        "Lightspeed",
+        "Airbnb"
+      ],
+      "blurb": "Budget hotel and homes network; long-running IPO ambitions.",
+      "base_price": 34.0,
+      "aliases": [
+        "Oravel Stays",
+        "Prism"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "acko",
+      "name": "Acko",
+      "sector": "Insurtech",
+      "hq": "Bengaluru",
+      "founded": 2016,
+      "valuation_usd": 1400000000,
+      "funding_usd": 450000000,
+      "investors": [
+        "General Atlantic",
+        "Munich Re",
+        "Amazon"
+      ],
+      "blurb": "Digital-first general insurer for motor, health and embedded cover.",
+      "base_price": 20.0,
+      "aliases": [
+        "Acko General Insurance"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "boat",
+      "name": "boAt",
+      "sector": "Consumer electronics",
+      "hq": "Mumbai",
+      "founded": 2016,
+      "valuation_usd": 1300000000,
+      "funding_usd": 170000000,
+      "investors": [
+        "Warburg Pincus",
+        "Malabar",
+        "Fireside"
+      ],
+      "blurb": "Audio and wearables brand; IPO deferred despite SEBI approval.",
+      "base_price": 18.5,
+      "aliases": [
+        "Imagine Marketing"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "ofbusiness",
+      "name": "OfBusiness",
+      "sector": "B2B commerce",
+      "hq": "Gurugram",
+      "founded": 2015,
+      "valuation_usd": 5000000000,
+      "funding_usd": 880000000,
+      "investors": [
+        "Tiger Global",
+        "SoftBank",
+        "Falcon Edge"
+      ],
+      "blurb": "Raw-material commerce and SME financing (Oxyzo); DRHP expected soon.",
+      "base_price": 71.0,
+      "aliases": [
+        "OFB Tech"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "zoho",
+      "name": "Zoho",
+      "sector": "SaaS",
+      "hq": "Chennai",
+      "founded": 1996,
+      "valuation_usd": 0,
+      "funding_usd": 0,
+      "investors": [
+        "Bootstrapped"
+      ],
+      "blurb": "Profitable bootstrapped business-software suite used worldwide.",
+      "base_price": 100.0,
+      "aliases": [
+        "Zoho Corporation"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "udaan",
+      "name": "Udaan",
+      "sector": "B2B commerce",
+      "hq": "Bengaluru",
+      "founded": 2016,
+      "valuation_usd": 1800000000,
+      "funding_usd": 1950000000,
+      "investors": [
+        "Lightspeed",
+        "DST Global",
+        "Tencent"
+      ],
+      "blurb": "B2B marketplace connecting manufacturers, wholesalers and retailers.",
+      "base_price": 26.0,
+      "aliases": [
+        "Hiveloop Technology"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "sharechat",
+      "name": "ShareChat",
+      "sector": "Social media",
+      "hq": "Bengaluru",
+      "founded": 2015,
+      "valuation_usd": 2000000000,
+      "funding_usd": 1700000000,
+      "investors": [
+        "Tiger Global",
+        "Snap",
+        "Twitter"
+      ],
+      "blurb": "Regional-language social network behind Moj short video.",
+      "base_price": 28.5,
+      "aliases": [
+        "Mohalla Tech"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "rapido",
+      "name": "Rapido",
+      "sector": "Mobility",
+      "hq": "Bengaluru",
+      "founded": 2015,
+      "valuation_usd": 1100000000,
+      "funding_usd": 430000000,
+      "investors": [
+        "WestBridge",
+        "Nexus",
+        "Swiggy"
+      ],
+      "blurb": "Bike-taxi and auto ride-hailing challenger to Ola and Uber.",
+      "base_price": 15.7,
+      "aliases": [
+        "Roppen Transportation",
+        "Roppen Transportation Services"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "bharatpe",
+      "name": "BharatPe",
+      "sector": "Fintech",
+      "hq": "New Delhi",
+      "founded": 2018,
+      "valuation_usd": 2850000000,
+      "funding_usd": 680000000,
+      "investors": [
+        "Peak XV",
+        "Tiger Global",
+        "Coatue"
+      ],
+      "blurb": "Merchant payments and lending network built on UPI QR.",
+      "base_price": 40.5,
+      "aliases": [
+        "Resilient Innovations"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "cars24",
+      "name": "CARS24",
+      "sector": "Auto tech",
+      "hq": "Gurugram",
+      "founded": 2015,
+      "valuation_usd": 1300000000,
+      "funding_usd": 1400000000,
+      "investors": [
+        "DST Global",
+        "SoftBank",
+        "Alpha Wave"
+      ],
+      "blurb": "Used-car buying, selling and financing platform.",
+      "base_price": 18.5,
+      "aliases": [
+        "Global Cars24",
+        "CARS24 Services"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "cardekho",
+      "name": "CarDekho",
+      "sector": "Auto tech",
+      "hq": "Jaipur",
+      "founded": 2008,
+      "valuation_usd": 750000000,
+      "funding_usd": 690000000,
+      "investors": [
+        "Peak XV",
+        "Google",
+        "Hillhouse"
+      ],
+      "blurb": "Car discovery marketplace with insurance and finance arms.",
+      "base_price": 10.7,
+      "aliases": [
+        "Girnar Software"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "unacademy",
+      "name": "Unacademy",
+      "sector": "Edtech",
+      "hq": "Bengaluru",
+      "founded": 2015,
+      "valuation_usd": 3400000000,
+      "funding_usd": 880000000,
+      "investors": [
+        "SoftBank",
+        "General Atlantic",
+        "Peak XV"
+      ],
+      "blurb": "Online learning platform spanning test prep to upskilling.",
+      "base_price": 48.5,
+      "aliases": [
+        "Sorting Hat Technologies"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "upgrad",
+      "name": "upGrad",
+      "sector": "Edtech",
+      "hq": "Mumbai",
+      "founded": 2015,
+      "valuation_usd": 2250000000,
+      "funding_usd": 600000000,
+      "investors": [
+        "Temasek",
+        "Bodhi Tree"
+      ],
+      "blurb": "Higher-education and skilling degrees with university partners.",
+      "base_price": 32.0,
+      "aliases": [
+        "upGrad Education"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "eruditus",
+      "name": "Eruditus",
+      "sector": "Edtech",
+      "hq": "Mumbai",
+      "founded": 2010,
+      "valuation_usd": 3200000000,
+      "funding_usd": 1600000000,
+      "investors": [
+        "SoftBank",
+        "Accel",
+        "CPP Investments"
+      ],
+      "blurb": "Executive education with global university partners (Emeritus).",
+      "base_price": 45.5,
+      "aliases": [
+        "Eruditus Executive Education"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "cultfit",
+      "name": "Cult.fit",
+      "sector": "Fitness",
+      "hq": "Bengaluru",
+      "founded": 2016,
+      "valuation_usd": 650000000,
+      "funding_usd": 640000000,
+      "investors": [
+        "Zomato",
+        "Tata Digital",
+        "Accel"
+      ],
+      "blurb": "Fitness centres, at-home workouts and healthy food under cure.fit.",
+      "base_price": 9.3,
+      "aliases": [
+        "cure.fit",
+        "Curefit Healthcare"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "porter",
+      "name": "Porter",
+      "sector": "Logistics",
+      "hq": "Bengaluru",
+      "founded": 2014,
+      "valuation_usd": 1000000000,
+      "funding_usd": 300000000,
+      "investors": [
+        "Tiger Global",
+        "Peak XV",
+        "Vitruvian"
+      ],
+      "blurb": "Intra-city mini-truck and two-wheeler logistics marketplace.",
+      "base_price": 14.3,
+      "aliases": [
+        "Resfeber Labs",
+        "SmartShift Logistics Solutions"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "xpressbees",
+      "name": "Xpressbees",
+      "sector": "Logistics",
+      "hq": "Pune",
+      "founded": 2015,
+      "valuation_usd": 1400000000,
+      "funding_usd": 590000000,
+      "investors": [
+        "Blackstone",
+        "TPG",
+        "ChrysCapital"
+      ],
+      "blurb": "E-commerce delivery network covering thousands of pin codes.",
+      "base_price": 20.0,
+      "aliases": [
+        "Busybees Logistics",
+        "Busybees Logistics Solutions"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "elasticrun",
+      "name": "ElasticRun",
+      "sector": "B2B commerce",
+      "hq": "Pune",
+      "founded": 2016,
+      "valuation_usd": 1500000000,
+      "funding_usd": 440000000,
+      "investors": [
+        "SoftBank",
+        "Prosus",
+        "Chimera"
+      ],
+      "blurb": "Rural distribution network reaching kirana stores across India.",
+      "base_price": 21.5,
+      "aliases": [
+        "NTex Transportation",
+        "Ntex Transportation Services"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "atomberg",
+      "name": "Atomberg",
+      "sector": "Consumer appliances",
+      "hq": "Mumbai",
+      "founded": 2012,
+      "valuation_usd": 500000000,
+      "funding_usd": 130000000,
+      "investors": [
+        "Temasek",
+        "Steadview",
+        "Jungle"
+      ],
+      "blurb": "Energy-efficient BLDC fans and home appliances; SEBI observations received.",
+      "base_price": 7.1,
+      "aliases": [
+        "Atomberg Technologies"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "healthifyme",
+      "name": "HealthifyMe",
+      "sector": "Healthtech",
+      "hq": "Bengaluru",
+      "founded": 2012,
+      "valuation_usd": 600000000,
+      "funding_usd": 200000000,
+      "investors": [
+        "LeapFrog",
+        "Khosla",
+        "Unilever Ventures"
+      ],
+      "blurb": "AI-powered nutrition and fitness coaching app.",
+      "base_price": 8.6,
+      "aliases": [
+        "HealthifyMe Wellness"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "kukufm",
+      "name": "Kuku FM",
+      "sector": "Media",
+      "hq": "Mumbai",
+      "founded": 2018,
+      "valuation_usd": 550000000,
+      "funding_usd": 120000000,
+      "investors": [
+        "Krafton",
+        "Vertex",
+        "3one4"
+      ],
+      "blurb": "Hindi and regional-language audio shows and audiobooks.",
+      "base_price": 7.9,
+      "aliases": [
+        "Mebigo Labs",
+        "Kuku Technologies"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "jar",
+      "name": "Jar",
+      "sector": "Fintech",
+      "hq": "Bengaluru",
+      "founded": 2021,
+      "valuation_usd": 300000000,
+      "funding_usd": 60000000,
+      "investors": [
+        "Tiger Global",
+        "Arkam"
+      ],
+      "blurb": "Micro-savings app that rounds up spare change into digital gold.",
+      "base_price": 4.3,
+      "aliases": [
+        "ChangeJar Technologies"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "darwinbox",
+      "name": "Darwinbox",
+      "sector": "SaaS",
+      "hq": "Hyderabad",
+      "founded": 2015,
+      "valuation_usd": 1000000000,
+      "funding_usd": 190000000,
+      "investors": [
+        "Salesforce Ventures",
+        "Peak XV",
+        "Lightspeed"
+      ],
+      "blurb": "Cloud HR platform for large enterprises.",
+      "base_price": 14.3,
+      "aliases": [
+        "Darwinbox Digital Solutions"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "sector": "Fintech",
+      "hq": "Mumbai",
+      "founded": 2019,
+      "valuation_usd": 710000000,
+      "funding_usd": 160000000,
+      "investors": [
+        "Tiger Global",
+        "Peak XV",
+        "Matrix"
+      ],
+      "blurb": "Neobanking app for savings, payments and money insights.",
+      "base_price": 10.1,
+      "aliases": [
+        "Amica Financial",
+        "Amica Financial Technologies"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "zeta",
+      "name": "Zeta",
+      "sector": "Fintech",
+      "hq": "Bengaluru",
+      "founded": 2015,
+      "valuation_usd": 2000000000,
+      "funding_usd": 390000000,
+      "investors": [
+        "SoftBank Vision Fund 2",
+        "Mastercard",
+        "Optum"
+      ],
+      "blurb": "Banking-tech platform powering card issuing and core banking for lenders like HDFC Bank; valued at $2 Bn after Optum's 2025 strategic round. Indian parent entity verified as Better World Technologies Pvt Ltd.",
+      "base_price": 28.6,
+      "aliases": [
+        "Better World Technologies",
+        "Better World Technologies Private Limited"
+      ],
+      "ipo_watch": false
+    },
+    {
+      "id": "moengage",
+      "name": "MoEngage",
+      "sector": "SaaS",
+      "hq": "Bengaluru",
+      "founded": 2014,
+      "valuation_usd": 900000000,
+      "funding_usd": 307000000,
+      "investors": [
+        "Goldman Sachs Alternatives",
+        "ChrysCapital",
+        "B Capital",
+        "A91 Partners"
+      ],
+      "blurb": "Customer engagement and analytics platform; reverse-flipped to India through an NCLT-approved merger into MoEngage India Pvt Ltd (Jan 2026) ahead of a planned domestic IPO.",
+      "base_price": 12.9,
+      "aliases": [
+        "MoEngage India",
+        "MoEngage India Private Limited"
+      ],
+      "ipo_watch": true
+    }
+  ]
+}

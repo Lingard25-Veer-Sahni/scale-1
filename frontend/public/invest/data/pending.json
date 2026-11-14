@@ -1,0 +1,36 @@
+{
+  "updated": "2026-11-14",
+  "note": "Companies reviewed against the India-domicile rule and NOT tracked. status=pending: domicile unresolved (quarantined). status=excluded: research resolved them as not headquartered/primarily operated in India today.",
+  "items": [
+    {
+      "name": "Postman",
+      "status": "excluded",
+      "pending_reason": "Resolved 2026-11-14: official site states 'headquartered in San Francisco' (founded in Bangalore); parent Postman Inc (US). Postdot Technologies Pvt Ltd is the Indian subsidiary. Fails the India-HQ rule.",
+      "source": "https://www.postman.com/company/contact-us/"
+    },
+    {
+      "name": "Icertis",
+      "status": "excluded",
+      "pending_reason": "Resolved 2026-11-14: headquartered in Bellevue, Washington (GlobalData, PitchBook, Wikipedia agree); Icertis Inc (US). Pune is the India office. Fails the India-HQ rule.",
+      "source": "https://www.globaldata.com/company-profile/icertis-inc/locations/"
+    },
+    {
+      "name": "Innovaccer",
+      "status": "excluded",
+      "pending_reason": "Resolved 2026-11-14: headquartered in San Francisco (official ONC disclosure, 101 Mission Street); Innovaccer Inc (US SEC filer). Innovaccer Analytics Pvt Ltd (Noida) is the Indian subsidiary. Fails the India-HQ rule.",
+      "source": "https://innovaccer.com/onc-certification-file/onc-disclaimer-document.pdf"
+    },
+    {
+      "name": "Chargebee",
+      "status": "excluded",
+      "pending_reason": "Resolved 2026-11-14: headquarters in California (Walnut/San Francisco); Chargebee Inc (US SEC filer). Chargebee Technologies Pvt Ltd (Chennai) is the R&D and operations centre. Fails the India-HQ rule.",
+      "source": "https://www.highperformr.ai/company/chargebee"
+    },
+    {
+      "name": "BrowserStack",
+      "status": "pending",
+      "pending_reason": "Founded and operated from Mumbai (BrowserStack Software Pvt Ltd) but the holding entity is Irish (BrowserStack Limited); redomicile to India was reported started Jan 2025 (8-12 month process per The Arc) with no completion report found as of 2026-11-14. Quarantined until the Indian holding entity is confirmed.",
+      "source": "https://inc42.com/buzz/browserstack-begins-process-to-redomicile-its-holding-entity-to-india-report/"
+    }
+  ]
+}
