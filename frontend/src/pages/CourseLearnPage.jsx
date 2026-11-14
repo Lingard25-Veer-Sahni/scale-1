@@ -63,7 +63,12 @@ export default function CourseLearnPage() {
       const url = window.URL.createObjectURL(new Blob([res.data], { type: "application/pdf" }));
       const a = document.createElement("a");
       a.href = url;
-      a.download = `SCALE-Certificate-${(learner?.name || "certificate").replace(/\s+/g, "-")}.pdf`;
+      // Mirrors the filename the API sets. Including the course number keeps
+      // a learner's certificates apart once they finish more than one course;
+      // a.download overrides the server's Content-Disposition, so it has to be
+      // built here too rather than relying on the header.
+      const who = (learner?.name || "certificate").replace(/\s+/g, "-");
+      a.download = `SCALE-Course-${course?.order ?? 1}-Certificate-${who}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();

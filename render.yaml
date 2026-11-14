@@ -72,3 +72,44 @@ services:
       - type: rewrite
         source: /p/*
         destination: /app-noindex.html
+
+  # Unlisted-startup simulator, served on its OWN subdomain
+  # (invest.scale-national.com) rather than as a path on the main site.
+  #
+  # Deliberately a separate service, not a rewrite on scale-frontend:
+  #  * nothing on the main site links here, and a separate origin keeps it that
+  #    way by construction - there is no path on scale-national.com to find;
+  #  * a path-based rule would have to be ordered ahead of the main site's
+  #    routing, which is the one part of the config that can break login,
+  #    registration and event URLs if it is got wrong;
+  #  * the two deploy independently, so a bad push here cannot take the main
+  #    site down.
+  #
+  # No build step: the folder is plain HTML/CSS/JS and is served as-is.
+  # Its data comes from an external Cloudflare Worker at runtime; the JSON under
+  # invest/site/data/ is only the offline fallback snapshot.
+  - type: web
+    runtime: static
+    name: scale-invest
+    rootDir: invest/site
+    buildCommand: ""
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      # Belt-and-braces alongside the <meta name="robots"> tag in index.html:
+      # the header also covers the JSON and markdown files, which have no HTML
+      # head to put a meta tag in.
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex, nofollow
+      - path: /*.html
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      # The data files are refreshed by the worker four times a day, so a long
+      # cache here would serve stale numbers even when the worker has new ones.
+      - path: /data/*
+        name: Cache-Control
+        value: public, max-age=300

@@ -94,9 +94,14 @@ const NOINDEX_STATIC_ROUTES = [
   "/signup",
   "/admin",
   "/payment-success",
-  // Hidden in admin settings today: non-admins are redirected to the home
-  // page, so these must not be indexed and must not appear in the sitemap.
-  // The URLs keep working for signed-in admins.
+  // These two have no prerendered page of their own, so they are served the
+  // noindex shell and stay out of the sitemap. Keep them listed even after an
+  // admin makes the page visible again: the list is also what writes
+  // build/<route>/index.html, so removing an entry without first adding a real
+  // prerendered page would leave the URL with no file to serve.
+  //
+  // To index one of these properly, add a body renderer and a build block in
+  // prerender.js and a ROUTES entry above, then drop it from this list.
   "/community",
   "/our-team",
 ];

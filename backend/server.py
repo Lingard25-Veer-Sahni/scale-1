@@ -19,7 +19,7 @@ from datetime import datetime, timezone, timedelta
 
 from email_service import send_email, notify_admin
 from storage_service import init_storage, put_object, get_object, build_upload_path
-from certificate_service import generate_course1_certificate
+from certificate_service import generate_certificate, has_template as has_certificate_template
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / ".env")
@@ -1712,13 +1712,21 @@ async def get_certificate(slug: str, learner: dict = Depends(get_current_learner
     if not enr or not enr.get("completed_at"):
         raise HTTPException(status_code=403, detail="Certificate not yet unlocked — pass every lesson's quiz (60%+) first.")
 
-    if slug != "personal-finance-money-decisions":
+    # Each course needs its own artwork, because the course name is baked
+    # into the template. Without one we must refuse rather than hand out
+    # another course's certificate.
+    if not has_certificate_template(slug):
         raise HTTPException(status_code=501, detail="Certificate template not configured for this course yet.")
 
     completed_dt = datetime.fromisoformat(enr["completed_at"].replace("Z", "+00:00"))
     date_str = completed_dt.strftime("%d %B %Y")
-    pdf_bytes = generate_course1_certificate(learner["name"], date_str)
-    headers = {"Content-Disposition": f'attachment; filename="SCALE-Certificate-{learner["name"].replace(" ", "-")}.pdf"'}
+    pdf_bytes = generate_certificate(slug, learner["name"], date_str)
+    # Name the file per course, so a learner who finishes more than one does
+    # not end up with "SCALE-Certificate-Name.pdf" and "...(1).pdf" and no way
+    # to tell them apart. Matches the "SCALE Course N" wording on the artwork.
+    safe_name = learner["name"].replace(" ", "-")
+    filename = f"SCALE-Course-{course.get('order', 1)}-Certificate-{safe_name}.pdf"
+    headers = {"Content-Disposition": f'attachment; filename="{filename}"'}
     return Response(content=pdf_bytes, media_type="application/pdf", headers=headers)
 
 
