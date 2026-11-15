@@ -90,7 +90,52 @@ async def upload_material(path: Path) -> str:
 # of this list entirely until its quiz is ready, rather than adding it with
 # quiz=[].
 LESSONS = [
-    # Lesson entries go here as the material arrives.
+    {
+        "order": 1,
+        "title": "Why Invest at All: Inflation and the Time Value of Money",
+        "youtube_url": "https://youtu.be/j-2PR_ptdy4",
+        "summary": DOWNLOADS / "SCALE-C2-L01-Summary-73f65a03.pdf",
+        # Slides PDF not yet on disk. Left as None so the lesson can publish
+        # now; re-running the script once the file is in ~/Downloads attaches
+        # it without disturbing anything else.
+        "ppt": None,
+        # The ten multiple-choice questions from the lesson quiz, in the same
+        # order and wording as the PDF so a learner working from the printout
+        # sees the same paper. The PDF's two written practice problems are not
+        # here: they need working shown, which the site cannot mark.
+        "quiz": [
+            ("What does inflation do to the purchasing power of money over time?",
+             ["Increases it", "Decreases it", "Leaves it unchanged", "Doubles it every year"], 1,
+             "Inflation is the general rise in prices, so the same amount of money buys less each year: purchasing power falls."),
+            ("₹10,000 is placed at 7% simple interest for 5 years. What is it worth at the end?",
+             ["₹10,700", "₹13,500", "₹14,026", "₹17,000"], 1,
+             "Simple interest = 10,000 x 0.07 x 5 = ₹3,500. Total = 10,000 + 3,500 = ₹13,500."),
+            ("Why does compound interest eventually outgrow simple interest at the same rate?",
+             ["The rate increases every year", "Interest is earned on the growing pile, including past interest", "Banks charge lower fees on it", "It avoids inflation completely"], 1,
+             "Compounding adds each period's interest to the base, so later interest is earned on interest."),
+            ("₹10,000 at 7% compounded annually is worth about how much after 10 years?",
+             ["₹17,000", "₹19,672", "₹24,000", "₹38,697"], 1,
+             "10,000 x 1.07^10 = about ₹19,672. ₹17,000 is the simple-interest answer; ₹38,697 is the 20-year compound answer."),
+            ("An investment earns 7% while inflation is 6%. The real return is closest to:",
+             ["13%", "7%", "1%", "-1%"], 2,
+             "Real return is roughly nominal minus inflation: 7 - 6 = 1% (exact: 1.07/1.06 - 1 = 0.94%)."),
+            ("Using the rule of 72, money growing at 9% a year doubles in about:",
+             ["6 years", "8 years", "9 years", "12 years"], 1,
+             "72 / 9 = 8 years."),
+            ("Prices are doubling every 12 years. The rule of 72 says inflation is about:",
+             ["12%", "8%", "6%", "4%"], 2,
+             "72 / 12 = 6%. The rule works backwards for prices too."),
+            ("Asha invests ₹2,000 a month from age 16 and Kabir the same from 26, at the same return. At 40, Asha has nearly 4 times Kabir's corpus mainly because:",
+             ["She chose riskier products", "Her money had more compounding periods", "She invested 4 times more each month", "Inflation was lower in her years"], 1,
+             "Same monthly amount and same return: only the ten extra years of compounding separate them."),
+            ("Keeping savings in a cash box at home while inflation runs at 6% means:",
+             ["The money is safe and grows slowly", "The real value of the money falls each year", "The money doubles in 12 years", "Nothing changes because cash has no risk"], 1,
+             "Idle cash earns 0%, so its purchasing power falls by roughly the inflation rate every year."),
+            ("Which statement best captures why people invest rather than only save?",
+             ["To avoid keeping any records", "To beat inflation and grow purchasing power over time", "To guarantee quick profits", "Because saving is illegal for students"], 1,
+             "Saving preserves money; investing aims to grow it faster than inflation so purchasing power actually increases."),
+        ],
+    },
 ]
 
 
