@@ -40,7 +40,28 @@ import os
 from pg_shim import PGClient
 from storage_service import put_object, build_upload_path
 
+# Lesson PDFs are kept in the repo folder, not ~/Downloads. Downloads was
+# cleared twice while this course was being built, each time taking lesson
+# material with it, which silently turned attached PDFs back into None on the
+# next run. Files are copied here as they arrive and stay put.
+MATERIALS = Path(__file__).parent.parent.parent / "course2-materials"
 DOWNLOADS = Path("/Users/veersinghsahni/Downloads")
+
+
+def material(filename: str) -> Path:
+    """Path to a lesson PDF: the repo copy if it is there, otherwise whatever
+    is still sitting in ~/Downloads. Returns the repo path when neither
+    exists, so the 'file missing' report names the place to put it."""
+    kept = MATERIALS / filename
+    if kept.exists():
+        return kept
+    fresh = DOWNLOADS / filename
+    if fresh.exists():
+        MATERIALS.mkdir(exist_ok=True)
+        kept.write_bytes(fresh.read_bytes())
+        print(f"  kept a copy of {filename} in course2-materials/")
+        return kept
+    return kept
 
 supabase_url = os.environ["SUPABASE_URL"]
 supabase_key = os.environ.get("SUPABASE_SECRET_KEY") or os.environ["SUPABASE_SERVICE_ROLE_KEY"]
@@ -94,8 +115,8 @@ LESSONS = [
         "order": 1,
         "title": "Why Invest at All: Inflation and the Time Value of Money",
         "youtube_url": "https://youtu.be/j-2PR_ptdy4",
-        "summary": DOWNLOADS / "SCALE-C2-L01-Summary-73f65a03.pdf",
-        "ppt": DOWNLOADS / "SCALE-C2-L01-Ppt-7533da5a.pdf",
+        "summary": material("SCALE-C2-L01-Summary-73f65a03.pdf"),
+        "ppt": material("SCALE-C2-L01-Ppt-7533da5a.pdf"),
         # The ten multiple-choice questions from the lesson quiz, in the same
         # order and wording as the PDF so a learner working from the printout
         # sees the same paper. The PDF's two written practice problems are not
@@ -137,8 +158,8 @@ LESSONS = [
         "order": 2,
         "title": "Risk, Return and Your Time Horizon",
         "youtube_url": "https://youtu.be/ys6bWPlcBvM",
-        "summary": DOWNLOADS / "SCALE-C2-L02-Summary-59c94aa8.pdf",
-        "ppt": DOWNLOADS / "SCALE-C2-L02-Ppt-027fd9fa.pdf",
+        "summary": material("SCALE-C2-L02-Summary-59c94aa8.pdf"),
+        "ppt": material("SCALE-C2-L02-Ppt-027fd9fa.pdf"),
         "quiz": [
             ("Which best describes volatility?",
              ["Money lost forever in a scam", "Normal up-and-down movement of prices over time", "A guaranteed fall in prices", "The fees charged by brokers"], 1,
@@ -170,6 +191,130 @@ LESSONS = [
             ("When risk tolerance and risk capacity disagree, a careful investor should follow:",
              ["Tolerance, because feelings matter", "Capacity, because a fixed deadline and a thin cushion do not change with how brave you feel", "Whichever is higher", "A friend's advice"], 1,
              "Capacity should set the limit. Comfort with risk can grow over time, but a fixed deadline will not move."),
+        ],
+    },
+    {
+        "order": 3,
+        "title": "How Markets Actually Work: Exchanges, Demat, Orders and Indices",
+        "youtube_url": "https://youtu.be/myX3PMMahKA",
+        "summary": material("SCALE-C2-L03-Summary-321ed066.pdf"),
+        "ppt": material("SCALE-C2-L03-Ppt-21df6832.pdf"),
+        "quiz": [
+            ("In the primary market:",
+             ["Investors buy shares from other investors", "The company sells new shares and receives the money (a fresh issue)", "The exchange sets share prices", "Shares trade every second"], 1,
+             "In a fresh issue the company itself sells new shares and receives the funds. In an offer for sale, existing shareholders sell and they receive the money."),
+            ("An IPO is:",
+             ["A type of bank account", "A company's first sale of shares to the public", "A government tax on shares", "A daily market index"], 1,
+             "IPO = initial public offering, the first public sale of a company's shares."),
+            ("Rohit buys 50 Konkan Koffee shares from Sana on the exchange. Konkan Koffee receives:",
+             ["The full trade value", "Half the trade value", "A small commission", "Nothing"], 3,
+             "Secondary-market trades move shares and money between investors. The company gets nothing."),
+            ("What does a stock exchange actually do?",
+             ["Sets the price of every share each morning", "Owns and sells shares on behalf of companies", "Matches buy and sell orders and enforces rules", "Guarantees investors a profit"], 2,
+             "An exchange is a regulated matchmaker and scoreboard. Prices come from buyers' and sellers' orders."),
+            ("A demat account is best described as:",
+             ["A loan account for buying shares", "A digital locker that holds shares electronically", "A type of fixed deposit", "An account only companies can open"], 1,
+             "Demat = dematerialized: shares are held as electronic records, not paper certificates."),
+            ("You want to buy a share only if the price is ₹100 or lower. The right instruction is:",
+             ["A market order", "A limit order at ₹100", "A stop order", "An IPO application"], 1,
+             "A limit order executes only at your price or better. A market order buys immediately at whatever price is available."),
+            ("Rohit buys 50 shares at ₹100 and pays ₹20 brokerage plus ₹15 charges. His total cost is:",
+             ["₹5,000", "₹5,035", "₹5,050", "₹5,135"], 1,
+             "Shares 50 x 100 = ₹5,000, plus 20 + 15 friction = ₹5,035."),
+            ("He later sells those 50 shares at ₹118 with ₹35 in charges. His profit is:",
+             ["₹900", "₹865", "₹830", "₹1,000"], 2,
+             "Net sale = 5,900 - 35 = 5,865. Profit = 5,865 - 5,035 = ₹830 (a 16.5% return on ₹5,035)."),
+            ("The Nifty rises from 22,000 to 22,220. In percent terms it rose:",
+             ["220%", "10%", "1%", "0.1%"], 2,
+             "220 / 22,000 x 100 = 1%. Always translate points into percent."),
+            ("The Sensex and Nifty are best described as:",
+             ["Guarantees of next week's prices", "Scoreboards tracking baskets of large companies", "Bank accounts for shares", "Government savings schemes"], 1,
+             "They summarize how baskets of large companies moved on average: thermometers, not predictions."),
+        ],
+    },
+    {
+        "order": 4,
+        "title": "Being the Bank: Deposits and Bonds",
+        "youtube_url": "https://youtu.be/TTI2H_wLnaU",
+        "summary": material("SCALE-C2-L04-Summary-9317831f.pdf"),
+        "ppt": material("SCALE-C2-L04-Ppt-f32d345b.pdf"),
+        # Eleven questions in this lesson, not ten like the earlier three.
+        "quiz": [
+            ("When you open a fixed deposit, you are:",
+             ["Buying a share of the bank", "Lending money to the bank", "Insuring the bank", "Renting a locker"], 1,
+             "A deposit is a loan from you to the bank. The interest is the price of that loan."),
+            ("A bank pays 6% on deposits and lends at 9% (hypothetical). Its business runs on:",
+             ["The 9% alone", "The 3% spread", "Government subsidy", "Locker fees"], 1,
+             "The spread between lending and deposit rates is the engine of banking."),
+            ("₹1,00,000 at 7% compounded annually for 3 years matures at about:",
+             ["₹1,21,000", "₹1,22,504", "₹1,07,000", "₹1,31,080"], 1,
+             "1,00,000 x 1.07^3 = ₹1,22,504. Quarterly compounding would give slightly more, about ₹1,23,144."),
+            ("DICGC deposit insurance currently covers:",
+             ["Unlimited amounts", "₹5 lakh per depositor per bank", "₹1 lakh per account", "Only fixed deposits above ₹10 lakh"], 1,
+             "All same-bank accounts in the same right and capacity are aggregated, principal plus interest, under the cap, which can be revised."),
+            ("Your savings are ₹12 lakh, all in one bank. The insurance-smart move is:",
+             ["Keep it; banks cannot fail", "Spread it across multiple banks with headroom under each cap", "Move it to an NBFC deposit", "Convert it to cash at home"], 1,
+             "The cap applies per bank and counts interest too, so spread banks and leave headroom. NBFC deposits are not DICGC-insured."),
+            ("Your ₹10,000 bond pays ₹800 a year with 4 years left. New bonds of similar risk now yield 9%. Your bond's price is about:",
+             ["₹10,000", "₹9,676", "₹8,000", "₹11,111"], 1,
+             "Price = present value of the 4 remaining coupons plus the principal, discounted at 9%: about ₹9,676."),
+            ("When market interest rates rise, existing lower-coupon bonds:",
+             ["Rise in price", "Fall in price", "Are unaffected", "Are cancelled"], 1,
+             "The seesaw: older bonds must cheapen until their coupon matches the new yield."),
+            ("A company's bond yields 11% while an Indian government bond of similar maturity yields about 7%. The 4% gap most likely means:",
+             ["A generous company", "The market pricing higher credit risk", "A printing error", "A government guarantee"], 1,
+             "Compared like-for-like, a yield gap over the government bond prices the extra risk of default, not kindness."),
+            ("If a bond's borrower defaults, investors may face:",
+             ["Immediate full repayment", "Delayed, reduced or lost payments", "Automatic government refund", "A free replacement bond"], 1,
+             "A bond is only as strong as the borrower. Default means the schedule breaks."),
+            ("Laddering deposits means:",
+             ["Stacking passbooks", "Staggering maturities so money regularly comes due", "Always choosing the longest term", "Borrowing against deposits"], 1,
+             "Staggered maturities give regular access and let you reinvest at then-current rates."),
+            ("The return that truly matters for a deposit is the:",
+             ["Advertised rate", "Real, after-tax return", "Nominal rate plus bonus", "Neighbour's rate"], 1,
+             "Tax and inflation decide what you actually keep and what it buys."),
+        ],
+    },
+    {
+        "order": 5,
+        "title": "Owning Things: Shares, Gold, Real Estate",
+        "youtube_url": "https://youtu.be/eK4RVNvYs80",
+        "summary": material("SCALE-C2-L05-Summary-ac1c2567.pdf"),
+        "ppt": material("SCALE-C2-L05-Ppt-e0def884.pdf"),
+        "quiz": [
+            ("Gold's return comes entirely from:",
+             ["Interest it pays", "Rent it earns", "The change in its price", "Dividends"], 2,
+             "Gold produces no cash flow. Only engine two, the price, moves your return."),
+            ("A share bought at ₹200 pays ₹4 a year in dividends and is sold at ₹260 after 3 years. The total return is:",
+             ["30%", "36%", "26%", "42%"], 1,
+             "(260 + 12) / 200 - 1 = 36% over 3 years. IRR with dividends timed is about 11%."),
+            ("You buy 10g of gold at ₹6,000/g with 12% making charges. Gold rises 25% and you sell at melt value. Your return is about:",
+             ["25%", "11.6%", "37%", "0%"], 1,
+             "Cost 67,200, received 75,000: 11.6%, in a model simplified before GST and spreads. The charges consumed most of the price rise."),
+            ("The surest sign jewellery is an adornment first and an investment second is:",
+             ["Its design", "Making charges you never recover", "Its weight", "The shop's location"], 1,
+             "Making charges are lost at purchase. Investors minimize them by choosing coins, bars or regulated funds."),
+            ("Checking a BIS hallmark tells you about gold's:",
+             ["Future price", "Purity", "Weight in carats of gems", "Seller's honesty"], 1,
+             "The BIS hallmark is the official purity certification."),
+            ("Which is true of real estate compared with liquid shares?",
+             ["Smaller ticket size", "Faster exit", "Entry costs of several percent and slow exits", "No ongoing costs"], 2,
+             "Property demands several percent to enter, months to exit, and maintenance, tax and vacancy along the way. Liquid shares can sell fast on market days, though spreads and closures still apply."),
+            ("A ₹60 lakh flat with 7% entry costs and ₹15,000 monthly rent has a rental yield on the all-in cost of about:",
+             ["2.8%", "7%", "9%", "15%"], 0,
+             "1.8 lakh a year on 64.2 lakh all-in is about 2.8%, in a model gross of operating costs."),
+            ("Buying a home with a large home loan adds leverage, which means:",
+             ["Only gains get bigger", "Only losses get bigger", "Gains and losses both grow relative to your own money", "The loan becomes free"], 2,
+             "Leverage magnifies outcomes both ways against your own contribution."),
+            ("For a new project, basic hygiene before buying includes checking:",
+             ["The builder's RERA registration", "The neighbour's car", "The paint brand", "The broker's watch"], 0,
+             "State RERA registration is the regulator's check on new projects."),
+            ("Sovereign gold bonds are best described as:",
+             ["A guaranteed yearly government scheme always open", "Government securities linked to the gold price, with a small fixed interest, under their own terms", "A type of jewellery", "A bank locker plan"], 1,
+             "They are government securities that follow the gold price and pay a small fixed interest, with terms set for each series."),
+            ("Why do families hold shares, gold and property together?",
+             ["Tradition demands it", "Their bad years tend to arrive on different schedules, which can help", "It avoids all losses", "Tax becomes zero"], 1,
+             "Diversifying across asset types can smooth the ride. It reduces, never eliminates, loss."),
         ],
     },
 ]
