@@ -95,10 +95,7 @@ LESSONS = [
         "title": "Why Invest at All: Inflation and the Time Value of Money",
         "youtube_url": "https://youtu.be/j-2PR_ptdy4",
         "summary": DOWNLOADS / "SCALE-C2-L01-Summary-73f65a03.pdf",
-        # Slides PDF not yet on disk. Left as None so the lesson can publish
-        # now; re-running the script once the file is in ~/Downloads attaches
-        # it without disturbing anything else.
-        "ppt": None,
+        "ppt": DOWNLOADS / "SCALE-C2-L01-Ppt-7533da5a.pdf",
         # The ten multiple-choice questions from the lesson quiz, in the same
         # order and wording as the PDF so a learner working from the printout
         # sees the same paper. The PDF's two written practice problems are not
@@ -134,6 +131,45 @@ LESSONS = [
             ("Which statement best captures why people invest rather than only save?",
              ["To avoid keeping any records", "To beat inflation and grow purchasing power over time", "To guarantee quick profits", "Because saving is illegal for students"], 1,
              "Saving preserves money; investing aims to grow it faster than inflation so purchasing power actually increases."),
+        ],
+    },
+    {
+        "order": 2,
+        "title": "Risk, Return and Your Time Horizon",
+        "youtube_url": "https://youtu.be/ys6bWPlcBvM",
+        "summary": DOWNLOADS / "SCALE-C2-L02-Summary-59c94aa8.pdf",
+        "ppt": DOWNLOADS / "SCALE-C2-L02-Ppt-027fd9fa.pdf",
+        "quiz": [
+            ("Which best describes volatility?",
+             ["Money lost forever in a scam", "Normal up-and-down movement of prices over time", "A guaranteed fall in prices", "The fees charged by brokers"], 1,
+             "Volatility is ordinary price wobble. Losing money for good, as in a scam, is a separate thing. A forced sale can turn a paper loss into a realized one."),
+            ("An investment falls 50%. What gain is needed to get back to where it started?",
+             ["50%", "75%", "100%", "150%"], 2,
+             "₹100 becomes ₹50. Doubling ₹50 needs a 100% gain. Recovery needed = 0.50 / (1 - 0.50) = 100%."),
+            ("An investment falls 20%. The recovery needed is about:",
+             ["20%", "22%", "25%", "40%"], 2,
+             "0.20 / 0.80 = 25%. Recoveries act on a smaller base, so they must be larger than the fall."),
+            ("Risk capacity is best described as:",
+             ["How brave an investor feels about losses", "How much risk the goal's timeline and cushion can actually afford", "The maximum a broker allows you to buy", "The number of investments in a portfolio"], 1,
+             "Capacity is about the situation (deadline, cushion), not the stomach (tolerance)."),
+            ("A student needs ₹1.5 lakh for a course in 18 months. The most suitable approach is:",
+             ["Buy volatile shares for higher returns", "A steady recurring deposit or similar safe avenue", "Wait for a market dip, then buy shares", "Keep the cash at home"], 1,
+             "With a near deadline there is little time to recover from a fall, so predictability within the product's terms matters more than growth."),
+            ("Why does a longer time horizon reduce, though never remove, the danger of volatility?",
+             ["Prices stop moving after ten years", "Strong and weak years partly offset, narrowing the range of outcomes", "Long investments cannot fall", "Inflation stops after ten years"], 1,
+             "Over long windows, yearly average returns have historically bunched into a narrower band, but the final amount still varies and loss stays possible."),
+            ("A fixed deposit pays 7% and 10% of the interest goes to tax. The after-tax return is:",
+             ["7.7%", "7%", "6.3%", "0.7%"], 2,
+             "Tax takes 10% of the 7% interest: 7 x 0.90 = 6.3%."),
+            ("If that deposit's after-tax return is 6.3% and inflation is 6%, the real return is about:",
+             ["6.3%", "12.3%", "0.3%", "-6%"], 2,
+             "1.063 / 1.06 - 1 = about 0.28%. Safety of principal is not safety of purchasing power."),
+            ("Arjun invests ₹5,000 a month for 15 years. About how much does he actually invest in total?",
+             ["₹25 lakh", "₹9 lakh", "₹15 lakh", "₹90,000"], 1,
+             "5,000 x 12 x 15 = ₹9,00,000 invested. Growth takes it to about ₹25.2 lakh."),
+            ("When risk tolerance and risk capacity disagree, a careful investor should follow:",
+             ["Tolerance, because feelings matter", "Capacity, because a fixed deadline and a thin cushion do not change with how brave you feel", "Whichever is higher", "A friend's advice"], 1,
+             "Capacity should set the limit. Comfort with risk can grow over time, but a fixed deadline will not move."),
         ],
     },
 ]
