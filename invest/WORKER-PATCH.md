@@ -215,19 +215,18 @@ authoritative:
 
 Once the worker stamps `sector`, the front end uses it as-is.
 
-**More feeds.** The brief lists Entrackr, VCCircle, ET Startups, Business
-Standard, Financial Express, BusinessLine, NDTV Profit and Google News RSS.
-**I have not verified a single one of those URLs** — see "What I did not do"
-in the changelog. Before adding any feed:
+**More feeds.** Done and verified — see **[NEWS-FEEDS.md](NEWS-FEEDS.md)** for
+the exact `FEEDS` array to paste, the evidence for each one, and the six
+candidates I rejected.
 
-- fetch the URL and confirm it returns valid RSS *now*;
-- read that publisher's terms, and only ever store headline, a short extract and
-  the link;
-- drop any feed that fails rather than leaving a dead entry in `FEEDS`.
+Short version: six feeds added (Entrackr, Business Standard x2, The Hindu
+BusinessLine x2, Mint Money), taking the worker from 6 to 12. VCCircle and
+Financial Express publish no usable RSS, ET Startups is abandoned (serving
+2020-21 items under a fresh `lastBuildDate`), NDTV Profit 403s automated
+requests, and Google News RSS is disallowed by its own `robots.txt`.
 
-Mind the **50 subrequests per invocation** cap. You are at 9 today (6 feeds + 2
-NSE + 1 BSE). Splitting the job per step 0 gives the news run its own budget, so
-about 20 feeds is safe; 40+ is not.
+That is 15 subrequests a run against the **50 per invocation** cap, so there is
+room for a few more but not forty.
 
 Keep the existing dedupe and the "Indian startup news only" filter exactly as
 they are.

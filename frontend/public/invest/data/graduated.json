@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T15:21:53.375628Z",
+ "updated": "2026-11-23T16:56:45.233152Z",
  "note": "Startups that graduated from the tracker by listing on NSE/BSE. Dates are listing dates where verified, otherwise approximate month.",
  "graduated": [
   {
@@ -387,7 +387,72 @@
    ],
    "listed_as": "Zetwerk Manufacturing Businesses",
    "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "avenues-ai",
+   "name": "Avenues AI",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Avenues AI",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "aye-finance",
+   "name": "Aye Finance",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Aye Finance",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "capillary-tech",
+   "name": "Capillary Tech",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "NSE"
+   ],
+   "listed_as": "Capillary Tech",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "ideaforge",
+   "name": "ideaforge",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "ideaforge",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "purple-style-labs",
+   "name": "Purple Style Labs",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Purple Style Labs",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "route-mobile",
+   "name": "Route Mobile",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Route Mobile",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
   }
  ],
- "graduated_total": 44
+ "graduated_total": 50
 }

@@ -393,6 +393,100 @@
           "as": "Zetwerk Manufacturing Businesses"
         }
       ]
+    },
+    {
+      "id": "avenues-ai",
+      "name": "Avenues AI",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Avenues AI"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Avenues AI"
+        }
+      ]
+    },
+    {
+      "id": "aye-finance",
+      "name": "Aye Finance",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Aye Finance"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Aye Finance"
+        }
+      ]
+    },
+    {
+      "id": "capillary-tech",
+      "name": "Capillary Tech",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Capillary Tech"
+        }
+      ]
+    },
+    {
+      "id": "ideaforge",
+      "name": "ideaforge",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "ideaforge"
+        },
+        {
+          "exchange": "BSE",
+          "as": "ideaforge"
+        }
+      ]
+    },
+    {
+      "id": "leap",
+      "name": "Leap",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Leap"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Leap"
+        }
+      ]
+    },
+    {
+      "id": "purple-style-labs",
+      "name": "Purple Style Labs",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Purple Style Labs"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Purple Style Labs"
+        }
+      ]
+    },
+    {
+      "id": "route-mobile",
+      "name": "Route Mobile",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Route Mobile"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Route Mobile"
+        }
+      ]
     }
   ],
   "clear": [
@@ -799,7 +893,595 @@
     {
       "id": "zoho",
       "name": "Zoho"
+    },
+    {
+      "id": "absolute-foods",
+      "name": "Absolute Foods"
+    },
+    {
+      "id": "adda247",
+      "name": "adda247"
+    },
+    {
+      "id": "agilitas",
+      "name": "Agilitas"
+    },
+    {
+      "id": "agnikul-cosmos",
+      "name": "AgniKul Cosmos"
+    },
+    {
+      "id": "agrostar",
+      "name": "AgroStar"
+    },
+    {
+      "id": "allhome",
+      "name": "AllHome"
+    },
+    {
+      "id": "ampere-vehicles",
+      "name": "Ampere Vehicles"
+    },
+    {
+      "id": "arya-ag",
+      "name": "Arya.ag"
+    },
+    {
+      "id": "auxilo",
+      "name": "Auxilo"
+    },
+    {
+      "id": "awfis",
+      "name": "Awfis"
+    },
+    {
+      "id": "bankbazaar",
+      "name": "Bankbazaar"
+    },
+    {
+      "id": "battery-smart",
+      "name": "Battery Smart"
+    },
+    {
+      "id": "betterplace",
+      "name": "BetterPlace"
+    },
+    {
+      "id": "blue-tokai-coffee-roasters",
+      "name": "Blue Tokai Coffee Roasters"
+    },
+    {
+      "id": "bookmyshow",
+      "name": "BookMyShow"
+    },
+    {
+      "id": "brightchamps",
+      "name": "Brightchamps"
+    },
+    {
+      "id": "captain-fresh",
+      "name": "Captain Fresh"
+    },
+    {
+      "id": "cashfree",
+      "name": "Cashfree"
+    },
+    {
+      "id": "cashify",
+      "name": "Cashify"
+    },
+    {
+      "id": "cashkaro",
+      "name": "Cashkaro"
+    },
+    {
+      "id": "celebal-technologies",
+      "name": "Celebal Technologies"
+    },
+    {
+      "id": "chaayos",
+      "name": "Chaayos"
+    },
+    {
+      "id": "chalo",
+      "name": "Chalo"
+    },
+    {
+      "id": "citymall",
+      "name": "Citymall"
+    },
+    {
+      "id": "classplus",
+      "name": "Classplus"
+    },
+    {
+      "id": "clear",
+      "name": "Clear"
+    },
+    {
+      "id": "clevertap",
+      "name": "CleverTap"
+    },
+    {
+      "id": "country-delight",
+      "name": "Country Delight"
+    },
+    {
+      "id": "credgenics",
+      "name": "Credgenics"
+    },
+    {
+      "id": "cuemath",
+      "name": "CueMath"
+    },
+    {
+      "id": "dehaat",
+      "name": "DeHaat"
+    },
+    {
+      "id": "dhruva-space",
+      "name": "Dhruva Space"
+    },
+    {
+      "id": "digantara",
+      "name": "Digantara"
+    },
+    {
+      "id": "drip-capital",
+      "name": "Drip Capital"
+    },
+    {
+      "id": "eatclub-brands",
+      "name": "EatClub Brands"
+    },
+    {
+      "id": "eka-mobility",
+      "name": "EKA Mobility"
+    },
+    {
+      "id": "euler-motors",
+      "name": "Euler Motors"
+    },
+    {
+      "id": "everest-fleet",
+      "name": "Everest Fleet"
+    },
+    {
+      "id": "exotel",
+      "name": "Exotel"
+    },
+    {
+      "id": "fareye",
+      "name": "FarEye"
+    },
+    {
+      "id": "fi",
+      "name": "Fi"
+    },
+    {
+      "id": "fibe",
+      "name": "Fibe"
+    },
+    {
+      "id": "finova-capital",
+      "name": "Finova Capital"
+    },
+    {
+      "id": "firstclub",
+      "name": "FirstClub"
+    },
+    {
+      "id": "freshtohome",
+      "name": "FreshToHome"
+    },
+    {
+      "id": "geniemode",
+      "name": "Geniemode"
+    },
+    {
+      "id": "giva",
+      "name": "Giva"
+    },
+    {
+      "id": "gokwik",
+      "name": "gokwik"
+    },
+    {
+      "id": "greyorange",
+      "name": "GreyOrange"
+    },
+    {
+      "id": "hackerrank",
+      "name": "Hackerrank"
+    },
+    {
+      "id": "healthifyme",
+      "name": "HealthifyMe"
+    },
+    {
+      "id": "healthkart",
+      "name": "Healthkart"
+    },
+    {
+      "id": "hocco",
+      "name": "Hocco"
+    },
+    {
+      "id": "homelane",
+      "name": "Homelane"
+    },
+    {
+      "id": "hopscotch",
+      "name": "Hopscotch"
+    },
+    {
+      "id": "id-fresh-food",
+      "name": "iD Fresh Food"
+    },
+    {
+      "id": "indiqube",
+      "name": "Indiqube"
+    },
+    {
+      "id": "indmoney",
+      "name": "IndMoney"
+    },
+    {
+      "id": "innovist",
+      "name": "Innovist"
+    },
+    {
+      "id": "innoviti",
+      "name": "Innoviti"
+    },
+    {
+      "id": "inshorts",
+      "name": "Inshorts"
+    },
+    {
+      "id": "insurancedekho",
+      "name": "Insurancedekho"
+    },
+    {
+      "id": "invideo",
+      "name": "InVideo"
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter"
+    },
+    {
+      "id": "k12technoservices",
+      "name": "k12technoservices"
+    },
+    {
+      "id": "keka",
+      "name": "Keka"
+    },
+    {
+      "id": "kissht",
+      "name": "Kissht"
+    },
+    {
+      "id": "kukufm",
+      "name": "Kuku FM"
+    },
+    {
+      "id": "lahori-zeera",
+      "name": "Lahori Zeera"
+    },
+    {
+      "id": "lambdatest",
+      "name": "Lambdatest"
+    },
+    {
+      "id": "loginext",
+      "name": "LogiNext"
+    },
+    {
+      "id": "lohum",
+      "name": "Lohum"
+    },
+    {
+      "id": "m1xchange",
+      "name": "m1xchange"
+    },
+    {
+      "id": "m2p-fintech",
+      "name": "M2P Fintech"
+    },
+    {
+      "id": "magicpin",
+      "name": "Magicpin"
+    },
+    {
+      "id": "mcaffeine",
+      "name": "mCaffeine"
+    },
+    {
+      "id": "medgenome",
+      "name": "Medgenome"
+    },
+    {
+      "id": "medikabazaar",
+      "name": "Medikabazaar"
+    },
+    {
+      "id": "miko",
+      "name": "Miko"
+    },
+    {
+      "id": "smartworks",
+      "name": "Smartworks"
+    },
+    {
+      "id": "mintifi",
+      "name": "Mintifi"
+    },
+    {
+      "id": "moengage",
+      "name": "MoEngage"
+    },
+    {
+      "id": "mosaic-wellness",
+      "name": "Mosaic Wellness"
+    },
+    {
+      "id": "mswipe",
+      "name": "Mswipe"
+    },
+    {
+      "id": "mygate",
+      "name": "Mygate"
+    },
+    {
+      "id": "nephroplus",
+      "name": "NephroPlus"
+    },
+    {
+      "id": "neuron7-ai",
+      "name": "Neuron7.ai"
+    },
+    {
+      "id": "ninjacart",
+      "name": "Ninjacart"
+    },
+    {
+      "id": "niyo",
+      "name": "Niyo"
+    },
+    {
+      "id": "noise",
+      "name": "Noise"
+    },
+    {
+      "id": "oneassist",
+      "name": "OneAssist"
+    },
+    {
+      "id": "palmonas",
+      "name": "Palmonas"
+    },
+    {
+      "id": "park",
+      "name": "Park+"
+    },
+    {
+      "id": "paymate",
+      "name": "Paymate"
+    },
+    {
+      "id": "pilgrim",
+      "name": "Pilgrim"
+    },
+    {
+      "id": "pixis",
+      "name": "Pixis"
+    },
+    {
+      "id": "pixxel",
+      "name": "Pixxel"
+    },
+    {
+      "id": "plum",
+      "name": "Plum"
+    },
+    {
+      "id": "pocket-fm",
+      "name": "Pocket FM"
+    },
+    {
+      "id": "practo",
+      "name": "Practo"
+    },
+    {
+      "id": "progcap",
+      "name": "Progcap"
+    },
+    {
+      "id": "pronto",
+      "name": "Pronto"
+    },
+    {
+      "id": "qure-ai",
+      "name": "Qure.ai"
+    },
+    {
+      "id": "raphe-mphibr",
+      "name": "Raphe mPhibr"
+    },
+    {
+      "id": "rare-rabbit",
+      "name": "Rare Rabbit"
+    },
+    {
+      "id": "recykal",
+      "name": "Recykal"
+    },
+    {
+      "id": "refyne",
+      "name": "Refyne"
+    },
+    {
+      "id": "renee-cosmetics",
+      "name": "RENEE Cosmetics"
+    },
+    {
+      "id": "ripplr",
+      "name": "Ripplr"
+    },
+    {
+      "id": "rupeek",
+      "name": "Rupeek"
+    },
+    {
+      "id": "safe-security",
+      "name": "Safe Security"
+    },
+    {
+      "id": "sahi",
+      "name": "Sahi"
+    },
+    {
+      "id": "sarvagram",
+      "name": "SarvaGram"
+    },
+    {
+      "id": "scaler-academy",
+      "name": "Scaler Academy"
+    },
+    {
+      "id": "scapia",
+      "name": "Scapia"
+    },
+    {
+      "id": "scripbox",
+      "name": "Scripbox"
+    },
+    {
+      "id": "servify",
+      "name": "Servify"
+    },
+    {
+      "id": "simple-energy",
+      "name": "Simple Energy"
+    },
+    {
+      "id": "smallcase",
+      "name": "Smallcase"
+    },
+    {
+      "id": "smartron",
+      "name": "Smartron"
+    },
+    {
+      "id": "snabbit",
+      "name": "Snabbit"
+    },
+    {
+      "id": "snitch",
+      "name": "Snitch"
+    },
+    {
+      "id": "solarsquare",
+      "name": "SolarSquare"
+    },
+    {
+      "id": "stanza-living",
+      "name": "Stanza Living"
+    },
+    {
+      "id": "stashfin",
+      "name": "Stashfin"
+    },
+    {
+      "id": "the-sleep-company",
+      "name": "The Sleep Company"
+    },
+    {
+      "id": "the-whole-truth",
+      "name": "The Whole Truth"
+    },
+    {
+      "id": "third-wave-coffee",
+      "name": "Third Wave Coffee"
+    },
+    {
+      "id": "true-balance",
+      "name": "True Balance"
+    },
+    {
+      "id": "truemeds",
+      "name": "Truemeds"
+    },
+    {
+      "id": "turtlemint",
+      "name": "Turtlemint"
+    },
+    {
+      "id": "ultrahuman",
+      "name": "Ultrahuman"
+    },
+    {
+      "id": "ultraviolette-automotive",
+      "name": "Ultraviolette Automotive"
+    },
+    {
+      "id": "vayana-network",
+      "name": "Vayana Network"
+    },
+    {
+      "id": "wakefit",
+      "name": "Wakefit"
+    },
+    {
+      "id": "waycool",
+      "name": "Waycool"
+    },
+    {
+      "id": "wework-india",
+      "name": "WeWork India"
+    },
+    {
+      "id": "whatfix",
+      "name": "Whatfix"
+    },
+    {
+      "id": "wow-skin-science",
+      "name": "Wow Skin Science"
+    },
+    {
+      "id": "wow-momo",
+      "name": "Wow! Momo"
+    },
+    {
+      "id": "yellow-ai",
+      "name": "Yellow.ai"
+    },
+    {
+      "id": "yulu",
+      "name": "Yulu"
+    },
+    {
+      "id": "zaggle",
+      "name": "Zaggle"
+    },
+    {
+      "id": "zenwork",
+      "name": "Zenwork"
+    },
+    {
+      "id": "zolve",
+      "name": "Zolve"
+    },
+    {
+      "id": "zupee",
+      "name": "Zupee"
+    },
+    {
+      "id": "zypp-electric",
+      "name": "Zypp Electric"
     }
   ],
-  "verdict": "101 clear, 25 appear listed"
+  "verdict": "248 clear, 32 appear listed"
 }

@@ -1,11 +1,18 @@
 {
- "updated": "2026-11-23T15:21:53.375628Z",
+ "updated": "2026-11-23T16:58:25.312730Z",
  "note": "Curated dataset of Indian UNLISTED startups. Eligibility: founded in India, headquartered/primarily operated in India, not listed on any exchange anywhere, not a subsidiary of a listed company. Valuations are last publicly reported figures and may be stale. Prices are simulated for learning.",
  "sources": [
   {
    "name": "Inc42 Indian Unicorn Tracker",
    "url": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "as_of": "2026-08-15"
+   "as_of": "2026-08-15",
+   "unit": 1000000000.0
+  },
+  {
+   "name": "Inc42 Indian Soonicorn Tracker",
+   "url": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "as_of": "2026-09-08",
+   "unit": 1000000.0
   }
  ],
  "startups": [
@@ -22,7 +29,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.3"
+  },
+  {
+   "id": "absolute-foods",
+   "name": "Absolute Foods",
+   "sector": "Agritech",
+   "hq": "Delhi NCR",
+   "founded": 2016,
+   "valuation_usd": 500000000,
+   "funding_usd": 102000000,
+   "base_price": 155.56,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "500"
   },
   {
    "id": "acko",
@@ -45,7 +71,94 @@
    ],
    "blurb": "Digital-first general insurer for motor, health and embedded cover.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.4"
+  },
+  {
+   "id": "adda247",
+   "name": "adda247",
+   "sector": "Edtech",
+   "hq": "Delhi NCR",
+   "founded": 2010,
+   "valuation_usd": 185000000,
+   "funding_usd": 67000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "170-200"
+  },
+  {
+   "id": "agilitas",
+   "name": "Agilitas",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2023,
+   "valuation_usd": 239000000,
+   "funding_usd": 64000000,
+   "base_price": 107.55,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "239"
+  },
+  {
+   "id": "agnikul-cosmos",
+   "name": "AgniKul Cosmos",
+   "sector": "Deep tech",
+   "hq": "Chennai",
+   "founded": 2017,
+   "valuation_usd": 500000000,
+   "funding_usd": 80000000,
+   "base_price": 155.56,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "500"
+  },
+  {
+   "id": "agrostar",
+   "name": "AgroStar",
+   "sector": "Agritech",
+   "hq": "Pune",
+   "founded": 2013,
+   "valuation_usd": 280000000,
+   "funding_usd": 118000000,
+   "base_price": 116.41,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "280"
+  },
+  {
+   "id": "allhome",
+   "name": "AllHome",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2025,
+   "valuation_usd": 200000000,
+   "funding_usd": 21000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
   },
   {
    "id": "amagi",
@@ -60,7 +173,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.4"
+  },
+  {
+   "id": "ampere-vehicles",
+   "name": "Ampere Vehicles",
+   "sector": "Cleantech",
+   "hq": "Coimbatore",
+   "founded": 2008,
+   "valuation_usd": 350000000,
+   "funding_usd": null,
+   "base_price": 130.15,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "350"
   },
   {
    "id": "apna",
@@ -75,7 +207,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.1"
+  },
+  {
+   "id": "arya-ag",
+   "name": "Arya.ag",
+   "sector": "Agritech",
+   "hq": "Delhi NCR",
+   "founded": 2013,
+   "valuation_usd": 325000000,
+   "funding_usd": 118000000,
+   "base_price": 125.42,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "325"
   },
   {
    "id": "astrotalk",
@@ -90,7 +241,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "atomberg",
@@ -115,6 +268,91 @@
    "valuation_source": null
   },
   {
+   "id": "auxilo",
+   "name": "Auxilo",
+   "sector": "Fintech",
+   "hq": "Mumbai",
+   "founded": 2017,
+   "valuation_usd": 360000000,
+   "funding_usd": 81000000,
+   "base_price": 132.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "360"
+  },
+  {
+   "id": "awfis",
+   "name": "Awfis",
+   "sector": "Real estate",
+   "hq": "Delhi NCR",
+   "founded": 2015,
+   "valuation_usd": 225000000,
+   "funding_usd": 135000000,
+   "base_price": 104.36,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-250"
+  },
+  {
+   "id": "bankbazaar",
+   "name": "Bankbazaar",
+   "sector": "Fintech",
+   "hq": "Chennai",
+   "founded": 2008,
+   "valuation_usd": 217000000,
+   "funding_usd": 133000000,
+   "base_price": 102.48,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "217"
+  },
+  {
+   "id": "battery-smart",
+   "name": "Battery Smart",
+   "sector": "Cleantech",
+   "hq": "Delhi NCR",
+   "founded": 2019,
+   "valuation_usd": 450000000,
+   "funding_usd": 168000000,
+   "base_price": 147.58,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "450"
+  },
+  {
+   "id": "betterplace",
+   "name": "BetterPlace",
+   "sector": "SaaS",
+   "hq": "Bengaluru",
+   "founded": 2015,
+   "valuation_usd": 270000000,
+   "funding_usd": 90000000,
+   "base_price": 114.32,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "270"
+  },
+  {
    "id": "bharatpe",
    "name": "BharatPe",
    "sector": "Fintech",
@@ -135,7 +373,9 @@
    ],
    "blurb": "Merchant payments and lending network built on UPI QR.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.8"
   },
   {
    "id": "bigbasket",
@@ -150,7 +390,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.2"
   },
   {
    "id": "billdesk",
@@ -165,7 +407,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.0"
+  },
+  {
+   "id": "blue-tokai-coffee-roasters",
+   "name": "Blue Tokai Coffee Roasters",
+   "sector": "Foodtech",
+   "hq": "Delhi NCR",
+   "founded": 2013,
+   "valuation_usd": 250000000,
+   "funding_usd": 103000000,
+   "base_price": 110.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-300"
   },
   {
    "id": "boat",
@@ -188,7 +449,43 @@
    ],
    "blurb": "Audio and wearables brand; IPO deferred despite SEBI approval.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
+  },
+  {
+   "id": "bookmyshow",
+   "name": "BookMyShow",
+   "sector": "Consumer services",
+   "hq": "Mumbai",
+   "founded": 1999,
+   "valuation_usd": 750000000,
+   "funding_usd": 225000000,
+   "base_price": 190.53,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "700-800"
+  },
+  {
+   "id": "brightchamps",
+   "name": "Brightchamps",
+   "sector": "Edtech",
+   "hq": "Hyderabad",
+   "founded": 2020,
+   "valuation_usd": 650000000,
+   "funding_usd": 63000000,
+   "base_price": 177.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "650"
   },
   {
    "id": "browserstack",
@@ -203,7 +500,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "4.0"
   },
   {
    "id": "byju-s",
@@ -219,6 +518,23 @@
    "ipo_watch": false,
    "valuation_source": null,
    "valuation_note": "No valuation we can cite; starting price is a neutral default."
+  },
+  {
+   "id": "captain-fresh",
+   "name": "Captain Fresh",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2019,
+   "valuation_usd": 515000000,
+   "funding_usd": 218000000,
+   "base_price": 157.88,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "500-530"
   },
   {
    "id": "cardekho",
@@ -241,7 +557,9 @@
    ],
    "blurb": "Car discovery marketplace with insurance and finance arms.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.2"
   },
   {
    "id": "cars24",
@@ -265,7 +583,111 @@
    ],
    "blurb": "Used-car buying, selling and financing platform.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.3"
+  },
+  {
+   "id": "cashfree",
+   "name": "Cashfree",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2015,
+   "valuation_usd": 700000000,
+   "funding_usd": 93000000,
+   "base_price": 184.07,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "700"
+  },
+  {
+   "id": "cashify",
+   "name": "Cashify",
+   "sector": "E-commerce",
+   "hq": "Delhi NCR",
+   "founded": 2013,
+   "valuation_usd": 300000000,
+   "funding_usd": 223000000,
+   "base_price": 120.5,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250-350"
+  },
+  {
+   "id": "cashkaro",
+   "name": "Cashkaro",
+   "sector": "E-commerce",
+   "hq": "Delhi NCR",
+   "founded": 2013,
+   "valuation_usd": 200000000,
+   "funding_usd": 30000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
+  },
+  {
+   "id": "celebal-technologies",
+   "name": "Celebal Technologies",
+   "sector": "SaaS",
+   "hq": "Jaipur",
+   "founded": 2015,
+   "valuation_usd": 210000000,
+   "funding_usd": 47000000,
+   "base_price": 100.82,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "210"
+  },
+  {
+   "id": "chaayos",
+   "name": "Chaayos",
+   "sector": "E-commerce",
+   "hq": "Delhi NCR",
+   "founded": 2012,
+   "valuation_usd": 275000000,
+   "funding_usd": 94000000,
+   "base_price": 115.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250-300"
+  },
+  {
+   "id": "chalo",
+   "name": "Chalo",
+   "sector": "Travel",
+   "hq": "Mumbai",
+   "founded": 2014,
+   "valuation_usd": 425000000,
+   "funding_usd": 105000000,
+   "base_price": 143.42,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400-450"
   },
   {
    "id": "chargebee",
@@ -280,7 +702,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.5"
   },
   {
    "id": "citiustech",
@@ -295,7 +719,77 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.2"
+  },
+  {
+   "id": "citymall",
+   "name": "Citymall",
+   "sector": "E-commerce",
+   "hq": "Delhi NCR",
+   "founded": 2019,
+   "valuation_usd": 320000000,
+   "funding_usd": 112000000,
+   "base_price": 124.45,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "320"
+  },
+  {
+   "id": "classplus",
+   "name": "Classplus",
+   "sector": "Edtech",
+   "hq": "Delhi NCR",
+   "founded": 2018,
+   "valuation_usd": 600000000,
+   "funding_usd": 158000000,
+   "base_price": 170.41,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "600"
+  },
+  {
+   "id": "clear",
+   "name": "Clear",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2011,
+   "valuation_usd": 725000000,
+   "funding_usd": 140000000,
+   "base_price": 187.32,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "700-750"
+  },
+  {
+   "id": "clevertap",
+   "name": "CleverTap",
+   "sector": "SaaS",
+   "hq": "Mumbai",
+   "founded": 2013,
+   "valuation_usd": 770000000,
+   "funding_usd": 182000000,
+   "base_price": 193.05,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "770"
   },
   {
    "id": "coindcx",
@@ -310,7 +804,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.2"
   },
   {
    "id": "coinswitch",
@@ -325,7 +821,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.9"
+  },
+  {
+   "id": "country-delight",
+   "name": "Country Delight",
+   "sector": "E-commerce",
+   "hq": "Delhi NCR",
+   "founded": 2015,
+   "valuation_usd": 820000000,
+   "funding_usd": 210000000,
+   "base_price": 199.22,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "820"
   },
   {
    "id": "cred",
@@ -348,7 +863,43 @@
    ],
    "blurb": "Members-only credit card bill payments and commerce club.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.5"
+  },
+  {
+   "id": "credgenics",
+   "name": "Credgenics",
+   "sector": "Fintech",
+   "hq": "Delhi NCR",
+   "founded": 2018,
+   "valuation_usd": 340000000,
+   "funding_usd": 78000000,
+   "base_price": 128.28,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "340"
+  },
+  {
+   "id": "cuemath",
+   "name": "CueMath",
+   "sector": "Edtech",
+   "hq": "Bengaluru",
+   "founded": 2013,
+   "valuation_usd": 380000000,
+   "funding_usd": 121000000,
+   "base_price": 135.62,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "360-400"
   },
   {
    "id": "cultfit",
@@ -372,7 +923,9 @@
    ],
    "blurb": "Fitness centres, at-home workouts and healthy food under cure.fit.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
   },
   {
    "id": "darwinbox",
@@ -395,7 +948,9 @@
    ],
    "blurb": "Cloud HR platform for large enterprises.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "dealshare",
@@ -410,7 +965,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.7"
+  },
+  {
+   "id": "dehaat",
+   "name": "DeHaat",
+   "sector": "Agritech",
+   "hq": "Delhi NCR",
+   "founded": 2012,
+   "valuation_usd": 675000000,
+   "funding_usd": 247000000,
+   "base_price": 180.75,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "650-700"
   },
   {
    "id": "dhan",
@@ -425,7 +999,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.2"
+  },
+  {
+   "id": "dhruva-space",
+   "name": "Dhruva Space",
+   "sector": "Deep tech",
+   "hq": "Hyderabad",
+   "founded": 2012,
+   "valuation_usd": 212000000,
+   "funding_usd": 39000000,
+   "base_price": 101.3,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "212"
+  },
+  {
+   "id": "digantara",
+   "name": "Digantara",
+   "sector": "Deep tech",
+   "hq": "Bengaluru",
+   "founded": 2018,
+   "valuation_usd": 200000000,
+   "funding_usd": 65000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
   },
   {
    "id": "dream11",
@@ -448,7 +1058,26 @@
    ],
    "blurb": "Fantasy sports giant navigating India's real-money gaming reset.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "8.0"
+  },
+  {
+   "id": "drip-capital",
+   "name": "Drip Capital",
+   "sector": "Fintech",
+   "hq": "Mumbai",
+   "founded": 2015,
+   "valuation_usd": 225000000,
+   "funding_usd": null,
+   "base_price": 104.36,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-250"
   },
   {
    "id": "drools",
@@ -463,7 +1092,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "droom",
@@ -478,7 +1109,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "0.4"
   },
   {
    "id": "druva",
@@ -493,7 +1126,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.0"
+  },
+  {
+   "id": "eatclub-brands",
+   "name": "EatClub Brands",
+   "sector": "Consumer services",
+   "hq": "Mumbai",
+   "founded": 2012,
+   "valuation_usd": 250000000,
+   "funding_usd": 104000000,
+   "base_price": 110.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-300"
+  },
+  {
+   "id": "eka-mobility",
+   "name": "EKA Mobility",
+   "sector": "Cleantech",
+   "hq": "Pune",
+   "founded": 2022,
+   "valuation_usd": 390000000,
+   "funding_usd": 104000000,
+   "base_price": 137.39,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "390"
   },
   {
    "id": "elasticrun",
@@ -517,7 +1186,9 @@
    ],
    "blurb": "Rural distribution network reaching kirana stores across India.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
   },
   {
    "id": "emergent",
@@ -532,7 +1203,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
   },
   {
    "id": "eruditus",
@@ -555,7 +1228,145 @@
    ],
    "blurb": "Executive education with global university partners (Emeritus).",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.1"
+  },
+  {
+   "id": "euler-motors",
+   "name": "Euler Motors",
+   "sector": "Cleantech",
+   "hq": "Delhi NCR",
+   "founded": 2018,
+   "valuation_usd": 425000000,
+   "funding_usd": 378000000,
+   "base_price": 143.42,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400-450"
+  },
+  {
+   "id": "everest-fleet",
+   "name": "Everest Fleet",
+   "sector": "Travel",
+   "hq": "Mumbai",
+   "founded": 2016,
+   "valuation_usd": 400000000,
+   "funding_usd": 57000000,
+   "base_price": 139.14,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400"
+  },
+  {
+   "id": "exotel",
+   "name": "Exotel",
+   "sector": "SaaS",
+   "hq": "Bengaluru",
+   "founded": 2011,
+   "valuation_usd": 275000000,
+   "funding_usd": 87000000,
+   "base_price": 115.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250-300"
+  },
+  {
+   "id": "fareye",
+   "name": "FarEye",
+   "sector": "SaaS",
+   "hq": "Delhi NCR",
+   "founded": 2013,
+   "valuation_usd": 375000000,
+   "funding_usd": 152000000,
+   "base_price": 134.72,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "350-400"
+  },
+  {
+   "id": "fi",
+   "name": "Fi",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2019,
+   "valuation_usd": 540000000,
+   "funding_usd": 136000000,
+   "base_price": 161.67,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "540"
+  },
+  {
+   "id": "fibe",
+   "name": "Fibe",
+   "sector": "Fintech",
+   "hq": "Pune",
+   "founded": 2015,
+   "valuation_usd": 575000000,
+   "funding_usd": 258000000,
+   "base_price": 166.82,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "550-600"
+  },
+  {
+   "id": "finova-capital",
+   "name": "Finova Capital",
+   "sector": "Fintech",
+   "hq": "Jaipur",
+   "founded": 2015,
+   "valuation_usd": 700000000,
+   "funding_usd": 276000000,
+   "base_price": 184.07,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "700"
+  },
+  {
+   "id": "firstclub",
+   "name": "FirstClub",
+   "sector": "Consumer services",
+   "hq": "Bengaluru",
+   "founded": 2024,
+   "valuation_usd": 255000000,
+   "funding_usd": 86000000,
+   "base_price": 111.09,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "255"
   },
   {
    "id": "flipkart",
@@ -578,7 +1389,9 @@
    ],
    "blurb": "India's largest homegrown e-commerce marketplace; IPO deferred to at least 2028.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "36.0"
   },
   {
    "id": "fractal",
@@ -593,7 +1406,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
+  },
+  {
+   "id": "freshtohome",
+   "name": "FreshToHome",
+   "sector": "Consumer services",
+   "hq": "Bengaluru",
+   "founded": 2015,
+   "valuation_usd": 500000000,
+   "funding_usd": 256000000,
+   "base_price": 155.56,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "450-550"
   },
   {
    "id": "games24x7",
@@ -608,7 +1440,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.5"
+  },
+  {
+   "id": "geniemode",
+   "name": "Geniemode",
+   "sector": "E-commerce",
+   "hq": "Delhi NCR",
+   "founded": 2021,
+   "valuation_usd": 200000000,
+   "funding_usd": 87000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
+  },
+  {
+   "id": "giva",
+   "name": "Giva",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2019,
+   "valuation_usd": 374000000,
+   "funding_usd": 163000000,
+   "base_price": 134.54,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "374"
   },
   {
    "id": "glance",
@@ -623,7 +1491,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.7"
   },
   {
    "id": "globalbees",
@@ -638,7 +1508,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.1"
+  },
+  {
+   "id": "gokwik",
+   "name": "gokwik",
+   "sector": "Fintech",
+   "hq": "Delhi NCR",
+   "founded": 2020,
+   "valuation_usd": 450000000,
+   "funding_usd": 68000000,
+   "base_price": 147.58,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "450"
   },
   {
    "id": "good-glamm-group",
@@ -656,6 +1545,23 @@
    "valuation_note": "No valuation we can cite; starting price is a neutral default."
   },
   {
+   "id": "greyorange",
+   "name": "GreyOrange",
+   "sector": "Deep tech",
+   "hq": "Delhi NCR",
+   "founded": 2011,
+   "valuation_usd": 700000000,
+   "funding_usd": 437000000,
+   "base_price": 184.07,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "700"
+  },
+  {
    "id": "groww",
    "name": "Groww",
    "sector": "Fintech",
@@ -668,7 +1574,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "11.0"
   },
   {
    "id": "gupshup",
@@ -683,7 +1591,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "0.5"
+  },
+  {
+   "id": "hackerrank",
+   "name": "Hackerrank",
+   "sector": "SaaS",
+   "hq": "Bengaluru",
+   "founded": 2009,
+   "valuation_usd": 500000000,
+   "funding_usd": 110000000,
+   "base_price": 155.56,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "500"
   },
   {
    "id": "hasura",
@@ -698,7 +1625,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "healthifyme",
@@ -706,21 +1635,92 @@
    "sector": "Healthtech",
    "hq": "Bengaluru",
    "founded": 2012,
-   "valuation_usd": 600000000,
-   "funding_usd": 200000000,
+   "valuation_usd": 225000000,
+   "funding_usd": 150000000,
+   "base_price": 8.6,
+   "price_basis": "legacy",
+   "aliases": [
+    "HealthifyMe Wellness"
+   ],
+   "ipo_watch": false,
    "investors": [
     "LeapFrog",
     "Khosla",
     "Unilever Ventures"
    ],
    "blurb": "AI-powered nutrition and fitness coaching app.",
-   "base_price": 8.6,
-   "aliases": [
-    "HealthifyMe Wellness"
-   ],
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-250"
+  },
+  {
+   "id": "healthkart",
+   "name": "Healthkart",
+   "sector": "Healthtech",
+   "hq": "Delhi NCR",
+   "founded": 2011,
+   "valuation_usd": 500000000,
+   "funding_usd": 350000000,
+   "base_price": 155.56,
+   "price_basis": "valuation",
+   "aliases": [],
    "ipo_watch": false,
-   "price_basis": "legacy",
-   "valuation_source": null
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "500"
+  },
+  {
+   "id": "hocco",
+   "name": "Hocco",
+   "sector": "E-commerce",
+   "hq": "Ahmedabad",
+   "founded": 2019,
+   "valuation_usd": 225000000,
+   "funding_usd": 35000000,
+   "base_price": 104.36,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "225"
+  },
+  {
+   "id": "homelane",
+   "name": "Homelane",
+   "sector": "Consumer services",
+   "hq": "Bengaluru",
+   "founded": 2014,
+   "valuation_usd": 360000000,
+   "funding_usd": 157000000,
+   "base_price": 132.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "360"
+  },
+  {
+   "id": "hopscotch",
+   "name": "Hopscotch",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2011,
+   "valuation_usd": 200000000,
+   "funding_usd": 71000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
   },
   {
    "id": "icertis",
@@ -735,7 +1735,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "5.0"
+  },
+  {
+   "id": "id-fresh-food",
+   "name": "iD Fresh Food",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2006,
+   "valuation_usd": 235000000,
+   "funding_usd": 99000000,
+   "base_price": 106.65,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "235"
   },
   {
    "id": "incred",
@@ -750,7 +1769,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
+  },
+  {
+   "id": "indiqube",
+   "name": "Indiqube",
+   "sector": "Real estate",
+   "hq": "Bengaluru",
+   "founded": 2016,
+   "valuation_usd": 500000000,
+   "funding_usd": 45000000,
+   "base_price": 155.56,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "450-550"
+  },
+  {
+   "id": "indmoney",
+   "name": "IndMoney",
+   "sector": "Fintech",
+   "hq": "Delhi NCR",
+   "founded": 2018,
+   "valuation_usd": 650000000,
+   "funding_usd": 143000000,
+   "base_price": 177.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "650"
   },
   {
    "id": "infra-market",
@@ -765,7 +1820,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.8"
   },
   {
    "id": "inmobi",
@@ -780,7 +1837,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
   },
   {
    "id": "innovaccer",
@@ -795,7 +1854,94 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.2"
+  },
+  {
+   "id": "innovist",
+   "name": "Innovist",
+   "sector": "E-commerce",
+   "hq": "Delhi NCR",
+   "founded": 2018,
+   "valuation_usd": 400000000,
+   "funding_usd": 103000000,
+   "base_price": 139.14,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "350-450"
+  },
+  {
+   "id": "innoviti",
+   "name": "Innoviti",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2002,
+   "valuation_usd": 210000000,
+   "funding_usd": 104000000,
+   "base_price": 100.82,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "210"
+  },
+  {
+   "id": "inshorts",
+   "name": "Inshorts",
+   "sector": "Media",
+   "hq": "Delhi NCR",
+   "founded": 2013,
+   "valuation_usd": 550000000,
+   "funding_usd": 165000000,
+   "base_price": 163.16,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "550"
+  },
+  {
+   "id": "insurancedekho",
+   "name": "Insurancedekho",
+   "sector": "Fintech",
+   "hq": "Delhi NCR",
+   "founded": 2016,
+   "valuation_usd": 725000000,
+   "funding_usd": 434000000,
+   "base_price": 187.32,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "700-750"
+  },
+  {
+   "id": "invideo",
+   "name": "InVideo",
+   "sector": "AI",
+   "hq": "Mumbai",
+   "founded": 2017,
+   "valuation_usd": 210000000,
+   "funding_usd": 53000000,
+   "base_price": 100.82,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "210"
   },
   {
    "id": "jar",
@@ -831,7 +1977,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "jupiter",
@@ -839,22 +1987,25 @@
    "sector": "Fintech",
    "hq": "Mumbai",
    "founded": 2019,
-   "valuation_usd": 710000000,
-   "funding_usd": 160000000,
+   "valuation_usd": 610000000,
+   "funding_usd": 171000000,
+   "base_price": 10.1,
+   "price_basis": "legacy",
+   "aliases": [
+    "Amica Financial",
+    "Amica Financial Technologies"
+   ],
+   "ipo_watch": false,
    "investors": [
     "Tiger Global",
     "Peak XV",
     "Matrix"
    ],
    "blurb": "Neobanking app for savings, payments and money insights.",
-   "base_price": 10.1,
-   "aliases": [
-    "Amica Financial",
-    "Amica Financial Technologies"
-   ],
-   "ipo_watch": false,
-   "price_basis": "legacy",
-   "valuation_source": null
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "610"
   },
   {
    "id": "juspay",
@@ -869,7 +2020,60 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.2"
+  },
+  {
+   "id": "k12technoservices",
+   "name": "k12technoservices",
+   "sector": "Edtech",
+   "hq": "Bengaluru",
+   "founded": 2010,
+   "valuation_usd": 445000000,
+   "funding_usd": 82000000,
+   "base_price": 146.76,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "445"
+  },
+  {
+   "id": "keka",
+   "name": "Keka",
+   "sector": "SaaS",
+   "hq": "Hyderabad",
+   "founded": 2014,
+   "valuation_usd": 210000000,
+   "funding_usd": 59000000,
+   "base_price": 100.82,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "210"
+  },
+  {
+   "id": "kissht",
+   "name": "Kissht",
+   "sector": "Fintech",
+   "hq": "Mumbai",
+   "founded": 2015,
+   "valuation_usd": 280000000,
+   "funding_usd": 142000000,
+   "base_price": 116.41,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "280"
   },
   {
    "id": "kreditbee",
@@ -884,7 +2088,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
   },
   {
    "id": "kukufm",
@@ -892,22 +2098,59 @@
    "sector": "Media",
    "hq": "Mumbai",
    "founded": 2018,
-   "valuation_usd": 550000000,
-   "funding_usd": 120000000,
+   "valuation_usd": 190000000,
+   "funding_usd": 72000000,
+   "base_price": 7.9,
+   "price_basis": "legacy",
+   "aliases": [
+    "Mebigo Labs",
+    "Kuku Technologies"
+   ],
+   "ipo_watch": false,
    "investors": [
     "Krafton",
     "Vertex",
     "3one4"
    ],
    "blurb": "Hindi and regional-language audio shows and audiobooks.",
-   "base_price": 7.9,
-   "aliases": [
-    "Mebigo Labs",
-    "Kuku Technologies"
-   ],
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "180-200"
+  },
+  {
+   "id": "lahori-zeera",
+   "name": "Lahori Zeera",
+   "sector": "E-commerce",
+   "hq": "Mohali",
+   "founded": 2017,
+   "valuation_usd": 310000000,
+   "funding_usd": 46000000,
+   "base_price": 122.49,
+   "price_basis": "valuation",
+   "aliases": [],
    "ipo_watch": false,
-   "price_basis": "legacy",
-   "valuation_source": null
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "310"
+  },
+  {
+   "id": "lambdatest",
+   "name": "Lambdatest",
+   "sector": "SaaS",
+   "hq": "Delhi NCR",
+   "founded": 2017,
+   "valuation_usd": 400000000,
+   "funding_usd": 108000000,
+   "base_price": 139.14,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400"
   },
   {
    "id": "lead",
@@ -922,7 +2165,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.1"
   },
   {
    "id": "leadsquared",
@@ -937,7 +2182,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
+  },
+  {
+   "id": "leap",
+   "name": "Leap",
+   "sector": "Edtech",
+   "hq": "Bengaluru",
+   "founded": 2019,
+   "valuation_usd": 750000000,
+   "funding_usd": 150000000,
+   "base_price": 190.53,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "700-800"
   },
   {
    "id": "licious",
@@ -952,7 +2216,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
   },
   {
    "id": "livspace",
@@ -967,7 +2233,94 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.2"
+  },
+  {
+   "id": "loginext",
+   "name": "LogiNext",
+   "sector": "Logistics",
+   "hq": "Mumbai",
+   "founded": 2014,
+   "valuation_usd": 250000000,
+   "funding_usd": 50000000,
+   "base_price": 110.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-300"
+  },
+  {
+   "id": "lohum",
+   "name": "Lohum",
+   "sector": "Cleantech",
+   "hq": "Bengaluru",
+   "founded": 2018,
+   "valuation_usd": 400000000,
+   "funding_usd": 44000000,
+   "base_price": 139.14,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400"
+  },
+  {
+   "id": "m1xchange",
+   "name": "m1xchange",
+   "sector": "Fintech",
+   "hq": "Delhi NCR",
+   "founded": 2016,
+   "valuation_usd": 234000000,
+   "funding_usd": 34000000,
+   "base_price": 106.42,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "234"
+  },
+  {
+   "id": "m2p-fintech",
+   "name": "M2P Fintech",
+   "sector": "Fintech",
+   "hq": "Chennai",
+   "founded": 2014,
+   "valuation_usd": 750000000,
+   "funding_usd": 214000000,
+   "base_price": 190.53,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "750"
+  },
+  {
+   "id": "magicpin",
+   "name": "Magicpin",
+   "sector": "Consumer services",
+   "hq": "Delhi NCR",
+   "founded": 2015,
+   "valuation_usd": 350000000,
+   "funding_usd": 105000000,
+   "base_price": 130.15,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "300-400"
   },
   {
    "id": "mamaearth",
@@ -982,7 +2335,60 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "0.9"
+  },
+  {
+   "id": "mcaffeine",
+   "name": "mCaffeine",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2016,
+   "valuation_usd": 200000000,
+   "funding_usd": 39000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
+  },
+  {
+   "id": "medgenome",
+   "name": "Medgenome",
+   "sector": "Healthtech",
+   "hq": "Bengaluru",
+   "founded": 2013,
+   "valuation_usd": 290000000,
+   "funding_usd": 185000000,
+   "base_price": 118.47,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "290"
+  },
+  {
+   "id": "medikabazaar",
+   "name": "Medikabazaar",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2015,
+   "valuation_usd": 650000000,
+   "funding_usd": 192000000,
+   "base_price": 177.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "650"
   },
   {
    "id": "mensa-brands",
@@ -997,7 +2403,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
+  },
+  {
+   "id": "miko",
+   "name": "Miko",
+   "sector": "Edtech",
+   "hq": "Mumbai",
+   "founded": 2015,
+   "valuation_usd": 200000000,
+   "funding_usd": 65000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
   },
   {
    "id": "mindtickle",
@@ -1012,7 +2437,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.2"
+  },
+  {
+   "id": "mintifi",
+   "name": "Mintifi",
+   "sector": "Fintech",
+   "hq": "Mumbai",
+   "founded": 2017,
+   "valuation_usd": 850000000,
+   "funding_usd": 340000000,
+   "base_price": 202.83,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "850"
   },
   {
    "id": "mobile-premier-league",
@@ -1027,7 +2471,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.2"
   },
   {
    "id": "moengage",
@@ -1036,7 +2482,14 @@
    "hq": "Bengaluru",
    "founded": 2014,
    "valuation_usd": 900000000,
-   "funding_usd": 307000000,
+   "funding_usd": 487000000,
+   "base_price": 12.9,
+   "price_basis": "legacy",
+   "aliases": [
+    "MoEngage India",
+    "MoEngage India Private Limited"
+   ],
+   "ipo_watch": false,
    "investors": [
     "Goldman Sachs Alternatives",
     "ChrysCapital",
@@ -1044,14 +2497,10 @@
     "A91 Partners"
    ],
    "blurb": "Customer engagement and analytics platform; reverse-flipped to India through an NCLT-approved merger into MoEngage India Pvt Ltd (Jan 2026) ahead of a planned domestic IPO.",
-   "base_price": 12.9,
-   "aliases": [
-    "MoEngage India",
-    "MoEngage India Private Limited"
-   ],
-   "ipo_watch": false,
-   "price_basis": "legacy",
-   "valuation_source": null
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "900"
   },
   {
    "id": "moglix",
@@ -1066,7 +2515,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.5"
+  },
+  {
+   "id": "mosaic-wellness",
+   "name": "Mosaic Wellness",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2020,
+   "valuation_usd": 400000000,
+   "funding_usd": 55000000,
+   "base_price": 139.14,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400"
+  },
+  {
+   "id": "mswipe",
+   "name": "Mswipe",
+   "sector": "Fintech",
+   "hq": "Mumbai",
+   "founded": 2011,
+   "valuation_usd": 350000000,
+   "funding_usd": 118000000,
+   "base_price": 130.15,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "300-400"
   },
   {
    "id": "mu-sigma",
@@ -1081,7 +2566,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
+  },
+  {
+   "id": "mygate",
+   "name": "Mygate",
+   "sector": "SaaS",
+   "hq": "Bengaluru",
+   "founded": 2016,
+   "valuation_usd": 275000000,
+   "funding_usd": 79000000,
+   "base_price": 115.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250-300"
+  },
+  {
+   "id": "nephroplus",
+   "name": "NephroPlus",
+   "sector": "Healthtech",
+   "hq": "Hyderabad",
+   "founded": 2009,
+   "valuation_usd": 250000000,
+   "funding_usd": 199000000,
+   "base_price": 110.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250"
   },
   {
    "id": "netradyne",
@@ -1096,7 +2617,60 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.3"
+  },
+  {
+   "id": "neuron7-ai",
+   "name": "Neuron7.ai",
+   "sector": "AI",
+   "hq": "Bengaluru",
+   "founded": 2020,
+   "valuation_usd": 265000000,
+   "funding_usd": 58000000,
+   "base_price": 113.25,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "265"
+  },
+  {
+   "id": "ninjacart",
+   "name": "Ninjacart",
+   "sector": "Agritech",
+   "hq": "Bengaluru",
+   "founded": 2015,
+   "valuation_usd": 670000000,
+   "funding_usd": 407000000,
+   "base_price": 180.08,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "670"
+  },
+  {
+   "id": "niyo",
+   "name": "Niyo",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2015,
+   "valuation_usd": 425000000,
+   "funding_usd": 179000000,
+   "base_price": 143.42,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "350-500"
   },
   {
    "id": "nobroker",
@@ -1111,7 +2685,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
+  },
+  {
+   "id": "noise",
+   "name": "Noise",
+   "sector": "E-commerce",
+   "hq": "Delhi NCR",
+   "founded": 2014,
+   "valuation_usd": 450000000,
+   "funding_usd": 30000000,
+   "base_price": 147.58,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "450"
   },
   {
    "id": "ofbusiness",
@@ -1134,7 +2727,9 @@
    ],
    "blurb": "Raw-material commerce and SME financing (Oxyzo); DRHP expected soon.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.8"
   },
   {
    "id": "ola",
@@ -1149,7 +2744,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.3"
   },
   {
    "id": "ola-krutrim",
@@ -1164,7 +2761,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
+  },
+  {
+   "id": "oneassist",
+   "name": "OneAssist",
+   "sector": "Consumer services",
+   "hq": "Mumbai",
+   "founded": 2011,
+   "valuation_usd": 220000000,
+   "funding_usd": 64000000,
+   "base_price": 103.19,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "220"
   },
   {
    "id": "onecard",
@@ -1179,7 +2795,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.4"
   },
   {
    "id": "open",
@@ -1194,7 +2812,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "oxyzo",
@@ -1209,7 +2829,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "oyo",
@@ -1233,7 +2855,60 @@
    ],
    "blurb": "Budget hotel and homes network; long-running IPO ambitions.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.5"
+  },
+  {
+   "id": "palmonas",
+   "name": "Palmonas",
+   "sector": "E-commerce",
+   "hq": "Pune",
+   "founded": 2022,
+   "valuation_usd": 200000000,
+   "funding_usd": 53000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
+  },
+  {
+   "id": "park",
+   "name": "Park+",
+   "sector": "Travel",
+   "hq": "Delhi NCR",
+   "founded": 2019,
+   "valuation_usd": 310000000,
+   "funding_usd": 53000000,
+   "base_price": 122.49,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "310"
+  },
+  {
+   "id": "paymate",
+   "name": "Paymate",
+   "sector": "Fintech",
+   "hq": "Mumbai",
+   "founded": 2006,
+   "valuation_usd": 900000000,
+   "funding_usd": 45000000,
+   "base_price": 208.71,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "900"
   },
   {
    "id": "paytm-mall",
@@ -1263,7 +2938,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "pharmeasy",
@@ -1278,7 +2955,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "0.5"
   },
   {
    "id": "phonepe",
@@ -1302,7 +2981,94 @@
    ],
    "blurb": "UPI payments leader; SEBI approval received Jan 2026 but IPO launch paused.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "13.0"
+  },
+  {
+   "id": "pilgrim",
+   "name": "Pilgrim",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2019,
+   "valuation_usd": 350000000,
+   "funding_usd": 54000000,
+   "base_price": 130.15,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "350"
+  },
+  {
+   "id": "pixis",
+   "name": "Pixis",
+   "sector": "AI",
+   "hq": "Bengaluru",
+   "founded": 2017,
+   "valuation_usd": 530000000,
+   "funding_usd": 209000000,
+   "base_price": 160.16,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "530"
+  },
+  {
+   "id": "pixxel",
+   "name": "Pixxel",
+   "sector": "Deep tech",
+   "hq": "Bengaluru",
+   "founded": 2015,
+   "valuation_usd": 425000000,
+   "funding_usd": 98000000,
+   "base_price": 143.42,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400-450"
+  },
+  {
+   "id": "plum",
+   "name": "Plum",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2013,
+   "valuation_usd": 250000000,
+   "funding_usd": 50000000,
+   "base_price": 110.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250"
+  },
+  {
+   "id": "pocket-fm",
+   "name": "Pocket FM",
+   "sector": "Media",
+   "hq": "Bengaluru",
+   "founded": 2018,
+   "valuation_usd": 750000000,
+   "funding_usd": 203000000,
+   "base_price": 190.53,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "750"
   },
   {
    "id": "porter",
@@ -1326,7 +3092,9 @@
    ],
    "blurb": "Intra-city mini-truck and two-wheeler logistics marketplace.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "postman",
@@ -1341,7 +3109,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "5.6"
+  },
+  {
+   "id": "practo",
+   "name": "Practo",
+   "sector": "Healthtech",
+   "hq": "Bengaluru",
+   "founded": 2008,
+   "valuation_usd": 425000000,
+   "funding_usd": 229000000,
+   "base_price": 143.42,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400-450"
   },
   {
    "id": "pristyn-care",
@@ -1356,7 +3143,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.4"
+  },
+  {
+   "id": "progcap",
+   "name": "Progcap",
+   "sector": "Fintech",
+   "hq": "Delhi NCR",
+   "founded": 2016,
+   "valuation_usd": 600000000,
+   "funding_usd": 112000000,
+   "base_price": 170.41,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "600"
+  },
+  {
+   "id": "pronto",
+   "name": "Pronto",
+   "sector": "Consumer services",
+   "hq": "Bengaluru",
+   "founded": 2025,
+   "valuation_usd": 200000000,
+   "funding_usd": 58000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
   },
   {
    "id": "purplle",
@@ -1371,7 +3194,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.3"
   },
   {
    "id": "quikr",
@@ -1386,7 +3211,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "0.6"
+  },
+  {
+   "id": "qure-ai",
+   "name": "Qure.ai",
+   "sector": "AI",
+   "hq": "Bengaluru",
+   "founded": 2016,
+   "valuation_usd": 250000000,
+   "funding_usd": 125000000,
+   "base_price": 110.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250"
+  },
+  {
+   "id": "raphe-mphibr",
+   "name": "Raphe mPhibr",
+   "sector": "Deep tech",
+   "hq": "Delhi NCR",
+   "founded": 2017,
+   "valuation_usd": 850000000,
+   "funding_usd": 100000000,
+   "base_price": 202.83,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "800-900"
   },
   {
    "id": "rapido",
@@ -1410,7 +3271,26 @@
    ],
    "blurb": "Bike-taxi and auto ride-hailing challenger to Ola and Uber.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.1"
+  },
+  {
+   "id": "rare-rabbit",
+   "name": "Rare Rabbit",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2014,
+   "valuation_usd": 300000000,
+   "funding_usd": null,
+   "base_price": 120.5,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "300"
   },
   {
    "id": "rategain",
@@ -1425,7 +3305,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "0.8"
   },
   {
    "id": "razorpay",
@@ -1449,7 +3331,9 @@
    ],
    "blurb": "Payments and banking infra for businesses; SEBI nod Nov 2026, eyeing a 2027 listing.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "7.5"
   },
   {
    "id": "rebel-foods",
@@ -1464,7 +3348,77 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.4"
+  },
+  {
+   "id": "recykal",
+   "name": "Recykal",
+   "sector": "Cleantech",
+   "hq": "Hyderabad",
+   "founded": 2016,
+   "valuation_usd": 280000000,
+   "funding_usd": 60000000,
+   "base_price": 116.41,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "280"
+  },
+  {
+   "id": "refyne",
+   "name": "Refyne",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2020,
+   "valuation_usd": 475000000,
+   "funding_usd": 106000000,
+   "base_price": 151.62,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "450-500"
+  },
+  {
+   "id": "renee-cosmetics",
+   "name": "RENEE Cosmetics",
+   "sector": "E-commerce",
+   "hq": "Ahmedabad",
+   "founded": 2019,
+   "valuation_usd": 200000000,
+   "funding_usd": 78000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
+  },
+  {
+   "id": "ripplr",
+   "name": "Ripplr",
+   "sector": "Logistics",
+   "hq": "Bengaluru",
+   "founded": 2019,
+   "valuation_usd": 225000000,
+   "funding_usd": 55000000,
+   "base_price": 104.36,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-250"
   },
   {
    "id": "rivigo",
@@ -1482,6 +3436,74 @@
    "valuation_note": "No valuation we can cite; starting price is a neutral default."
   },
   {
+   "id": "rupeek",
+   "name": "Rupeek",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2015,
+   "valuation_usd": 213000000,
+   "funding_usd": 200000000,
+   "base_price": 101.53,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "213"
+  },
+  {
+   "id": "safe-security",
+   "name": "Safe Security",
+   "sector": "SaaS",
+   "hq": "Delhi NCR",
+   "founded": 2012,
+   "valuation_usd": 340000000,
+   "funding_usd": 165000000,
+   "base_price": 128.28,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "280-400"
+  },
+  {
+   "id": "sahi",
+   "name": "Sahi",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2023,
+   "valuation_usd": 200000000,
+   "funding_usd": 44000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
+  },
+  {
+   "id": "sarvagram",
+   "name": "SarvaGram",
+   "sector": "Fintech",
+   "hq": "Pune",
+   "founded": 2018,
+   "valuation_usd": 200000000,
+   "funding_usd": 116000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
+  },
+  {
    "id": "sarvam-ai",
    "name": "Sarvam AI",
    "sector": "AI",
@@ -1494,7 +3516,77 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
+  },
+  {
+   "id": "scaler-academy",
+   "name": "Scaler Academy",
+   "sector": "Edtech",
+   "hq": "Bengaluru",
+   "founded": 2019,
+   "valuation_usd": 700000000,
+   "funding_usd": 55000000,
+   "base_price": 184.07,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "700"
+  },
+  {
+   "id": "scapia",
+   "name": "Scapia",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2022,
+   "valuation_usd": 500000000,
+   "funding_usd": 135000000,
+   "base_price": 155.56,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "500"
+  },
+  {
+   "id": "scripbox",
+   "name": "Scripbox",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2012,
+   "valuation_usd": 200000000,
+   "funding_usd": 55000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
+  },
+  {
+   "id": "servify",
+   "name": "Servify",
+   "sector": "Consumer services",
+   "hq": "Mumbai",
+   "founded": 2015,
+   "valuation_usd": 740000000,
+   "funding_usd": 130000000,
+   "base_price": 189.25,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "740"
   },
   {
    "id": "sharechat",
@@ -1517,7 +3609,9 @@
    ],
    "blurb": "Regional-language social network behind Moj short video.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.0"
   },
   {
    "id": "shopclues",
@@ -1532,7 +3626,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "0.1"
+  },
+  {
+   "id": "simple-energy",
+   "name": "Simple Energy",
+   "sector": "Travel",
+   "hq": "Bengaluru",
+   "founded": 2019,
+   "valuation_usd": 200000000,
+   "funding_usd": 61000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
   },
   {
    "id": "skyroot-aerospace",
@@ -1547,7 +3660,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.1"
   },
   {
    "id": "slice",
@@ -1562,7 +3677,77 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.3"
+  },
+  {
+   "id": "smallcase",
+   "name": "Smallcase",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2015,
+   "valuation_usd": 275000000,
+   "funding_usd": 112000000,
+   "base_price": 115.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250-300"
+  },
+  {
+   "id": "smartron",
+   "name": "Smartron",
+   "sector": "Deep tech",
+   "hq": "Hyderabad",
+   "founded": 2014,
+   "valuation_usd": 225000000,
+   "funding_usd": 16000000,
+   "base_price": 104.36,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-250"
+  },
+  {
+   "id": "smartworks",
+   "name": "Smartworks",
+   "sector": "Real estate",
+   "hq": "Delhi NCR",
+   "founded": 2016,
+   "valuation_usd": 650000000,
+   "funding_usd": 65000000,
+   "base_price": 177.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "650"
+  },
+  {
+   "id": "snabbit",
+   "name": "Snabbit",
+   "sector": "Consumer services",
+   "hq": "Bengaluru",
+   "founded": 2024,
+   "valuation_usd": 350000000,
+   "funding_usd": 113000000,
+   "base_price": 130.15,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "350"
   },
   {
    "id": "snapdeal",
@@ -1577,7 +3762,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "0.8"
+  },
+  {
+   "id": "snitch",
+   "name": "Snitch",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2018,
+   "valuation_usd": 275000000,
+   "funding_usd": 53000000,
+   "base_price": 115.37,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "250-300"
+  },
+  {
+   "id": "solarsquare",
+   "name": "SolarSquare",
+   "sector": "Cleantech",
+   "hq": "Mumbai",
+   "founded": 2015,
+   "valuation_usd": 475000000,
+   "funding_usd": 113000000,
+   "base_price": 151.62,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "450-500"
   },
   {
    "id": "spinny",
@@ -1592,7 +3813,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.8"
   },
   {
    "id": "square-yards",
@@ -1607,7 +3830,145 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
+  },
+  {
+   "id": "stanza-living",
+   "name": "Stanza Living",
+   "sector": "Real estate",
+   "hq": "Delhi NCR",
+   "founded": 2017,
+   "valuation_usd": 525000000,
+   "funding_usd": 228000000,
+   "base_price": 159.41,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "500-550"
+  },
+  {
+   "id": "stashfin",
+   "name": "Stashfin",
+   "sector": "Fintech",
+   "hq": "Delhi NCR",
+   "founded": 2016,
+   "valuation_usd": 800000000,
+   "funding_usd": 424000000,
+   "base_price": 196.77,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "800"
+  },
+  {
+   "id": "the-sleep-company",
+   "name": "The Sleep Company",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2019,
+   "valuation_usd": 320000000,
+   "funding_usd": 99000000,
+   "base_price": 124.45,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "320"
+  },
+  {
+   "id": "the-whole-truth",
+   "name": "The Whole Truth",
+   "sector": "E-commerce",
+   "hq": "Mumbai",
+   "founded": 2019,
+   "valuation_usd": 400000000,
+   "funding_usd": 83000000,
+   "base_price": 139.14,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400"
+  },
+  {
+   "id": "third-wave-coffee",
+   "name": "Third Wave Coffee",
+   "sector": "Foodtech",
+   "hq": "Bengaluru",
+   "founded": 2016,
+   "valuation_usd": 350000000,
+   "funding_usd": 105000000,
+   "base_price": 130.15,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-500"
+  },
+  {
+   "id": "true-balance",
+   "name": "True Balance",
+   "sector": "Fintech",
+   "hq": "Delhi NCR",
+   "founded": 2014,
+   "valuation_usd": 185000000,
+   "funding_usd": 169000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "170-200"
+  },
+  {
+   "id": "truemeds",
+   "name": "Truemeds",
+   "sector": "Healthtech",
+   "hq": "Mumbai",
+   "founded": 2019,
+   "valuation_usd": 375000000,
+   "funding_usd": 112000000,
+   "base_price": 134.72,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "350-400"
+  },
+  {
+   "id": "turtlemint",
+   "name": "Turtlemint",
+   "sector": "Fintech",
+   "hq": "Mumbai",
+   "founded": 2015,
+   "valuation_usd": 450000000,
+   "funding_usd": 197000000,
+   "base_price": 147.58,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400-500"
   },
   {
    "id": "udaan",
@@ -1630,7 +3991,43 @@
    ],
    "blurb": "B2B marketplace connecting manufacturers, wholesalers and retailers.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.8"
+  },
+  {
+   "id": "ultrahuman",
+   "name": "Ultrahuman",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2020,
+   "valuation_usd": 450000000,
+   "funding_usd": 53000000,
+   "base_price": 147.58,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400-500"
+  },
+  {
+   "id": "ultraviolette-automotive",
+   "name": "Ultraviolette Automotive",
+   "sector": "Cleantech",
+   "hq": "Bengaluru",
+   "founded": 2016,
+   "valuation_usd": 310000000,
+   "funding_usd": 91000000,
+   "base_price": 122.49,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "310"
   },
   {
    "id": "unacademy",
@@ -1653,7 +4050,9 @@
    ],
    "blurb": "Online learning platform spanning test prep to upskilling.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.4"
   },
   {
    "id": "uniphore",
@@ -1668,7 +4067,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.5"
   },
   {
    "id": "upgrad",
@@ -1690,7 +4091,9 @@
    ],
    "blurb": "Higher-education and skilling degrees with university partners.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.3"
   },
   {
    "id": "upstox",
@@ -1705,7 +4108,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.5"
+  },
+  {
+   "id": "vayana-network",
+   "name": "Vayana Network",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2016,
+   "valuation_usd": 230000000,
+   "funding_usd": 70000000,
+   "base_price": 105.51,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "230"
   },
   {
    "id": "vedantu",
@@ -1720,7 +4142,9 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
   },
   {
    "id": "verse-innovation",
@@ -1735,7 +4159,111 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.9"
+  },
+  {
+   "id": "wakefit",
+   "name": "Wakefit",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2014,
+   "valuation_usd": 225000000,
+   "funding_usd": 148000000,
+   "base_price": 104.36,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-250"
+  },
+  {
+   "id": "waycool",
+   "name": "Waycool",
+   "sector": "Agritech",
+   "hq": "Chennai",
+   "founded": 2015,
+   "valuation_usd": 700000000,
+   "funding_usd": 280000000,
+   "base_price": 184.07,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "650-750"
+  },
+  {
+   "id": "wework-india",
+   "name": "WeWork India",
+   "sector": "Real estate",
+   "hq": "Mumbai",
+   "founded": 2017,
+   "valuation_usd": 510000000,
+   "funding_usd": 222000000,
+   "base_price": 157.11,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "480-540"
+  },
+  {
+   "id": "whatfix",
+   "name": "Whatfix",
+   "sector": "SaaS",
+   "hq": "Bengaluru",
+   "founded": 2013,
+   "valuation_usd": 900000000,
+   "funding_usd": 264000000,
+   "base_price": 208.71,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "900"
+  },
+  {
+   "id": "wow-skin-science",
+   "name": "Wow Skin Science",
+   "sector": "E-commerce",
+   "hq": "Bengaluru",
+   "founded": 2014,
+   "valuation_usd": 400000000,
+   "funding_usd": 98000000,
+   "base_price": 139.14,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "400"
+  },
+  {
+   "id": "wow-momo",
+   "name": "Wow! Momo",
+   "sector": "Foodtech",
+   "hq": "Kolkata",
+   "founded": 2008,
+   "valuation_usd": 250000000,
+   "funding_usd": 154000000,
+   "base_price": 110.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-300"
   },
   {
    "id": "xpressbees",
@@ -1759,7 +4287,26 @@
    ],
    "blurb": "E-commerce delivery network covering thousands of pin codes.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
+  },
+  {
+   "id": "yellow-ai",
+   "name": "Yellow.ai",
+   "sector": "AI",
+   "hq": "Bengaluru",
+   "founded": 2016,
+   "valuation_usd": 375000000,
+   "funding_usd": 102000000,
+   "base_price": 134.72,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "300-450"
   },
   {
    "id": "yubi",
@@ -1774,7 +4321,43 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.3"
+  },
+  {
+   "id": "yulu",
+   "name": "Yulu",
+   "sector": "Travel",
+   "hq": "Bengaluru",
+   "founded": 2017,
+   "valuation_usd": 185000000,
+   "funding_usd": 228000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "170-200"
+  },
+  {
+   "id": "zaggle",
+   "name": "Zaggle",
+   "sector": "Fintech",
+   "hq": "Mumbai",
+   "founded": 2011,
+   "valuation_usd": 593000000,
+   "funding_usd": 45000000,
+   "base_price": 169.41,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "593"
   },
   {
    "id": "zenoti",
@@ -1789,7 +4372,26 @@
    "aliases": [],
    "ipo_watch": false,
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.5"
+  },
+  {
+   "id": "zenwork",
+   "name": "Zenwork",
+   "sector": "Fintech",
+   "hq": "Hyderabad",
+   "founded": 2011,
+   "valuation_usd": 200000000,
+   "funding_usd": 163000000,
+   "base_price": 100.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200"
   },
   {
    "id": "zepto",
@@ -1813,7 +4415,9 @@
    ],
    "blurb": "10-minute grocery delivery; IPO on hold, raised a pre-IPO round instead.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "5.0"
   },
   {
    "id": "zerodha",
@@ -1834,7 +4438,9 @@
    ],
    "blurb": "India's largest discount broker; profitable and bootstrapped with no IPO plans.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "3.6"
   },
   {
    "id": "zeta",
@@ -1858,7 +4464,9 @@
    ],
    "blurb": "Banking-tech platform powering card issuing and core banking for lenders like HDFC Bank; valued at $2 Bn after Optum's 2025 strategic round. Indian parent entity verified as Better World Technologies Pvt Ltd.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "2.0"
   },
   {
    "id": "zoho",
@@ -1879,7 +4487,60 @@
    ],
    "blurb": "Profitable bootstrapped business-software suite used worldwide.",
    "valuation_source": "https://inc42.com/features/indian-unicorn-tracker-funding-investors-revenue-and-more/",
-   "valuation_as_of": "2026-08-15"
+   "valuation_as_of": "2026-08-15",
+   "valuation_source_name": "Inc42 Indian Unicorn Tracker",
+   "valuation_reported": "1.0"
+  },
+  {
+   "id": "zolve",
+   "name": "Zolve",
+   "sector": "Fintech",
+   "hq": "Bengaluru",
+   "founded": 2020,
+   "valuation_usd": 250000000,
+   "funding_usd": 406000000,
+   "base_price": 110.0,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "200-300"
+  },
+  {
+   "id": "zupee",
+   "name": "Zupee",
+   "sector": "Media",
+   "hq": "Delhi NCR",
+   "founded": 2018,
+   "valuation_usd": 600000000,
+   "funding_usd": 121000000,
+   "base_price": 170.41,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "600"
+  },
+  {
+   "id": "zypp-electric",
+   "name": "Zypp Electric",
+   "sector": "Cleantech",
+   "hq": "Delhi NCR",
+   "founded": 2017,
+   "valuation_usd": 320000000,
+   "funding_usd": 63000000,
+   "base_price": 124.45,
+   "price_basis": "valuation",
+   "aliases": [],
+   "ipo_watch": false,
+   "valuation_source": "https://inc42.com/features/indian-soonicorn-tracker-list-of-indias-unicorns-of-tomorrow/",
+   "valuation_as_of": "2026-09-08",
+   "valuation_source_name": "Inc42 Indian Soonicorn Tracker",
+   "valuation_reported": "320"
   }
  ]
 }

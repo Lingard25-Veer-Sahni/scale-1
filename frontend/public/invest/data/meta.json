@@ -1,7 +1,7 @@
 {
- "updated": "2026-11-23T15:21:53.375628Z",
- "tracked": 107,
- "graduated_total": 44,
+ "updated": "2026-11-23T16:56:45.233152Z",
+ "tracked": 251,
+ "graduated_total": 50,
  "new_graduates": [],
  "feeds": [
   "Inc42",
@@ -9,7 +9,13 @@
   "ET Tech",
   "TechCrunch India",
   "Mint Companies",
-  "Moneycontrol"
+  "Mint Money",
+  "Moneycontrol",
+  "Entrackr",
+  "Business Standard Companies",
+  "Business Standard Tech",
+  "BusinessLine Companies",
+  "BusinessLine Info-Tech"
  ],
  "exchange_check": {
   "nse_master_ok": true,
