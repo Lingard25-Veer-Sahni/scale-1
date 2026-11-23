@@ -1,0 +1,805 @@
+{
+  "sources": {
+    "nse_main": {
+      "ok": true,
+      "rows": 4786
+    },
+    "nse_sme": {
+      "ok": true,
+      "rows": 2,
+      "note": "served nearly empty; SME effectively unchecked"
+    },
+    "bse_bhavcopy": {
+      "ok": true,
+      "rows": 9282,
+      "date": "20261123"
+    }
+  },
+  "listed": [
+    {
+      "id": "ather-energy",
+      "name": "Ather Energy",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Ather Energy"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Ather Energy"
+        },
+        {
+          "exchange": "NSE",
+          "as": "Ather Energy"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Ather Energy"
+        }
+      ]
+    },
+    {
+      "id": "blackbuck",
+      "name": "BlackBuck",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "BlackBuck"
+        },
+        {
+          "exchange": "BSE",
+          "as": "BlackBuck"
+        }
+      ]
+    },
+    {
+      "id": "delhivery",
+      "name": "Delhivery",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Delhivery"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Delhivery"
+        },
+        {
+          "exchange": "NSE",
+          "as": "Delhivery"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Delhivery"
+        }
+      ]
+    },
+    {
+      "id": "digit-insurance",
+      "name": "Digit Insurance",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Go Digit General Insurance"
+        }
+      ]
+    },
+    {
+      "id": "easemytrip",
+      "name": "EaseMyTrip",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Easy Trip Planners"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Easy Trip Planners"
+        }
+      ]
+    },
+    {
+      "id": "eternal",
+      "name": "Eternal (Zomato)",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Eternal"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Eternal"
+        }
+      ]
+    },
+    {
+      "id": "firstcry",
+      "name": "FirstCry",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Brainbees Solutions"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Brainbees Solutions"
+        }
+      ]
+    },
+    {
+      "id": "indiamart",
+      "name": "IndiaMART",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "IndiaMART InterMESH"
+        },
+        {
+          "exchange": "BSE",
+          "as": "IndiaMART InterMESH"
+        }
+      ]
+    },
+    {
+      "id": "info-edge",
+      "name": "Info Edge",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Info Edge"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Info Edge"
+        },
+        {
+          "exchange": "NSE",
+          "as": "Info Edge (India)"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Info Edge (India)"
+        }
+      ]
+    },
+    {
+      "id": "lenskart",
+      "name": "Lenskart",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Lenskart"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Lenskart"
+        }
+      ]
+    },
+    {
+      "id": "mapmyindia",
+      "name": "MapmyIndia",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "CE Info Systems"
+        },
+        {
+          "exchange": "BSE",
+          "as": "CE Info Systems"
+        }
+      ]
+    },
+    {
+      "id": "meesho",
+      "name": "Meesho",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Meesho"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Meesho"
+        }
+      ]
+    },
+    {
+      "id": "mobikwik",
+      "name": "MobiKwik",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "One MobiKwik Systems"
+        },
+        {
+          "exchange": "BSE",
+          "as": "One MobiKwik Systems"
+        }
+      ]
+    },
+    {
+      "id": "money-view",
+      "name": "Money View",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Money View"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Money View"
+        }
+      ]
+    },
+    {
+      "id": "nykaa",
+      "name": "Nykaa",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "FSN E-Commerce Ventures"
+        }
+      ]
+    },
+    {
+      "id": "ola-electric",
+      "name": "Ola Electric",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Ola Electric Mobility"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Ola Electric Mobility"
+        }
+      ]
+    },
+    {
+      "id": "paytm",
+      "name": "Paytm",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "One97 Communications"
+        },
+        {
+          "exchange": "BSE",
+          "as": "One97 Communications"
+        }
+      ]
+    },
+    {
+      "id": "physics-wallah",
+      "name": "Physics Wallah",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Physics Wallah"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Physics Wallah"
+        },
+        {
+          "exchange": "NSE",
+          "as": "PhysicsWallah"
+        },
+        {
+          "exchange": "BSE",
+          "as": "PhysicsWallah"
+        }
+      ]
+    },
+    {
+      "id": "pine-labs",
+      "name": "Pine Labs",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Pine Labs"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Pine Labs"
+        }
+      ]
+    },
+    {
+      "id": "policybazaar",
+      "name": "Policybazaar",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "PB Fintech"
+        },
+        {
+          "exchange": "BSE",
+          "as": "PB Fintech"
+        }
+      ]
+    },
+    {
+      "id": "shiprocket",
+      "name": "Shiprocket",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Shiprocket"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Shiprocket"
+        }
+      ]
+    },
+    {
+      "id": "swiggy",
+      "name": "Swiggy",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Swiggy"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Swiggy"
+        },
+        {
+          "exchange": "NSE",
+          "as": "Swiggy"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Swiggy"
+        }
+      ]
+    },
+    {
+      "id": "travel-boutique-online",
+      "name": "Travel Boutique Online",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "TBO Tek"
+        },
+        {
+          "exchange": "BSE",
+          "as": "TBO Tek"
+        }
+      ]
+    },
+    {
+      "id": "urban-company",
+      "name": "Urban Company",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Urban Company"
+        },
+        {
+          "exchange": "BSE",
+          "as": "Urban Company"
+        }
+      ]
+    },
+    {
+      "id": "zetwerk",
+      "name": "Zetwerk",
+      "matched": [
+        {
+          "exchange": "NSE",
+          "as": "Zetwerk Manufacturing Businesses"
+        }
+      ]
+    }
+  ],
+  "clear": [
+    {
+      "id": "1mg",
+      "name": "1mg"
+    },
+    {
+      "id": "acko",
+      "name": "Acko"
+    },
+    {
+      "id": "amagi",
+      "name": "Amagi"
+    },
+    {
+      "id": "apna",
+      "name": "Apna"
+    },
+    {
+      "id": "astrotalk",
+      "name": "Astrotalk"
+    },
+    {
+      "id": "bharatpe",
+      "name": "BharatPe"
+    },
+    {
+      "id": "bigbasket",
+      "name": "BigBasket"
+    },
+    {
+      "id": "billdesk",
+      "name": "BillDesk"
+    },
+    {
+      "id": "boat",
+      "name": "boAt"
+    },
+    {
+      "id": "browserstack",
+      "name": "BrowserStack"
+    },
+    {
+      "id": "byju-s",
+      "name": "Byju's"
+    },
+    {
+      "id": "cardekho",
+      "name": "CarDekho"
+    },
+    {
+      "id": "cars24",
+      "name": "CARS24"
+    },
+    {
+      "id": "chargebee",
+      "name": "Chargebee"
+    },
+    {
+      "id": "citiustech",
+      "name": "CitiusTech"
+    },
+    {
+      "id": "coindcx",
+      "name": "CoinDCX"
+    },
+    {
+      "id": "coinswitch",
+      "name": "CoinSwitch"
+    },
+    {
+      "id": "cred",
+      "name": "CRED"
+    },
+    {
+      "id": "cultfit",
+      "name": "Cult.fit"
+    },
+    {
+      "id": "darwinbox",
+      "name": "Darwinbox"
+    },
+    {
+      "id": "dealshare",
+      "name": "DealShare"
+    },
+    {
+      "id": "dhan",
+      "name": "Dhan"
+    },
+    {
+      "id": "dream11",
+      "name": "Dream11"
+    },
+    {
+      "id": "drools",
+      "name": "Drools"
+    },
+    {
+      "id": "droom",
+      "name": "Droom"
+    },
+    {
+      "id": "druva",
+      "name": "Druva"
+    },
+    {
+      "id": "elasticrun",
+      "name": "ElasticRun"
+    },
+    {
+      "id": "emergent",
+      "name": "Emergent"
+    },
+    {
+      "id": "eruditus",
+      "name": "Eruditus"
+    },
+    {
+      "id": "flipkart",
+      "name": "Flipkart"
+    },
+    {
+      "id": "fractal",
+      "name": "Fractal"
+    },
+    {
+      "id": "games24x7",
+      "name": "Games24x7"
+    },
+    {
+      "id": "glance",
+      "name": "Glance"
+    },
+    {
+      "id": "globalbees",
+      "name": "GlobalBees"
+    },
+    {
+      "id": "good-glamm-group",
+      "name": "Good Glamm Group"
+    },
+    {
+      "id": "groww",
+      "name": "Groww"
+    },
+    {
+      "id": "gupshup",
+      "name": "Gupshup"
+    },
+    {
+      "id": "hasura",
+      "name": "Hasura"
+    },
+    {
+      "id": "icertis",
+      "name": "Icertis"
+    },
+    {
+      "id": "incred",
+      "name": "InCred"
+    },
+    {
+      "id": "infra-market",
+      "name": "Infra.Market"
+    },
+    {
+      "id": "inmobi",
+      "name": "InMobi"
+    },
+    {
+      "id": "innovaccer",
+      "name": "Innovaccer"
+    },
+    {
+      "id": "jumbotail",
+      "name": "Jumbotail"
+    },
+    {
+      "id": "juspay",
+      "name": "Juspay"
+    },
+    {
+      "id": "kreditbee",
+      "name": "KreditBee"
+    },
+    {
+      "id": "lead",
+      "name": "LEAD"
+    },
+    {
+      "id": "leadsquared",
+      "name": "LeadSquared"
+    },
+    {
+      "id": "licious",
+      "name": "Licious"
+    },
+    {
+      "id": "livspace",
+      "name": "Livspace"
+    },
+    {
+      "id": "mamaearth",
+      "name": "Mamaearth"
+    },
+    {
+      "id": "mensa-brands",
+      "name": "Mensa Brands"
+    },
+    {
+      "id": "mindtickle",
+      "name": "MindTickle"
+    },
+    {
+      "id": "mobile-premier-league",
+      "name": "Mobile Premier League"
+    },
+    {
+      "id": "moglix",
+      "name": "Moglix"
+    },
+    {
+      "id": "mu-sigma",
+      "name": "Mu Sigma"
+    },
+    {
+      "id": "netradyne",
+      "name": "Netradyne"
+    },
+    {
+      "id": "nobroker",
+      "name": "NoBroker"
+    },
+    {
+      "id": "ofbusiness",
+      "name": "OfBusiness"
+    },
+    {
+      "id": "ola",
+      "name": "Ola"
+    },
+    {
+      "id": "ola-krutrim",
+      "name": "Ola Krutrim"
+    },
+    {
+      "id": "onecard",
+      "name": "OneCard"
+    },
+    {
+      "id": "open",
+      "name": "Open"
+    },
+    {
+      "id": "oxyzo",
+      "name": "Oxyzo"
+    },
+    {
+      "id": "oyo",
+      "name": "OYO"
+    },
+    {
+      "id": "paytm-mall",
+      "name": "Paytm Mall"
+    },
+    {
+      "id": "perfios",
+      "name": "Perfios"
+    },
+    {
+      "id": "pharmeasy",
+      "name": "PharmEasy"
+    },
+    {
+      "id": "phonepe",
+      "name": "PhonePe"
+    },
+    {
+      "id": "porter",
+      "name": "Porter"
+    },
+    {
+      "id": "postman",
+      "name": "Postman"
+    },
+    {
+      "id": "pristyn-care",
+      "name": "Pristyn Care"
+    },
+    {
+      "id": "purplle",
+      "name": "Purplle"
+    },
+    {
+      "id": "quikr",
+      "name": "Quikr"
+    },
+    {
+      "id": "rapido",
+      "name": "Rapido"
+    },
+    {
+      "id": "rategain",
+      "name": "RateGain"
+    },
+    {
+      "id": "razorpay",
+      "name": "Razorpay"
+    },
+    {
+      "id": "rebel-foods",
+      "name": "Rebel Foods"
+    },
+    {
+      "id": "rivigo",
+      "name": "Rivigo"
+    },
+    {
+      "id": "sarvam-ai",
+      "name": "Sarvam AI"
+    },
+    {
+      "id": "sharechat",
+      "name": "ShareChat"
+    },
+    {
+      "id": "shopclues",
+      "name": "ShopClues"
+    },
+    {
+      "id": "skyroot-aerospace",
+      "name": "Skyroot Aerospace"
+    },
+    {
+      "id": "slice",
+      "name": "Slice"
+    },
+    {
+      "id": "snapdeal",
+      "name": "Snapdeal"
+    },
+    {
+      "id": "spinny",
+      "name": "Spinny"
+    },
+    {
+      "id": "square-yards",
+      "name": "Square Yards"
+    },
+    {
+      "id": "udaan",
+      "name": "Udaan"
+    },
+    {
+      "id": "unacademy",
+      "name": "Unacademy"
+    },
+    {
+      "id": "uniphore",
+      "name": "Uniphore"
+    },
+    {
+      "id": "upgrad",
+      "name": "upGrad"
+    },
+    {
+      "id": "upstox",
+      "name": "Upstox"
+    },
+    {
+      "id": "vedantu",
+      "name": "Vedantu"
+    },
+    {
+      "id": "verse-innovation",
+      "name": "Verse Innovation"
+    },
+    {
+      "id": "xpressbees",
+      "name": "Xpressbees"
+    },
+    {
+      "id": "yubi",
+      "name": "Yubi"
+    },
+    {
+      "id": "zenoti",
+      "name": "Zenoti"
+    },
+    {
+      "id": "zepto",
+      "name": "Zepto"
+    },
+    {
+      "id": "zerodha",
+      "name": "Zerodha"
+    },
+    {
+      "id": "zeta",
+      "name": "Zeta"
+    },
+    {
+      "id": "zoho",
+      "name": "Zoho"
+    }
+  ],
+  "verdict": "101 clear, 25 appear listed"
+}

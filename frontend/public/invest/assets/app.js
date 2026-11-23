@@ -1,6 +1,15 @@
-/* SCALE India Investment - Unlisted Startup Exchange
-   Static front-end. All data comes from data/*.json, refreshed by the Cloudflare data worker (see data/meta.json).
-   Paper trading state lives in this browser only (localStorage when available). */
+/* SCALE India Investment
+   Static front-end. Company, news and listing data come from data/*.json,
+   refreshed by the Cloudflare data worker (see data/meta.json).
+
+   Prices are SIMULATED and computed in the browser by sim-engine.js, as a pure
+   function of (company, time). The worker runs the same engine, so the price a
+   student sees is the price their order fills at - without the site polling for
+   quotes, which at 500+ users would blow straight through Cloudflare's free
+   request allowance.
+
+   Paper trading state lives in this browser only (localStorage when available);
+   logged-in accounts trade against the server instead. */
 
 const SHELL_HTML = `
 <header class="topbar">
@@ -8,8 +17,12 @@ const SHELL_HTML = `
     <img class="logo-img" src="/invest/assets/logo.png" alt="SCALE logo" width="36" height="36">
     <div>
       <div class="brand-name">SCALE India Investment</div>
-      <div class="brand-sub">Unlisted Startup Exchange &middot; learning simulator</div>
+      <div class="brand-sub">Learning simulator &middot; simulated prices, real news</div>
     </div>
+  </div>
+  <div class="market-clock" id="marketClock" title="Trading hours">
+    <span class="live-dot" id="liveDot"></span>
+    <span class="clock-text" id="clockText">-</span>
   </div>
   <div class="index-pill" id="indexPill" title="Equal-weight index of all tracked startups">
     <span class="pill-label">SCALE INDEX</span>
@@ -28,8 +41,8 @@ const SHELL_HTML = `
 </header>
 <div class="notice">
   <span class="dot"></span>
-  <span class="notice-text">All prices and balances are <strong>SimRupees (Sim₹)</strong>, a virtual currency for learning - unlisted startups have no live market price and no real money is involved.
-  News and listing status refresh automatically four times a day from our data worker (scale-startup-data.y84ikt.workers.dev). Nothing here is investment advice.</span>
+  <span class="notice-text">Every price here is <strong>simulated</strong> and shown in <strong>SimRupees (Sim₹)</strong>, a virtual currency for learning. These companies are unlisted, so they have no real market price and nothing on this page is a real quote. No real money is involved.
+  Company news and listing status refresh automatically from our data worker. Nothing here is investment advice.</span>
 </div>
 <main id="main"></main>
 <footer>
@@ -81,8 +94,10 @@ const state = {
   meta: {},
   watch: JSON.parse(store.getItem("scale_watch") || "[]"),
   portfolio: JSON.parse(store.getItem("scale_portfolio") || "null"),
-  newsFilter: { src: "All", q: "" },
+  newsFilter: { sector: "All", src: "All", q: "" },
   chartMode: "line",
+  timeframe: "5m",
+  timeOffsetMs: 0,
   dataSource: "cached",
   lb: { status: "idle", rows: [], error: null, joined: false },
   profile: JSON.parse(store.getItem("scale_profile") || "null"),
@@ -126,28 +141,152 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 function series(id) { return state.prices[id] || []; }
-function lastClose(id) { const s = series(id); return s.length ? s[s.length - 1].c : 0; }
-function dayChange(id) {
+
+/* ----------------------------------------------------- live simulation ---
+ * Nothing below is a real quote. SimEngine turns (company, time) into a price,
+ * anchored to the company's last stored daily close.
+ */
+
+// Server clock, not the device clock. A student with a wrong system time would
+// otherwise see a nonsense countdown and a price from the wrong point in the
+// day. Cosmetic only: the worker enforces hours against its own clock.
+const now = () => Date.now() + (state.timeOffsetMs || 0);
+
+/* The anchor for today's path: the most recent stored close from a day that
+ * has already finished. If the worker has already written today's close we
+ * must not use it as today's opening price, or the day would start from its
+ * own ending. */
+function prevClose(id) {
   const s = series(id);
-  if (s.length < 2) return 0;
-  return (s[s.length - 1].c / s[s.length - 2].c - 1) * 100;
+  if (!s.length) return 0;
+  const today = SimEngine.istParts(now()).dayKey;
+  for (let i = s.length - 1; i >= 0; i--) if (s[i].d < today) return s[i].c;
+  return s[0].c;
 }
+
+/* When the market is shut the price must sit still at the last close rather
+ * than drifting. With 06:00-24:00 every day the only closed window is
+ * 00:00-06:00 IST, and the close that applies is that day's 00:00. */
+function effectiveNow() {
+  const n = now();
+  return SimEngine.marketStatus(n).open ? n : SimEngine.istMidnightMs(n);
+}
+
+/* News impulses: real headlines move the simulated price, which is what the
+ * site has always claimed. Positive stories nudge up, negative down, decaying
+ * with a 30-minute half life.
+ *
+ * KEEP IN SYNC WITH THE WORKER. The worker prices orders with the same engine,
+ * and if its impulse list differs the fill will not match what was on screen.
+ * See invest/WORKER-PATCH.md. */
+const RE_POS = /raises|raised|funding|valuation|profit|profitable|growth|expands|launch|partnership|acquires|record|surge|wins|unicorn|hires|milestone|crosses/i;
+const RE_NEG = /loss|layoff|lays off|shuts|shutdown|probe|fraud|fine|penalty|delays|defers|on hold|shelve|crash|falls|drops|\bcut\b|exits|resigns|\bban\b|downround|down round/i;
+
+function newsImpulses(id) {
+  const cutoff = now() - 6 * 3600 * 1000;   // older than this has decayed to nothing
+  const out = [];
+  for (const n of state.news) {
+    if (!(n.startups || []).includes(id)) continue;
+    const tMs = Date.parse(n.date);
+    if (!isFinite(tMs) || tMs < cutoff) continue;
+    const text = (n.title || "") + " " + (n.summary || "");
+    const pos = RE_POS.test(text), neg = RE_NEG.test(text);
+    if (!pos && !neg) continue;
+    // Size is a function of the headline itself, so every client agrees.
+    const mag = 1 + 3 * hashUnit(n.url || n.title);
+    out.push({ tMs, pct: (neg && !pos ? -mag : mag) });
+  }
+  return out;
+}
+
+// Same 32-bit hash the engine uses, so impulse sizes are stable everywhere.
+function hashUnit(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < String(str).length; i++) { h ^= String(str).charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  h ^= h >>> 13; h = Math.imul(h, 0x5bd1e995) >>> 0; h ^= h >>> 15;
+  return (h >>> 0) / 4294967296;
+}
+
+/* The live simulated price. This is what every screen shows and what a local
+ * practice trade fills at. */
+function px(id) {
+  const anchor = prevClose(id);
+  if (!anchor) return 0;
+  return SimEngine.priceAt(id, anchor, effectiveNow(), newsImpulses(id));
+}
+
+function dayChange(id) {
+  const anchor = prevClose(id);
+  if (!anchor) return 0;
+  return (px(id) / anchor - 1) * 100;
+}
+
 const chgCls = (v) => (v >= 0 ? "up" : "down");
 const chgTxt = (v) => (v >= 0 ? "+" : "") + v.toFixed(2) + "%";
 
-function sparkline(id, w = 260, h = 44) {
-  const s = series(id).slice(-60);
-  if (s.length < 2) return "";
-  const min = Math.min(...s.map(p => p.c)), max = Math.max(...s.map(p => p.c));
-  const span = max - min || 1;
-  const pts = s.map((p, i) =>
-    `${(i / (s.length - 1) * w).toFixed(1)},${(h - 3 - (p.c - min) / span * (h - 6)).toFixed(1)}`
-  ).join(" ");
-  const up = s[s.length - 1].c >= s[0].c;
-  const col = up ? "#2fbf71" : "#e5534b";
-  return `<svg class="spark" width="100%" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
-    <polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8"/></svg>`;
+/* Today's simulated path, sampled every stepMin minutes from the day's open to
+ * now. Sampled rather than built from candles() on purpose: candles walk every
+ * 5-second tick, which across 100+ cards every 5 seconds would be millions of
+ * evaluations a minute. Sampling gives the same shape for a sparkline. */
+function intradayPoints(id, stepMin) {
+  const anchor = prevClose(id);
+  if (!anchor) return [];
+  const t = effectiveNow();
+  const ctx = SimEngine.dayContext(t);
+  if (t <= ctx.openMs) return [];
+  const imp = newsImpulses(id);
+  const step = (stepMin || 15) * 60000;
+  const pts = [anchor];
+  for (let x = ctx.openMs + step; x < t; x += step) pts.push(SimEngine.priceAt(id, anchor, x, imp));
+  pts.push(SimEngine.priceAt(id, anchor, t, imp));
+  return pts;
 }
+
+function sparkPolyline(vals, w, h) {
+  if (vals.length < 2) return null;
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const span = max - min || 1;
+  const pts = vals.map((v, i) =>
+    `${(i / (vals.length - 1) * w).toFixed(1)},${(h - 3 - (v - min) / span * (h - 6)).toFixed(1)}`
+  ).join(" ");
+  return { pts, up: vals[vals.length - 1] >= vals[0] };
+}
+
+/* Intraday while there is a day to show, otherwise the daily history. Carries
+ * data-spark so the tick loop can repaint it without a full re-render. */
+function sparkline(id, w = 260, h = 44) {
+  let vals = intradayPoints(id);
+  if (vals.length < 2) vals = series(id).slice(-60).map(p => p.c);
+  const line = sparkPolyline(vals, w, h);
+  if (!line) return `<svg class="spark" data-spark="${id}" width="100%" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"></svg>`;
+  return `<svg class="spark" data-spark="${id}" width="100%" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <polyline points="${line.pts}" fill="none" stroke="${line.up ? "#2fbf71" : "#e5534b"}" stroke-width="1.8"/></svg>`;
+}
+
+/* Repaint one sparkline in place. */
+function refreshSpark(el) {
+  const id = el.dataset.spark;
+  const w = 260, h = 44;
+  let vals = intradayPoints(id);
+  if (vals.length < 2) vals = series(id).slice(-60).map(p => p.c);
+  const line = sparkPolyline(vals, w, h);
+  if (!line) return;
+  el.innerHTML = `<polyline points="${line.pts}" fill="none" stroke="${line.up ? "#2fbf71" : "#e5534b"}" stroke-width="1.8"/>`;
+}
+
+/* Chart timeframes. The three intraday ones are built live from the engine and
+ * keep updating; the daily ones come from stored history, which the engine
+ * never rewrites. */
+const TIMEFRAMES = [
+  { key: "1m", label: "1m", bucket: 1, title: "Today, 1-minute candles" },
+  { key: "5m", label: "5m", bucket: 5, title: "Today, 5-minute candles" },
+  { key: "15m", label: "15m", bucket: 15, title: "Today, 15-minute candles" },
+  { key: "1M", label: "1M", days: 22, title: "About one month of daily closes" },
+  { key: "3M", label: "3M", days: 66, title: "About three months of daily closes" },
+  { key: "6M", label: "6M", days: 180, title: "About six months of daily closes" },
+];
+const tfOf = (key) => TIMEFRAMES.find(t => t.key === key) || TIMEFRAMES[1];
+const isIntraday = (key) => !!tfOf(key).bucket;
 
 function badges(s) {
   const out = [];
@@ -172,13 +311,13 @@ function filteredStartups() {
     valuation: (a, b) => (b.valuation_usd || 0) - (a.valuation_usd || 0),
     gainers: (a, b) => dayChange(b.id) - dayChange(a.id),
     losers: (a, b) => dayChange(a.id) - dayChange(b.id),
-    price: (a, b) => lastClose(b.id) - lastClose(a.id),
+    price: (a, b) => px(b.id) - px(a.id),
   };
   return list.sort(by[state.sort] || by.name);
 }
 
 function cardHtml(s) {
-  const c = lastClose(s.id), ch = dayChange(s.id);
+  const c = px(s.id), ch = dayChange(s.id);
   const watched = state.watch.includes(s.id);
   return `<div class="card" data-open="${s.id}">
     <div class="card-head">
@@ -190,8 +329,8 @@ function cardHtml(s) {
     </div>
     ${badges(s)}
     <div class="price-row">
-      <span class="price">${inr(c)}</span>
-      <span class="change ${chgCls(ch)}">${chgTxt(ch)}</span>
+      <span class="price" data-px="${s.id}">${inr(c)}</span>
+      <span class="change ${chgCls(ch)}" data-chg="${s.id}">${chgTxt(ch)}</span>
     </div>
     ${sparkline(s.id)}
     <div class="meta-row">
@@ -206,7 +345,7 @@ function cardHtml(s) {
 function drawerHtml(id) {
   const s = state.startups.find(x => x.id === id);
   if (!s) return "";
-  const c = lastClose(id), ch = dayChange(id);
+  const c = px(id), ch = dayChange(id);
   const sNews = state.news.filter(n => (n.startups || []).includes(id)).slice(0, 5);
   const h = state.portfolio.holdings[id];
   const msg = state.tradeMsg && state.tradeMsg.id === id ? state.tradeMsg : null;
@@ -220,13 +359,16 @@ function drawerHtml(id) {
       <button class="close" data-close>&times;</button>
     </div>
     <div class="price-row">
-      <span class="price" style="font-size:26px">${inr(c)}</span>
-      <span class="change ${chgCls(ch)}">${chgTxt(ch)} today</span>
-      <span style="color:var(--muted);font-size:12px">simulated</span>
+      <span class="price" style="font-size:26px" data-px="${id}">${inr(c)}</span>
+      <span class="change ${chgCls(ch)}" data-chg="${id}">${chgTxt(ch)} today</span>
+      <span class="sim-tag">Simulated live price</span>
     </div>
     <div class="chart-toggle">
       <button class="chip ${state.chartMode !== "candle" ? "on" : ""}" data-chartmode="line">Line</button>
       <button class="chip ${state.chartMode === "candle" ? "on" : ""}" data-chartmode="candle">Candlestick</button>
+      <span class="tf-sep"></span>
+      ${TIMEFRAMES.map(tf =>
+        `<button class="chip ${state.timeframe === tf.key ? "on" : ""}" data-tf="${tf.key}" title="${esc(tf.title)}">${esc(tf.label)}</button>`).join("")}
     </div>
     <canvas id="chart" width="680" height="220"></canvas>
     <div class="kv">
@@ -262,10 +404,11 @@ function verifyChipHtml() {
   if (ageDays > 3) {
     return `<div class="verify-chip warn">Listing check stale (last run ${checked}). Unlisted status is not freshly verified.</div>`;
   }
-  // Sources responded, but coverage is partial: BSE is daily-traded names only
-  // (suspended BSE-only scrips can be missed), the NSE SME master file was
-  // nearly empty, and foreign listings are covered by news review only.
-  return `<div class="verify-chip warn">Listing check ${checked}: name + legal-entity match against the NSE master, NSE SME master and BSE daily trades found no listings. Coverage is partial - suspended BSE-only scrips and foreign listings can be missed; see AUDIT.md. Unlisted status is best-effort, not guaranteed.</div>`;
+  // Checks passed: say nothing. The long "coverage is partial" banner used to
+  // sit here on every page load, which made the normal case look like a
+  // warning. The caveats now live in the Learn tab instead, and this chip is
+  // reserved for the cases that genuinely need attention above.
+  return "";
 }
 
 function renderMarket() {
@@ -273,7 +416,7 @@ function renderMarket() {
   const cards = list.map(s => cardHtml(s) + (state.openId === s.id ? drawerHtml(s.id) : ""));
   return `
     <div class="section-title">Market <span style="color:var(--muted);font-size:13px;font-weight:400">${state.startups.length} unlisted startups tracked</span></div>
-    <div class="section-sub">Simulated prices update daily. Click any company for its chart, story and trading desk.</div>
+    <div class="section-sub">Simulated prices move every 5 seconds while the market is open. Click any company for its live chart, story and trading desk.</div>
     ${verifyChipHtml()}
     <div class="toolbar">
       <input class="search" id="search" placeholder="Search name, sector, city..." value="${esc(state.search)}">
@@ -291,25 +434,80 @@ function renderMarket() {
     <div class="grid">${cards.join("") || '<div class="empty">No startups match.</div>'}</div>`;
 }
 
-/* --------------------------------------------------------------- news ---- */
+/* --------------------------------------------------------------- news ---
+ * Sector is the primary filter. The worker is meant to stamp each item with a
+ * `sector`; until that patch is deployed this classifies client-side from the
+ * tagged company, then from keywords, so the chips work either way.
+ */
+
+// Keyword fallbacks, checked only when no tagged company settles the sector.
+const SECTOR_HINTS = [
+  ["Fintech", /fintech|\bupi\b|payments?|lending|neobank|insurance tech|wealthtech|\bnbfc\b|credit card|\bloan/i],
+  ["Edtech", /edtech|ed-?tech|learning app|tutor|upskilling|test prep|coaching/i],
+  ["SaaS", /\bsaas\b|enterprise software|\bapi\b platform|developer tool|\bcrm\b|\berp\b|cloud software/i],
+  ["Quick commerce", /quick ?commerce|10-?minute|instant delivery|dark store|\bq-?comm/i],
+  ["E-commerce", /e-?commerce|online marketplace|\bd2c\b|direct to consumer|online retail/i],
+  ["Mobility", /mobility|ride ?hailing|cab\b|scooter|electric vehicle|\bev\b|bike taxi|charging/i],
+  ["Healthtech", /healthtech|health-?tech|telemedicine|diagnostics|pharmacy|hospital|medtech|wellness/i],
+  ["Logistics", /logistics|supply chain|warehous|freight|last ?mile|shipping|courier/i],
+  ["Gaming", /gaming|esports|\bgame\b|fantasy sports/i],
+  ["AI", /\bai\b|artificial intelligence|machine learning|\bllm\b|foundation model|generative/i],
+  ["Agritech", /agritech|agri-?tech|farmer|agriculture|farm/i],
+  ["Spacetech", /spacetech|space-?tech|satellite|launch vehicle|rocket/i],
+];
+
+function newsSector(item) {
+  if (item.sector) return item.sector;                    // worker-stamped, preferred
+  for (const id of item.startups || []) {
+    const st = state.startups.find(s => s.id === id);
+    if (st && st.sector) return st.sector;
+  }
+  const text = (item.title || "") + " " + (item.summary || "");
+  for (const [name, re] of SECTOR_HINTS) if (re.test(text)) return name;
+  return "General";
+}
+
+function newsSectors() {
+  const counts = new Map();
+  for (const i of state.news) {
+    const s = newsSector(i);
+    counts.set(s, (counts.get(s) || 0) + 1);
+  }
+  // Busiest sectors first; "General" always last so it never leads.
+  const names = [...counts.keys()].sort((a, b) =>
+    a === "General" ? 1 : b === "General" ? -1 : (counts.get(b) - counts.get(a)) || a.localeCompare(b));
+  return { names, counts };
+}
+
 function renderNews() {
   const f = state.newsFilter;
-  const sources = ["All", ...new Set(state.news.map(i => i.source).filter(Boolean))];
+  const { names, counts } = newsSectors();
+  const sources = ["All", ...new Set(state.news.map(i => i.source).filter(Boolean))].sort((a, b) =>
+    a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b));
   const q = (f.q || "").toLowerCase();
   const items = state.news.filter(i =>
+    (f.sector === "All" || newsSector(i) === f.sector) &&
     (f.src === "All" || i.source === f.src) &&
     (!q || (i.title || "").toLowerCase().includes(q) || (i.summary || "").toLowerCase().includes(q)));
   return `
     <div class="section-title">Startup News</div>
-    <div class="section-sub">Pulled by the updater from ${(state.meta.feeds || []).join(", ") || "public feeds"}. Best-effort coverage, not exhaustive. Links open the original publisher.</div>
+    <div class="section-sub">Headlines and short extracts from public feeds, filtered to Indian startups. Links open the original publisher - full articles are never copied here. Coverage is best-effort, not exhaustive.</div>
     <div class="news-filters">
-      ${sources.map(src => `<button class="chip ${f.src === src ? "on" : ""}" data-newssrc="${esc(src)}">${esc(src)}</button>`).join("")}
+      <button class="chip ${f.sector === "All" ? "on" : ""}" data-newssector="All">All sectors <span class="chip-n">${state.news.length}</span></button>
+      ${names.map(s => `<button class="chip ${f.sector === s ? "on" : ""}" data-newssector="${esc(s)}">${esc(s)} <span class="chip-n">${counts.get(s)}</span></button>`).join("")}
+    </div>
+    <div class="news-filters sub">
+      <label class="news-srclabel" for="newsSrc">Source</label>
+      <select class="sort" id="newsSrc">
+        ${sources.map(src => `<option value="${esc(src)}" ${f.src === src ? "selected" : ""}>${src === "All" ? "All sources" : esc(src)}</option>`).join("")}
+      </select>
       <input type="search" id="newsSearch" placeholder="Filter by keyword..." value="${esc(f.q || "")}" aria-label="Filter news by keyword">
     </div>
     ${items.map(i => `
       <div class="news-item">
         <h3><a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a></h3>
         <div class="news-meta">
+          <span class="sector-tag">${esc(newsSector(i))}</span>
           <span>${esc(i.source)}</span><span>&middot;</span><span>${ago(i.date)}</span>
           ${(i.startups || []).map(id => {
             const st = state.startups.find(s => s.id === id);
@@ -317,12 +515,12 @@ function renderNews() {
           }).join("")}
         </div>
         ${i.summary ? `<div class="news-summary">${esc(i.summary)}...</div>` : ""}
-      </div>`).join("") || '<div class="empty">No news yet. The updater runs 4 times a day.</div>'}`;
+      </div>`).join("") || '<div class="empty">No stories match this filter.</div>'}`;
 }
 
 /* ---------------------------------------------------------- portfolio ---- */
 function holdingValue() {
-  return Object.entries(state.portfolio.holdings).reduce((v, [id, h]) => v + h.qty * lastClose(id), 0);
+  return Object.entries(state.portfolio.holdings).reduce((v, [id, h]) => v + h.qty * px(id), 0);
 }
 function renderPortfolio() {
   const p = state.portfolio;
@@ -351,7 +549,7 @@ function renderPortfolio() {
       ${rows.map(([id, h]) => {
         const st = state.startups.find(s => s.id === id);
         if (!st) return "";
-        const last = lastClose(id), val = h.qty * last, pl = val - h.qty * h.avg;
+        const last = px(id), val = h.qty * last, pl = val - h.qty * h.avg;
         return `<tr>
           <td><a href="#" data-open="${id}">${esc(st.name)}</a></td>
           <td class="num">${h.qty}</td>
@@ -385,7 +583,7 @@ function renderPortfolio() {
 function allocationPie(p) {
   const parts = Object.entries(p.holdings).map(([id, h]) => {
     const st = state.startups.find(x => x.id === id);
-    return st ? { name: st.name, v: h.qty * lastClose(id) } : null;
+    return st ? { name: st.name, v: h.qty * px(id) } : null;
   }).filter(x => x && x.v > 0);
   if (p.cash > 0) parts.push({ name: "Cash (uninvested)", v: p.cash });
   const total = parts.reduce((a, b) => a + b.v, 0);
@@ -440,11 +638,11 @@ function renderLeaderboard() {
     </tbody></table>`;
   return `
     <div class="section-title">Leaderboard</div>
-    <div class="section-sub">Ranked automatically from the server portfolios of approved accounts: our data worker records each trade when it happens at the current simulated price, only during NSE market hours - backdated or self-reported trades are not accepted, and trades made while the worker is unreachable do not count. Starting capital is ${inr0(START_CASH)} SimRupees (virtual) for everyone.</div>
+    <div class="section-sub">Ranked automatically from the server portfolios of approved accounts: our data worker records each trade when it happens at the current simulated price, only while the simulated market is open - backdated or self-reported trades are not accepted, and trades made while the worker is unreachable do not count. Starting capital is ${inr0(START_CASH)} SimRupees (virtual) for everyone.</div>
     ${body}
     <div class="lb-join">
       ${state.acct.token && state.acct.isAdmin ? `<div class="empty">The creator account is hidden from the board.</div>` :
-        state.acct.token ? `<div class="empty">You are on the board as <strong>${esc(state.acct.username)}</strong> - your server portfolio is ranked automatically. Trades count only during NSE market hours (Mon-Fri, 9:15-15:30 IST).</div>` :
+        state.acct.token ? `<div class="empty">You are on the board as <strong>${esc(state.acct.username)}</strong> - your server portfolio is ranked automatically. Trades count only while the simulated market is open (${esc(SimEngine.MARKET.label)}).</div>` :
         (state.profile && !state.acct.token) ? `<div class="empty">Log in from the Account tab and your server portfolio is ranked automatically.</div>` :
         `<div class="empty">Sign up, get approved and log in to join the board - entries are server portfolios, not self-reported scores.</div>`}
     </div>`;
@@ -547,7 +745,7 @@ async function submitSignup() {
 /* ------------------------------------------------------------ account ---- */
 // Server accounts: signup -> active immediately (auto-approval; the creator can kick) ->
 // login. While logged in, the SERVER portfolio is authoritative and trades are
-// gated to NSE market hours by the worker (the original behavior, restored).
+// gated to the simulated market's hours by the worker, against its own clock.
 // Without an account, everything stays local in this browser.
 
 function acctHeaders() {
@@ -767,13 +965,13 @@ function renderAccount() {
     </div>
     <div class="panel" style="max-width:420px">
       <h3>No account yet?</h3>
-      <div class="section-sub">Signed-up visitors get a server-kept portfolio that survives browsers and devices, and their trades count during NSE market hours. Without an account you can still browse and practice-trade locally in this browser.</div>
+      <div class="section-sub">Signed-up visitors get a server-kept portfolio that survives browsers and devices, and their trades count while the simulated market is open. Without an account you can still browse and practice-trade locally in this browser.</div>
     </div>`;
   }
   const until = a.isAdmin ? "creator account - never expires" : (a.approvedUntil ? "access until " + new Date(a.approvedUntil).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "");
   return `
     <div class="section-title">Account</div>
-    <div class="section-sub">Logged in as <strong>${esc(a.username)}</strong>${a.isAdmin ? " (creator)" : ""} &middot; ${esc(until)}. Your portfolio is kept on the server and trades here count only during NSE market hours (Mon-Fri, 9:15-15:30 IST).</div>
+    <div class="section-sub">Logged in as <strong>${esc(a.username)}</strong>${a.isAdmin ? " (creator)" : ""} &middot; ${esc(until)}. Your portfolio is kept on the server and trades here count only while the simulated market is open (${esc(SimEngine.MARKET.label)}).</div>
     <div class="stat-row">
       <div class="stat"><div class="k">Server portfolio value</div><div class="v">${inr0(state.portfolio.cash + holdingValue())}</div></div>
       <div class="stat"><div class="k">Server trades</div><div class="v">${a.serverTrades === null ? "-" : a.serverTrades}</div></div>
@@ -800,18 +998,23 @@ function renderLearn() {
       <h3>Why "unlisted" startups?</h3>
       <p>Companies like Flipkart or Zepto do not trade on NSE or BSE yet. You cannot buy their shares on a stock exchange, so there is no live market price. That is what makes them interesting to study: their value moves with funding rounds, revenue, regulation and news - not with a ticker.</p>
       <h3>Where do the prices come from?</h3>
-      <p>The prices here are <strong>simulated for learning</strong>. A small model starts each company near a level derived from its last reported valuation and moves it daily using (a) real news about that company - positive and negative headlines push the price - and (b) a deterministic random component so charts look and behave like real markets. The same date always produces the same price; history is never rewritten.</p>
-      <h3>What updates automatically once live?</h3>
+      <p>Every price here is <strong>simulated for learning</strong>. There is no real quote to show, and we have no licensed feed of real unlisted-share prices, so we do not pretend to have one. Each company starts the day at its previous simulated close and then moves on a model driven by (a) real news about that company - positive and negative headlines push the price, fading over about half an hour - and (b) a deterministic random component so the chart behaves like a market.</p>
+      <p>"Deterministic" is the important word. The price is worked out from the company and the clock, so your screen, your friend's screen and our server all compute the same number at the same instant. That is why an order fills at the price you were looking at, and why nobody can get a better price by refreshing.</p>
+      <h3>When is the market open?</h3>
+      <p>${esc(SimEngine.MARKET.label)}. The header shows a countdown to the next open or close. Prices move every 5 seconds while it is open and sit still once it shuts. Orders are refused outside those hours - our server checks its own clock, so changing the time on your laptop does not help.</p>
+      <h3>What updates automatically?</h3>
       <ul>
-        <li><strong>News:</strong> our data worker runs automatically 4 times a day, pulling Indian startup news from public RSS feeds (Inc42, YourStory, ET Tech, TechCrunch India, Mint, Moneycontrol) and tagging stories to tracked companies. Non-startup and non-India stories are filtered out.</li>
-        <li><strong>Listing status:</strong> the same job checks every tracked company against the NSE listed-company master and the BSE daily bhavcopy. An exact exchange match removes it from the tracked list. A news report of a listing never removes a company on its own - it is flagged for human review. IPO <em>plans</em> only add an "IPO Watch" badge.</li>
-        <li><strong>Prices:</strong> one new simulated close is added each trading day.</li>
+        <li><strong>News:</strong> our data worker pulls Indian startup news from public RSS feeds, tags stories to tracked companies and sorts them by sector. Non-startup and non-India stories are filtered out. You get the headline, a short extract and a link - the full article always stays with the publisher.</li>
+        <li><strong>Listing status:</strong> the same job checks every tracked company against the NSE listed-company master, the NSE SME master and the BSE daily bhavcopy. An exact exchange match removes it from the tracked list. A news report of a listing never removes a company on its own - it is flagged for human review. IPO <em>plans</em> only add an "IPO Watch" badge.</li>
+        <li><strong>Prices:</strong> at the end of each trading day the closing value is written to history. Past days are never rewritten.</li>
       </ul>
       <h3>Limits to know</h3>
       <ul>
+        <li>Nothing on this page is a real market price. The companies are unlisted: you cannot actually buy them on an exchange.</li>
         <li>Valuations are last publicly reported figures and may be stale.</li>
-        <li>News coverage is best-effort from free feeds, not exhaustive.</li>
-        <li>Without an account, your portfolio and watchlist are stored only in this browser. With a free approved account (Account tab), your portfolio is kept on our server across devices and server trades count only during NSE market hours.</li>
+        <li>The unlisted check is best-effort, not a guarantee. It matches company and legal-entity names against the NSE master, the NSE SME master and BSE daily trades, so a suspended BSE-only scrip or a listing on a foreign exchange can be missed. A banner appears above the market if the check goes stale or a source is unreachable.</li>
+        <li>News coverage is best-effort from free public feeds, not exhaustive, and the sector label is our classification rather than the publisher's.</li>
+        <li>Without an account, your portfolio and watchlist are stored only in this browser. With a free account (Account tab), your portfolio is kept on our server across devices and server trades count only while the simulated market is open.</li>
         <li>Nothing here is investment advice. It is a classroom simulator.</li>
       </ul>
     </div>`;
@@ -825,59 +1028,172 @@ function openDrawer(id) {
   const d = $("#drawer");
   if (d) {
     drawChart(id);
+    startChartLoop();
     d.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 }
 function closeDrawer() {
   state.openId = null;
   state.tradeMsg = null;
+  stopChartLoop();
   refreshBody();
 }
+
+/* ------------------------------------------------------------- charts ----
+ * Both the line and the candlestick view are live. Intraday timeframes build
+ * OHLC straight from the engine, so the right-hand candle grows while you
+ * watch it; daily timeframes read stored history, which never changes.
+ */
+
+const CHART = { up: "#2fbf71", down: "#e5534b", grid: "#262c36", axis: "#8b93a1" };
+
+/* Candles for the chosen timeframe. Intraday comes from the engine; daily is
+ * folded out of the stored closes (open = previous close). */
+function chartCandles(id, key) {
+  const tf = tfOf(key);
+  if (tf.bucket) {
+    const anchor = prevClose(id);
+    if (!anchor) return { bars: [], intraday: true };
+    const bars = SimEngine.candles(id, anchor, effectiveNow(), tf.bucket, newsImpulses(id));
+    return { bars, intraday: true };
+  }
+  const s = series(id).slice(-tf.days);
+  const bars = s.map((p, i) => {
+    const o = i ? s[i - 1].c : p.c;
+    return { t: Date.parse(p.d + "T00:00:00Z"), label: p.d, o, h: Math.max(o, p.c), l: Math.min(o, p.c), c: p.c, forming: false };
+  });
+  return { bars, intraday: false };
+}
+
+const hhmm = (ms) => {
+  const p = SimEngine.istParts(ms);
+  return String(Math.floor(p.minOfDay / 60)).padStart(2, "0") + ":" + String(p.minOfDay % 60).padStart(2, "0");
+};
 
 function drawChart(id) {
   const cv = $("#chart");
   if (!cv) return;
+  const { bars, intraday } = chartCandles(id, state.timeframe);
   const ctx = cv.getContext("2d");
-  const s = series(id);
-  if (s.length < 2) return;
-  const W = cv.width, H = cv.height, pad = 40;
-  const min = Math.min(...s.map(p => p.c)), max = Math.max(...s.map(p => p.c));
-  const span = max - min || 1;
-  const x = (i) => pad + (i / (s.length - 1)) * (W - pad - 8);
-  const y = (v) => H - 20 - ((v - min) / span) * (H - 40);
-  ctx.clearRect(0, 0, W, H);
-  ctx.strokeStyle = "#262c36"; ctx.fillStyle = "#8b93a1";
-  ctx.font = "11px sans-serif"; ctx.lineWidth = 1;
-  for (let g = 0; g <= 4; g++) {
-    const gy = 20 + (g / 4) * (H - 40);
-    ctx.beginPath(); ctx.moveTo(pad, gy); ctx.lineTo(W - 8, gy); ctx.stroke();
-    ctx.fillText(inr(max - (g / 4) * span, 0), 2, gy + 4);
+
+  // Keep it sharp on retina screens: back the canvas with device pixels and
+  // draw in CSS pixels.
+  const dpr = window.devicePixelRatio || 1;
+  const W = cv.clientWidth || 680, H = cv.clientHeight || 220;
+  if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) {
+    cv.width = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
   }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  ctx.font = "11px sans-serif";
+  ctx.textBaseline = "alphabetic";
+
+  if (bars.length < 2) {
+    ctx.fillStyle = CHART.axis;
+    ctx.fillText(intraday ? "Waiting for the market to open." : "Not enough history yet.", 44, H / 2);
+    return;
+  }
+
+  const padL = 46, padR = 10, padT = 14, padB = 22;
+  let min = Infinity, max = -Infinity;
+  for (const b of bars) { if (b.l < min) min = b.l; if (b.h > max) max = b.h; }
+  const span = (max - min) || (max * 0.01) || 1;
+  min -= span * 0.06; max += span * 0.06;
+  const vspan = max - min;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const x = (i) => padL + (bars.length === 1 ? plotW / 2 : (i / (bars.length - 1)) * plotW);
+  const y = (v) => padT + plotH - ((v - min) / vspan) * plotH;
+
+  // Grid and price axis
+  ctx.strokeStyle = CHART.grid; ctx.fillStyle = CHART.axis; ctx.lineWidth = 1;
+  for (let g = 0; g <= 4; g++) {
+    const gy = Math.round(padT + (g / 4) * plotH) + 0.5;
+    ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(W - padR, gy); ctx.stroke();
+    ctx.fillText(inr(max - (g / 4) * vspan, 0), 2, gy + 4);
+  }
+
+  // The anchor line: where the day (or window) started.
+  const anchorVal = bars[0].o;
+  if (anchorVal >= min && anchorVal <= max) {
+    ctx.save();
+    ctx.setLineDash([3, 3]); ctx.strokeStyle = "#4a515c";
+    const ay = Math.round(y(anchorVal)) + 0.5;
+    ctx.beginPath(); ctx.moveTo(padL, ay); ctx.lineTo(W - padR, ay); ctx.stroke();
+    ctx.restore();
+  }
+
+  const lastBar = bars[bars.length - 1];
+  const rising = lastBar.c >= anchorVal;
+
   if (state.chartMode === "candle") {
-    // Simulated candles derived from the same simulated daily closes:
-    // open = previous close, high/low = +/-1% band around the open-close range.
-    const n = s.length, cw = Math.max(2, (W - pad - 8) / n * 0.6);
-    s.forEach((p, i) => {
-      const o = i ? s[i - 1].c : p.c * 0.995;
-      const hi = Math.max(o, p.c) * 1.005, lo = Math.min(o, p.c) * 0.995;
-      const upDay = p.c >= o;
-      ctx.strokeStyle = upDay ? "#2fbf71" : "#e5534b";
-      ctx.fillStyle = upDay ? "#2fbf71" : "#e5534b";
-      ctx.lineWidth = 1;
-      const cx = x(i);
-      ctx.beginPath(); ctx.moveTo(cx, y(hi)); ctx.lineTo(cx, y(lo)); ctx.stroke();
-      ctx.fillRect(cx - cw / 2, y(Math.max(o, p.c)), cw, Math.max(1, Math.abs(y(o) - y(p.c))));
+    const cw = Math.max(1.5, Math.min(14, plotW / bars.length * 0.62));
+    bars.forEach((b, i) => {
+      const upBar = b.c >= b.o;
+      const col = upBar ? CHART.up : CHART.down;
+      ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = 1;
+      const cx = Math.round(x(i)) + 0.5;
+      ctx.beginPath(); ctx.moveTo(cx, y(b.h)); ctx.lineTo(cx, y(b.l)); ctx.stroke();
+      const top = y(Math.max(b.o, b.c));
+      const hgt = Math.max(1, Math.abs(y(b.o) - y(b.c)));
+      if (b.forming) {
+        // The candle still being written: hollow, so it reads as provisional.
+        ctx.lineWidth = 1.4;
+        ctx.strokeRect(cx - cw / 2, top, cw, hgt);
+      } else {
+        ctx.fillRect(cx - cw / 2, top, cw, hgt);
+      }
     });
   } else {
-    const up = s[s.length - 1].c >= s[0].c;
-    ctx.strokeStyle = up ? "#2fbf71" : "#e5534b"; ctx.lineWidth = 2;
+    ctx.strokeStyle = rising ? CHART.up : CHART.down;
+    ctx.lineWidth = 2; ctx.lineJoin = "round";
     ctx.beginPath();
-    s.forEach((p, i) => (i ? ctx.lineTo(x(i), y(p.c)) : ctx.moveTo(x(i), y(p.c))));
+    bars.forEach((b, i) => (i ? ctx.lineTo(x(i), y(b.c)) : ctx.moveTo(x(i), y(b.c))));
     ctx.stroke();
+    // Soft fill under the line.
+    ctx.lineTo(x(bars.length - 1), padT + plotH);
+    ctx.lineTo(x(0), padT + plotH);
+    ctx.closePath();
+    ctx.fillStyle = (rising ? "rgba(47,191,113," : "rgba(229,83,75,") + "0.10)";
+    ctx.fill();
   }
-  ctx.fillText(s[0].d, pad, H - 6);
-  const lastLbl = s[s.length - 1].d;
-  ctx.fillText(lastLbl, W - 8 - ctx.measureText(lastLbl).width, H - 6);
+
+  // The live marker, so the eye can find "now" immediately.
+  const lx = x(bars.length - 1), ly = y(lastBar.c);
+  ctx.fillStyle = rising ? CHART.up : CHART.down;
+  ctx.beginPath(); ctx.arc(lx, ly, 3, 0, Math.PI * 2); ctx.fill();
+
+  // Time axis
+  ctx.fillStyle = CHART.axis;
+  const first = intraday ? hhmm(bars[0].t) : bars[0].label;
+  const last = intraday ? hhmm(lastBar.t) : lastBar.label;
+  ctx.fillText(first, padL, H - 6);
+  ctx.fillText(last, W - padR - ctx.measureText(last).width, H - 6);
+  if (intraday) {
+    const tag = SimEngine.marketStatus(now()).open ? "LIVE" : "CLOSED";
+    ctx.fillStyle = SimEngine.marketStatus(now()).open ? CHART.up : CHART.axis;
+    const tw = ctx.measureText(tag).width;
+    ctx.fillText(tag, (W - tw) / 2, H - 6);
+  }
+}
+
+/* One animation-frame loop drives the open chart. requestAnimationFrame rather
+ * than a timer so the browser throttles it when the tab is hidden. */
+let chartRaf = null;
+function startChartLoop() {
+  if (chartRaf) return;
+  const frame = () => {
+    chartRaf = null;
+    if (state.openId && $("#chart")) {
+      drawChart(state.openId);
+      chartRaf = requestAnimationFrame(frame);
+    }
+  };
+  chartRaf = requestAnimationFrame(frame);
+}
+function stopChartLoop() {
+  if (chartRaf) cancelAnimationFrame(chartRaf);
+  chartRaf = null;
 }
 
 /* -------------------------------------------------------------- trade ---- */
@@ -890,10 +1206,21 @@ async function trade(id, side) {
   const qty = Math.max(0, Math.floor(Number(qtyInput && qtyInput.value) || 0));
   const setMsg = (text, cls) => { state.tradeMsg = { id, text, cls }; };
   if (!qty) { setMsg("Enter a quantity of 1 or more.", "down"); refreshBody(); drawChart(id); return; }
-  const price = lastClose(id);
+
+  // Closed means closed, for practice trades too. The worker checks its own
+  // clock as well, so this is a courtesy message rather than the real gate.
+  const st = SimEngine.marketStatus(now());
+  if (!st.open) {
+    const opens = st.nextChangeMs ? SimEngine.countdown(st.nextChangeMs - now()) : "soon";
+    setMsg(`The market is closed. It opens in ${opens} (${SimEngine.MARKET.label}).`, "down");
+    refreshBody(); drawChart(id); return;
+  }
+
+  let price = px(id);
   // Logged-in accounts trade on the server (authoritative): the worker prices
-  // the order at the current server quote and enforces NSE market hours, so a
-  // failed server trade must NOT be applied locally.
+  // the order with the same engine at the server's own clock and enforces the
+  // hours itself, so a failed server trade must NOT be applied locally. We fill
+  // at whatever price the server reports back, not the one we just computed.
   if (state.acct.token) {
     setMsg("Sending order to the server...", "");
     refreshBody(); drawChart(id);
@@ -907,6 +1234,7 @@ async function trade(id, side) {
         setMsg(d.detail || ("Order rejected (" + (d.error || r.status) + ")."), "down");
         refreshBody(); drawChart(id); return;
       }
+      if (isFinite(Number(d.price)) && Number(d.price) > 0) price = Number(d.price);
     } catch {
       setMsg("Could not reach the trading server. No order was placed.", "down");
       refreshBody(); drawChart(id); return;
@@ -930,11 +1258,72 @@ async function trade(id, side) {
     p.cash += qty * price;
     if (!h.qty) delete p.holdings[id];
   }
-  p.txns.push({ ts: Date.now(), side, id, name: s.name, qty, price });
+  p.txns.push({ ts: now(), side, id, name: s.name, qty, price });
   saveLocal();
-  setMsg(`${side === "BUY" ? "Bought" : "Sold"} ${qty} x ${s.name} at ${inr(price)}.`, "up");
+  setMsg(`${side === "BUY" ? "Bought" : "Sold"} ${qty} x ${s.name} at ${inr(price)} (executed price, simulated).`, "up");
   refreshBody();
   drawChart(id);
+}
+
+/* --------------------------------------------------------- live ticks ----
+ * Prices are repainted in place every 5 seconds. A full re-render would throw
+ * away input focus, the open drawer and any half-typed quantity, so the tick
+ * only touches the elements that carry a price.
+ */
+
+const lastShown = new Map();   // id -> last price painted, for the flash direction
+
+function tickPrices() {
+  const open = SimEngine.marketStatus(now()).open;
+
+  $$("[data-px]").forEach(el => {
+    const id = el.dataset.px;
+    const v = px(id);
+    if (!v) return;
+    const before = lastShown.get(id);
+    const text = inr(v);
+    if (el.textContent !== text) el.textContent = text;
+    if (open && before !== undefined && v !== before) {
+      // Flash green or red for one tick. Re-adding the class needs the old one
+      // gone first or the animation will not restart.
+      el.classList.remove("flash-up", "flash-down");
+      void el.offsetWidth;
+      el.classList.add(v > before ? "flash-up" : "flash-down");
+    }
+    lastShown.set(id, v);
+  });
+
+  $$("[data-chg]").forEach(el => {
+    const id = el.dataset.chg;
+    const ch = dayChange(id);
+    const suffix = el.textContent.indexOf("today") >= 0 ? " today" : "";
+    el.textContent = chgTxt(ch) + suffix;
+    el.className = el.className.replace(/\b(up|down)\b/g, "").trim() + " " + chgCls(ch);
+  });
+
+  $$("[data-spark]").forEach(refreshSpark);
+  renderIndexPill();
+}
+
+/* The header clock. Ticks every second; the countdown is driven by the server
+ * clock offset so a wrong device time cannot show the wrong answer. */
+function tickClock() {
+  const txt = $("#clockText"), dot = $("#liveDot"), box = $("#marketClock");
+  if (!txt || !dot || !box) return;
+  const n = now();
+  const st = SimEngine.marketStatus(n);
+  const left = st.nextChangeMs ? SimEngine.countdown(st.nextChangeMs - n) : "--:--:--";
+  txt.textContent = (st.open ? "Market open, closes in " : "Market closed, opens in ") + left;
+  dot.classList.toggle("on", st.open);
+  box.classList.toggle("closed", !st.open);
+  box.title = "Simulated trading hours: " + SimEngine.MARKET.label;
+}
+
+let tickTimer = null, clockTimer = null;
+function startLiveLoops() {
+  if (!tickTimer) tickTimer = setInterval(tickPrices, SimEngine.STEP_MS);
+  if (!clockTimer) clockTimer = setInterval(tickClock, 1000);
+  tickClock();
 }
 
 /* -------------------------------------------------------------- index ---- */
@@ -957,7 +1346,7 @@ function render() {
   $$("#tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === state.tab));
   $("#newsCount").textContent = state.news.length || "";
   bind();
-  if (state.openId) drawChart(state.openId);
+  if (state.openId) { drawChart(state.openId); startChartLoop(); } else stopChartLoop();
 }
 
 function bind() {
@@ -995,14 +1384,23 @@ function bind() {
     }
   });
   $$("[data-close]").forEach(b => b.onclick = () => closeDrawer());
-  $$("[data-newssrc]").forEach(b => b.onclick = () => { state.newsFilter.src = b.dataset.newssrc; refreshBody(); });
+  $$("[data-newssector]").forEach(b => b.onclick = () => { state.newsFilter.sector = b.dataset.newssector; refreshBody(); });
+  const nsrc = $("#newsSrc");
+  if (nsrc) nsrc.onchange = (e) => { state.newsFilter.src = e.target.value; refreshBody(); };
   const ns = $("#newsSearch");
   if (ns) ns.oninput = (e) => {
     state.newsFilter.q = e.target.value;
     clearTimeout(state._nsT);
     state._nsT = setTimeout(() => { refreshBody(); const el = $("#newsSearch"); el.focus(); el.setSelectionRange(el.value.length, el.value.length); }, 300);
   };
-  $$("[data-chartmode]").forEach(b => b.onclick = () => { state.chartMode = b.dataset.chartmode; refreshBody(); if (state.openId) drawChart(state.openId); });
+  $$("[data-chartmode]").forEach(b => b.onclick = () => {
+    state.chartMode = b.dataset.chartmode; refreshBody();
+    if (state.openId) { drawChart(state.openId); startChartLoop(); }
+  });
+  $$("[data-tf]").forEach(b => b.onclick = () => {
+    state.timeframe = b.dataset.tf; refreshBody();
+    if (state.openId) { drawChart(state.openId); startChartLoop(); }
+  });
   const acLogin = $("#acLogin");
   if (acLogin) acLogin.onclick = () => acctLogin();
   const acPass = $("#acPass");
@@ -1059,6 +1457,7 @@ function applyData(su, pr, ne, gr, me) {
   }
   renderIndexPill();
   render();
+  startLiveLoops();
   if (state.acct.token && !state.acct.username) {
     acctRestore().then(() => { if (state.tab === "account") render(); });
   }
@@ -1070,6 +1469,21 @@ function applyData(su, pr, ne, gr, me) {
 // site, so the page still works if the worker is unreachable.
 const DATA_WORKER = "https://scale-startup-data.y84ikt.workers.dev";
 
+/* Trust the server's clock, not the device's. Every worker response carries a
+ * Date header, so the first successful data fetch gives us the offset for free
+ * - no extra request, which matters at 500+ users. /api/time is used only as a
+ * fallback if no Date header came through. */
+function noteServerDate(res) {
+  const h = res && res.headers && res.headers.get("date");
+  if (!h) return;
+  const t = Date.parse(h);
+  if (!isFinite(t)) return;
+  const off = t - Date.now();
+  // Header resolution is one second, so ignore anything inside a couple of
+  // seconds rather than jittering the countdown for no reason.
+  state.timeOffsetMs = Math.abs(off) > 2000 ? off : 0;
+}
+
 async function load() {
   let liveHits = 0;
   const grab = async (name, fb) => {
@@ -1078,7 +1492,7 @@ async function load() {
       const t = setTimeout(() => ctl.abort(), 3000);
       const r = await fetch(DATA_WORKER + "/data/" + name + "?v=" + Date.now(), { signal: ctl.signal });
       clearTimeout(t);
-      if (r.ok) { liveHits++; return await r.json(); }
+      if (r.ok) { liveHits++; noteServerDate(r); return await r.json(); }
     } catch {}
     try { const r = await fetch("/invest/data/" + name + "?v=" + Date.now()); return await r.json(); }
     catch { return fb; }

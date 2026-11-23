@@ -273,3 +273,72 @@ td.up { color: #2fbf71; } td.down { color: #e5534b; }
   font-size: 14px; box-sizing: border-box;
 }
 .signup-fineprint { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
+
+/* ------------------------------------------------- live market chrome ---- */
+/* Added for the live-price upgrade: header clock, tick flashes, chart
+   timeframe row and the sector filter on the news tab. */
+
+.market-clock {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 999px; padding: 7px 14px;
+  font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.market-clock.closed { color: var(--muted); }
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--muted); flex: none;
+}
+.live-dot.on {
+  background: var(--green);
+  box-shadow: 0 0 0 0 rgba(47, 191, 113, .7);
+  animation: livePulse 2s infinite;
+}
+@keyframes livePulse {
+  70% { box-shadow: 0 0 0 7px rgba(47, 191, 113, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(47, 191, 113, 0); }
+}
+
+/* One-shot tint on each 5-second tick. */
+.flash-up { animation: flashUp .6s ease-out; }
+.flash-down { animation: flashDown .6s ease-out; }
+@keyframes flashUp { from { color: var(--green); } to { color: inherit; } }
+@keyframes flashDown { from { color: var(--red); } to { color: inherit; } }
+
+.sim-tag {
+  color: var(--muted); font-size: 11px; text-transform: uppercase;
+  letter-spacing: .6px; border: 1px solid var(--border);
+  border-radius: 999px; padding: 2px 8px;
+}
+
+.chart-toggle { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.tf-sep { width: 1px; height: 18px; background: var(--border); margin: 0 4px; }
+#chart { width: 100%; height: 220px; display: block; }
+
+.chip.on { background: var(--accent2); border-color: var(--accent); color: #fff; }
+.chip-n { opacity: .65; font-size: 11px; margin-left: 2px; }
+
+.news-filters { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+.news-filters.sub { margin-bottom: 16px; }
+.news-srclabel { color: var(--muted); font-size: 12px; }
+.sector-tag {
+  color: var(--text); background: var(--card2);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 1px 8px; font-size: 11px;
+}
+
+/* The clock and index pill are the first things to drop on a narrow screen. */
+@media (max-width: 900px) {
+  .market-clock { font-size: 11px; padding: 6px 10px; }
+}
+@media (max-width: 640px) {
+  .market-clock .clock-text { display: none; }
+  .market-clock::after { content: "Live"; color: var(--muted); font-size: 11px; }
+}
+
+/* Honour a system preference for less motion: the dot stops pulsing and the
+   tick flash becomes an instant colour change rather than a fade. */
+@media (prefers-reduced-motion: reduce) {
+  .live-dot.on { animation: none; }
+  .flash-up, .flash-down { animation-duration: .01ms; }
+}

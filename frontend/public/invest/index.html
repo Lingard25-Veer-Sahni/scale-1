@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SCALE India Investment - Unlisted Startup Exchange</title>
-<meta name="description" content="A learning simulator tracking Indian unlisted startups: simulated prices, real startup news, and automatic removal when companies list on NSE/BSE.">
+<title>SCALE India Investment</title>
+<meta name="description" content="A learning simulator tracking Indian unlisted startups: simulated live prices, real startup news by sector, and automatic removal when companies list on NSE/BSE.">
 <!-- Kept out of search results: nothing on scale-national.com links here, so
      the only way in is the URL itself. Delete this line to make it findable. -->
 <meta name="robots" content="noindex,nofollow">
@@ -17,6 +17,8 @@
 </head>
 <body>
 <div id="app"></div>
+<!-- The price engine must load before app.js: app.js calls SimEngine on boot. -->
+<script src="/invest/assets/sim-engine.js"></script>
 <script src="/invest/assets/app.js"></script>
 </body>
 </html>

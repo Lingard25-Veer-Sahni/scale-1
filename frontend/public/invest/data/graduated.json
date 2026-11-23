@@ -1,1 +1,393 @@
-{"updated":"2026-11-14","note":"Startups that graduated from the tracker by listing on NSE/BSE. Dates are listing dates where verified, otherwise approximate month.","graduated":[{"name":"Zetwerk","sector":"B2B manufacturing","listed":"Oct 2026","detail":"Listed on NSE/BSE at Rs 151, up ~23% on debut."},{"name":"Shiprocket","sector":"Logistics","listed":"Jul 2026","detail":"E-commerce shipping aggregator listed mid-2026."},{"name":"Fractal Analytics","sector":"AI / Analytics","listed":"2026","detail":"Enterprise AI firm listed in 2026; trading below issue price."},{"name":"Amagi","sector":"Media SaaS","listed":"Jan 2026","detail":"First major new-age listing of 2026."},{"name":"Shadowfax","sector":"Logistics","listed":"2026","detail":"Last-mile delivery platform listed in 2026."},{"name":"Meesho","sector":"E-commerce","listed":"Dec 2025","detail":"Listed 10 Dec 2025; closed 53% above issue price on debut."},{"name":"Lenskart","sector":"Retail / Eyewear","listed":"Nov 2025","detail":"Listed on NSE and BSE in November 2025."},{"name":"Pine Labs","sector":"Fintech","listed":"Nov 2025","detail":"Listed at ~$2.9 Bn valuation, below its private peak."},{"name":"Groww","sector":"Fintech","listed":"Nov 2025","detail":"Retail investing platform listed in November 2025."},{"name":"Urban Company","sector":"Home services","listed":"Sep 2025","detail":"Debuted ~62% above issue price."},{"name":"PhysicsWallah","sector":"Edtech","listed":"Sep 2025","detail":"Listed in September 2025."},{"name":"Ather Energy","sector":"EV","listed":"May 2025","detail":"Electric scooter maker listed in May 2025."},{"name":"Ola Electric","sector":"EV","listed":"Aug 2024","detail":"Listed on 9 Aug 2024."},{"name":"Swiggy","sector":"Food delivery","listed":"Nov 2024","detail":"Listed on 13 Nov 2024."},{"name":"Zomato","sector":"Food delivery","listed":"Jul 2021","detail":"First major Indian startup listing of the modern era."},{"name":"Paytm","sector":"Fintech","listed":"Nov 2021","detail":"One97 Communications listed in November 2021."},{"name":"Nykaa","sector":"E-commerce","listed":"Nov 2021","detail":"FSN E-Commerce listed in November 2021."},{"name":"Policybazaar","sector":"Insurtech","listed":"Nov 2021","detail":"PB Fintech listed in November 2021."},{"name":"Delhivery","sector":"Logistics","listed":"May 2022","detail":"Listed in May 2022."}]}
+{
+ "updated": "2026-11-23T15:21:53.375628Z",
+ "note": "Startups that graduated from the tracker by listing on NSE/BSE. Dates are listing dates where verified, otherwise approximate month.",
+ "graduated": [
+  {
+   "name": "Zetwerk",
+   "sector": "B2B manufacturing",
+   "listed": "Oct 2026",
+   "detail": "Listed on NSE/BSE at Rs 151, up ~23% on debut."
+  },
+  {
+   "name": "Shiprocket",
+   "sector": "Logistics",
+   "listed": "Jul 2026",
+   "detail": "E-commerce shipping aggregator listed mid-2026."
+  },
+  {
+   "name": "Fractal Analytics",
+   "sector": "AI / Analytics",
+   "listed": "2026",
+   "detail": "Enterprise AI firm listed in 2026; trading below issue price."
+  },
+  {
+   "name": "Amagi",
+   "sector": "Media SaaS",
+   "listed": "Jan 2026",
+   "detail": "First major new-age listing of 2026."
+  },
+  {
+   "name": "Shadowfax",
+   "sector": "Logistics",
+   "listed": "2026",
+   "detail": "Last-mile delivery platform listed in 2026."
+  },
+  {
+   "name": "Meesho",
+   "sector": "E-commerce",
+   "listed": "Dec 2025",
+   "detail": "Listed 10 Dec 2025; closed 53% above issue price on debut."
+  },
+  {
+   "name": "Lenskart",
+   "sector": "Retail / Eyewear",
+   "listed": "Nov 2025",
+   "detail": "Listed on NSE and BSE in November 2025."
+  },
+  {
+   "name": "Pine Labs",
+   "sector": "Fintech",
+   "listed": "Nov 2025",
+   "detail": "Listed at ~$2.9 Bn valuation, below its private peak."
+  },
+  {
+   "name": "Groww",
+   "sector": "Fintech",
+   "listed": "Nov 2025",
+   "detail": "Retail investing platform listed in November 2025."
+  },
+  {
+   "name": "Urban Company",
+   "sector": "Home services",
+   "listed": "Sep 2025",
+   "detail": "Debuted ~62% above issue price."
+  },
+  {
+   "name": "PhysicsWallah",
+   "sector": "Edtech",
+   "listed": "Sep 2025",
+   "detail": "Listed in September 2025."
+  },
+  {
+   "name": "Ather Energy",
+   "sector": "EV",
+   "listed": "May 2025",
+   "detail": "Electric scooter maker listed in May 2025."
+  },
+  {
+   "name": "Ola Electric",
+   "sector": "EV",
+   "listed": "Aug 2024",
+   "detail": "Listed on 9 Aug 2024."
+  },
+  {
+   "name": "Swiggy",
+   "sector": "Food delivery",
+   "listed": "Nov 2024",
+   "detail": "Listed on 13 Nov 2024."
+  },
+  {
+   "name": "Zomato",
+   "sector": "Food delivery",
+   "listed": "Jul 2021",
+   "detail": "First major Indian startup listing of the modern era."
+  },
+  {
+   "name": "Paytm",
+   "sector": "Fintech",
+   "listed": "Nov 2021",
+   "detail": "One97 Communications listed in November 2021."
+  },
+  {
+   "name": "Nykaa",
+   "sector": "E-commerce",
+   "listed": "Nov 2021",
+   "detail": "FSN E-Commerce listed in November 2021."
+  },
+  {
+   "name": "Policybazaar",
+   "sector": "Insurtech",
+   "listed": "Nov 2021",
+   "detail": "PB Fintech listed in November 2021."
+  },
+  {
+   "name": "Delhivery",
+   "sector": "Logistics",
+   "listed": "May 2022",
+   "detail": "Listed in May 2022."
+  },
+  {
+   "id": "ather-energy",
+   "name": "Ather Energy",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Ather Energy",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "blackbuck",
+   "name": "BlackBuck",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "BlackBuck",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "delhivery",
+   "name": "Delhivery",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Delhivery",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "digit-insurance",
+   "name": "Digit Insurance",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "NSE"
+   ],
+   "listed_as": "Go Digit General Insurance",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "easemytrip",
+   "name": "EaseMyTrip",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Easy Trip Planners",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "eternal",
+   "name": "Eternal (Zomato)",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Eternal",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "firstcry",
+   "name": "FirstCry",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Brainbees Solutions",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "indiamart",
+   "name": "IndiaMART",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "IndiaMART InterMESH",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "info-edge",
+   "name": "Info Edge",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Info Edge",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "lenskart",
+   "name": "Lenskart",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Lenskart",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "mapmyindia",
+   "name": "MapmyIndia",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "CE Info Systems",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "meesho",
+   "name": "Meesho",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Meesho",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "mobikwik",
+   "name": "MobiKwik",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "One MobiKwik Systems",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "money-view",
+   "name": "Money View",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Money View",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "nykaa",
+   "name": "Nykaa",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "NSE"
+   ],
+   "listed_as": "FSN E-Commerce Ventures",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "ola-electric",
+   "name": "Ola Electric",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Ola Electric Mobility",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "paytm",
+   "name": "Paytm",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "One97 Communications",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "physics-wallah",
+   "name": "Physics Wallah",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Physics Wallah",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "pine-labs",
+   "name": "Pine Labs",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Pine Labs",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "policybazaar",
+   "name": "Policybazaar",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "PB Fintech",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "shiprocket",
+   "name": "Shiprocket",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Shiprocket",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "swiggy",
+   "name": "Swiggy",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Swiggy",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "travel-boutique-online",
+   "name": "Travel Boutique Online",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "TBO Tek",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "urban-company",
+   "name": "Urban Company",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "BSE",
+    "NSE"
+   ],
+   "listed_as": "Urban Company",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  },
+  {
+   "id": "zetwerk",
+   "name": "Zetwerk",
+   "removed_on": "2026-11-23",
+   "exchanges": [
+    "NSE"
+   ],
+   "listed_as": "Zetwerk Manufacturing Businesses",
+   "reason": "Matched a listed-company name in the exchange master files, so it is no longer unlisted."
+  }
+ ],
+ "graduated_total": 44
+}

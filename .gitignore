@@ -10,3 +10,6 @@ node_modules/
 frontend/build/
 mongo/
 uploads/
+
+# Intermediate build artefacts from invest/build_*.py
+invest/_*.json
