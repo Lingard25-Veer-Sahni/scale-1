@@ -13,3 +13,10 @@ uploads/
 
 # Intermediate build artefacts from invest/build_*.py
 invest/_*.json
+
+# --- added 25 Nov 2026 after these were found in the public repo ---
+# Holds the live admin login. Never commit it.
+memory/test_credentials.md
+# A second virtualenv; 416 MB of it was committed by accident.
+backend/.venv_tmp/
+.venv*/
