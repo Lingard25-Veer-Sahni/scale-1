@@ -7,6 +7,7 @@ from pg_shim import PGClient
 import os
 import re
 import base64
+import secrets
 import logging
 import uuid
 import requests
@@ -30,7 +31,17 @@ supabase_key = os.environ.get("SUPABASE_SECRET_KEY") or os.environ["SUPABASE_SER
 client = PGClient(supabase_url, supabase_key)
 db = client
 
-JWT_SECRET = os.environ.get("JWT_SECRET", "scale-dev-secret")
+# Session tokens are signed with this. It must never have a literal fallback:
+# this file is public, so a known default would let anyone mint a valid admin
+# token and skip the login screen entirely.
+#
+# With nothing set we generate a random secret for this process instead of
+# failing to boot. The site keeps working; the cost is that everyone is signed
+# out whenever the backend restarts, and the warning below says why.
+JWT_SECRET = os.environ.get("JWT_SECRET")
+_JWT_SECRET_WAS_GENERATED = not JWT_SECRET
+if not JWT_SECRET:
+    JWT_SECRET = secrets.token_urlsafe(48)
 JWT_ALG = "HS256"
 JWT_EXP_HOURS = 24 * 7
 
@@ -39,6 +50,12 @@ api_router = APIRouter(prefix="/api")
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
+
+if _JWT_SECRET_WAS_GENERATED:
+    logger.warning(
+        "JWT_SECRET is not set, so a random one was generated for this process. "
+        "Sessions will not survive a restart. Set JWT_SECRET in the environment."
+    )
 
 security = HTTPBearer(auto_error=False)
 
@@ -578,20 +595,37 @@ async def startup():
     except Exception as e:
         logger.warning(f"Object storage unavailable: {e}")
 
+    # The admin password comes from the environment and nowhere else.
+    #
+    # There used to be a literal fallback password here. This file is tracked in
+    # a public repository, so that string was readable by anyone, and because
+    # the block below rewrites the password on every startup, that public string
+    # WAS the live admin password whenever ADMIN_PASSWORD was unset - and
+    # changing it in the admin UI would be undone by the next restart.
+    #
+    # With no ADMIN_PASSWORD set we now skip this block entirely rather than
+    # fall back to anything. The site keeps serving; the admin account is just
+    # left alone.
     admin_email = os.environ.get("ADMIN_EMAIL", "scalesupportteam2@gmail.com")
-    admin_pw = os.environ.get("ADMIN_PASSWORD", "SCALEdaddySALLU67")
-    existing = await db.users.find_one({"email": admin_email}, {"_id": 0})
-    if not existing:
-        admin = User(email=admin_email, name="SCALE Admin", role="admin")
-        doc = admin.model_dump()
-        doc["password"] = hash_password(admin_pw)
-        await db.users.insert_one(doc)
-        logger.info(f"Seeded admin user: {admin_email}")
-    else:
-        await db.users.update_one(
-            {"email": admin_email},
-            {"$set": {"role": "admin", "password": hash_password(admin_pw)}},
+    admin_pw = os.environ.get("ADMIN_PASSWORD")
+    if not admin_pw:
+        logger.warning(
+            "ADMIN_PASSWORD is not set, so the admin account was not seeded or "
+            "reset. Set it in the environment to create or update the admin login."
         )
+    else:
+        existing = await db.users.find_one({"email": admin_email}, {"_id": 0})
+        if not existing:
+            admin = User(email=admin_email, name="SCALE Admin", role="admin")
+            doc = admin.model_dump()
+            doc["password"] = hash_password(admin_pw)
+            await db.users.insert_one(doc)
+            logger.info(f"Seeded admin user: {admin_email}")
+        else:
+            await db.users.update_one(
+                {"email": admin_email},
+                {"$set": {"role": "admin", "password": hash_password(admin_pw)}},
+            )
 
     existing_content = await db.content.find_one({"id": "main"}, {"_id": 0})
     if not existing_content:
