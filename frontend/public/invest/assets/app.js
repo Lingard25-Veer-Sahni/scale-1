@@ -1450,7 +1450,10 @@ function applyData(su, pr, ne, gr, me) {
   state.graduated = gr.graduated || [];
   state.meta = me || {};
   const updated = me.updated ? new Date(me.updated).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }) + " IST" : "unknown";
-  $("#footerMeta").textContent = (state.dataSource === "live" ? `Live data from the SCALE data worker, refreshed ${updated}` : `Cached snapshot ${updated} - live updates temporarily unavailable`);
+  const src = state.companySource ? ` - company list: ${state.companySource}` : "";
+  $("#footerMeta").textContent = (state.dataSource === "live"
+    ? `Live data from the SCALE data worker, refreshed ${updated}`
+    : `Cached snapshot ${updated} - live updates temporarily unavailable`) + src;
   const notice = document.querySelector(".notice-text");
   if (notice && state.dataSource !== "live") {
     notice.innerHTML = `Showing <strong>cached data from ${updated}</strong> - the live update service is temporarily unreachable, so recently listed or removed companies may still appear. Prices are simulated for learning. Nothing here is investment advice.`;
@@ -1497,6 +1500,12 @@ async function load() {
     try { const r = await fetch("/invest/data/" + name + "?v=" + Date.now()); return await r.json(); }
     catch { return fb; }
   };
+  // Fetch only from the bundled files, no worker. Used to compare the two.
+  const local = async (name, fb) => {
+    try { const r = await fetch("/invest/data/" + name + "?v=" + Date.now()); return await r.json(); }
+    catch { return fb; }
+  };
+
   const [su, pr, ne, gr, me] = await Promise.all([
     grab("startups.json", { startups: [] }),
     grab("prices.json", { series: {} }),
@@ -1504,10 +1513,37 @@ async function load() {
     grab("graduated.json", { graduated: [] }),
     grab("meta.json", {}),
   ]);
+
+  /* The company list is whichever source knows about more companies.
+   *
+   * The worker rebuilds startups.json from its KV copy on every run and falls
+   * back to a small list baked into its source when that copy is missing or
+   * will not parse - then writes the small list back. So a worker that has
+   * lost its data silently serves a fraction of the companies, and the bundled
+   * file shipped with the site is the fuller one. Taking the larger list means
+   * the site is right either way round, and it self-corrects the moment the
+   * worker's own copy is restored.
+   *
+   * Prices are merged rather than replaced: the worker's series are the ones
+   * still being extended each day, so they win for the companies it knows, and
+   * the bundled history fills in the rest. */
+  const localSu = await local("startups.json", { startups: [] });
+  const liveCount = (su.startups || []).length;
+  const localCount = (localSu.startups || []).length;
+  let startupsDoc = su;
+  if (localCount > liveCount) {
+    startupsDoc = localSu;
+    state.companySource = `bundled (${localCount} companies; the worker offered ${liveCount})`;
+    const localPr = await local("prices.json", { series: {} });
+    pr.series = Object.assign({}, localPr.series || {}, pr.series || {});
+  } else {
+    state.companySource = `worker (${liveCount} companies)`;
+  }
+
   state.dataSource = liveHits >= 3 ? "live" : "cached";
   const ageMs = me && me.updated ? Date.now() - Date.parse(me.updated) : Infinity;
   state.tradingHalted = state.dataSource !== "live" || ageMs > 26 * 3600 * 1000;
-  applyData(su, pr, ne, gr, me);
+  applyData(startupsDoc, pr, ne, gr, me);
 }
 
 if (typeof window !== "undefined") {
